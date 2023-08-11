@@ -1,11 +1,16 @@
-// import professionsMock from '../mockData/professions.json' assert { type: 'json' }
 import Category from '../models/Category.js'
+import Book from '../models/Book.js'
 import categoriesApi from '../mockData/categories.api.js'
+import booksApi from '../mockData/books.api.js'
 
 async function initDatabase() {
     const categories = await Category.find()
     if (categories.length !== categoriesApi.length) {
         await createInitialEntity(Category, categoriesApi)
+    }
+    const books = await Book.find()
+    if (books.length !== booksApi.length) {
+        await createInitialEntity(Book, booksApi)
     }
 }
 
