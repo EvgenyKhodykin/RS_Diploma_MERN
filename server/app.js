@@ -6,6 +6,7 @@ import router from './routes/index.js'
 import initDatabase from './startUp/initDatabase.js'
 
 const app = express()
+app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/api', router)

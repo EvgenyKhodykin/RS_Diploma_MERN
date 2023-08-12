@@ -1,6 +1,6 @@
 import Category from '../models/Category.js'
-import Book from '../models/Book.js'
 import categoriesApi from '../mockData/categories.api.js'
+import Book from '../models/Book.js'
 import booksApi from '../mockData/books.api.js'
 
 async function initDatabase() {

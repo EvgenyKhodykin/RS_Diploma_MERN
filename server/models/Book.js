@@ -4,10 +4,7 @@ const schema = new Schema(
     {
         name: { type: String, required: true },
         category: { type: String, required: true },
-        poster: {
-            data: Buffer,
-            contentType: String
-        },
+        cover: { type: String },
         rate: { type: Number },
         price: { type: Number }
     },
