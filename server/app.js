@@ -1,7 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import config from 'config'
 import chalk from 'chalk'
+import 'dotenv/config'
 import router from './routes/index.js'
 import initDatabase from './startUp/initDatabase.js'
 
@@ -11,14 +11,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use('/api', router)
 
-const PORT = config.get('port') ?? 4000
+const PORT = process.env.PORT ?? 4000
 
 async function start() {
     try {
         mongoose.connection.once('open', () => {
             initDatabase()
         })
-        await mongoose.connect(config.get('mongoUri'))
+        await mongoose.connect(process.env.MONGO_URI)
         console.log(chalk.blue('MongoDB connected'))
         app.listen(PORT, () => {
             console.log(chalk.green(`Server has been started on port ${PORT}...`))
