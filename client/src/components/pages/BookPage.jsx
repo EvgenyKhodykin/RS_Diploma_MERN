@@ -16,9 +16,9 @@ import BookmarkIcon from '@mui/icons-material/Bookmark'
 
 function BookPage(props) {
     const {
-        id,
+        _id,
         name,
-        poster,
+        cover,
         price,
         rate,
         handleBuyClick,
@@ -27,11 +27,7 @@ function BookPage(props) {
     } = props
 
     return (
-        <Grid
-            item
-            xs={12}
-            md={3}
-        >
+        <Grid item xs={12} md={3}>
             <Card
                 sx={{
                     height: '100%',
@@ -41,17 +37,14 @@ function BookPage(props) {
                 }}
             >
                 <CardMedia
-                    image={poster}
+                    image={cover}
                     component='img'
                     alt={name}
                     title={name}
-                    sx={{ maxHeight: 200, objectFit: 'contain' }}
+                    sx={{ maxHeight: 250, objectFit: 'contain', marginBottom: 2 }}
                 />
                 <CardContent>
-                    <Typography
-                        variant='BUTTON TEXT'
-                        sx={{ color: 'red' }}
-                    >
+                    <Typography variant='BUTTON TEXT' sx={{ color: 'red' }}>
                         {price} &#8381;
                     </Typography>
                     <Typography
@@ -60,7 +53,8 @@ function BookPage(props) {
                             textOverflow: 'ellipsis',
                             display: '-webkit-box',
                             WebkitLineClamp: '2',
-                            WebkitBoxOrient: 'vertical'
+                            WebkitBoxOrient: 'vertical',
+                            my: 2
                         }}
                         variant='body1'
                         component='h3'
@@ -68,11 +62,7 @@ function BookPage(props) {
                         {name}
                     </Typography>
                 </CardContent>
-                <Rating
-                    readOnly
-                    defaultValue={rate}
-                    precision={0.5}
-                />
+                <Rating readOnly defaultValue={rate} precision={0.5} />
                 <CardActions
                     sx={{
                         display: 'flex',
@@ -83,12 +73,12 @@ function BookPage(props) {
                         size='large'
                         variant='contained'
                         sx={{ backgroundColor: '#26a9e0' }}
-                        onClick={() => handleBuyClick(id)}
+                        onClick={() => handleBuyClick(_id)}
                     >
                         Купить
                     </Button>
                     <Tooltip title='Добавить в избранное'>
-                        <IconButton onClick={() => handleBookmarkClick(id)}>
+                        <IconButton onClick={() => handleBookmarkClick(_id)}>
                             {!isBookmarked ? (
                                 <BookmarkBorderIcon
                                     fontSize='large'

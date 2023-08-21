@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Container } from '@mui/material'
 import BooksList from '../BooksList'
 import Snack from '../../UI/SnackBar'
-import API from '../../api'
+import { useSelector } from 'react-redux'
+import { getBooks } from '../../redux/selectors/books.selectors.js'
 
 function MainPage() {
-    const [books, setBooks] = useState([])
+    const books = useSelector(getBooks)
     const [isSnackOpen, setSnackOpen] = useState(false)
     const [snackText, setSnackText] = useState('')
-
-    useEffect(() => {
-        API.fetchAll().then(data => setBooks(data))
-    }, [])
 
     const handleBuyClick = id => {
         setSnackOpen(true)
@@ -21,17 +18,17 @@ function MainPage() {
     const handleBookmarkClick = id => {
         setSnackOpen(true)
         setSnackText('Товар добавлен в избранное')
-        setBooks(
-            books.map(book => {
-                if (book.id === id) {
-                    return {
-                        ...book,
-                        isBookmarked: !book.isBookmarked
-                    }
-                }
-                return book
-            })
-        )
+        // setBooks(
+        //     books.map(book => {
+        //         if (book.id === id) {
+        //             return {
+        //                 ...book,
+        //                 isBookmarked: !book.isBookmarked
+        //             }
+        //         }
+        //         return book
+        //     })
+        // )
     }
 
     return (

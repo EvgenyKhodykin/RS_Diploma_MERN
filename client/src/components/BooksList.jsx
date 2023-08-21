@@ -9,7 +9,7 @@ function BooksList({ handleBuyClick, handleBookmarkClick, books }) {
                 <Grid container spacing={3} sx={{ mt: 3 }}>
                     {books.map(book => (
                         <BookPage
-                            key={book.id}
+                            key={book._id}
                             {...book}
                             handleBuyClick={handleBuyClick}
                             handleBookmarkClick={handleBookmarkClick}
