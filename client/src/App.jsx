@@ -4,8 +4,8 @@ import MainLayout from './layouts/MainLayout'
 import MainPage from './components/pages/MainPage'
 import CartLayout from './layouts/CartLayout'
 import LoginLayout from './layouts/LoginLayout'
-import AppLoader from './UI/hoc/AppLoader.jsx'
 import BookPage from './components/pages/BookPage.jsx'
+import AppLoader from './components/UI/hoc/AppLoader.jsx'
 
 function App() {
     return (

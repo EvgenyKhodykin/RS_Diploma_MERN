@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { Container } from '@mui/material'
-import Snack from '../../UI/SnackBar'
+// import Snack from '../../UI/SnackBar'
 import { useSelector } from 'react-redux'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
 import BooksList from '../books/BooksList.jsx'
+import Snack from '../UI/Snackbar.jsx'
 
 function MainPage() {
     const books = useSelector(getBooks)

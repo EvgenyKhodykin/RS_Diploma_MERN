@@ -1,10 +1,13 @@
 import { React, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Button from '@mui/material/Button'
-// import Menu from '@mui/material/Menu'
-// import MenuItem from '@mui/material/MenuItem'
-// import API from '../api'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import MenuIcon from '@mui/icons-material/Menu'
+import { getCategories } from '../../redux/selectors/categories.selectors.js'
 
 export default function CatalogButton() {
+    const categories = useSelector(getCategories)
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 
@@ -12,10 +15,9 @@ export default function CatalogButton() {
         setAnchorEl(event.currentTarget)
     }
 
-    // const handleClose = target => {
-    //     setAnchorEl(null)
-    //     // setCurrentCategory(target.innerText)
-    // }
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
 
     return (
         <div>
@@ -30,8 +32,9 @@ export default function CatalogButton() {
                 onClick={handleClick}
             >
                 Каталог
+                {<MenuIcon sx={{ marginLeft: 1 }} />}
             </Button>
-            {/* <Menu
+            <Menu
                 id='basic-menu'
                 anchorEl={anchorEl}
                 open={open}
@@ -40,12 +43,13 @@ export default function CatalogButton() {
                     'aria-labelledby': 'basic-button'
                 }}
             >
-                {API.categories.map(category => (
-                    <MenuItem key={category} onClick={handleClose}>
-                        {category}
-                    </MenuItem>
-                ))}
-            </Menu> */}
+                {categories &&
+                    categories.map(category => (
+                        <MenuItem key={category._id} onClick={handleClose}>
+                            {category.name}
+                        </MenuItem>
+                    ))}
+            </Menu>
         </div>
     )
 }

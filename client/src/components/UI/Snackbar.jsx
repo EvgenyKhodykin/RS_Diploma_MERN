@@ -3,11 +3,7 @@ import React from 'react'
 
 function Snack({ isOpen, handleClose, text }) {
     return (
-        <Snackbar
-            open={isOpen}
-            onClose={handleClose}
-            autoHideDuration={1500}
-        >
+        <Snackbar open={isOpen} onClose={handleClose} autoHideDuration={1500}>
             <Alert severity='success'>{text}</Alert>
         </Snackbar>
     )
