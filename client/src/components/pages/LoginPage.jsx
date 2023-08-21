@@ -1,14 +1,8 @@
 import React from 'react'
-import { Box, Typography } from '@mui/material'
+import Loading from '../UI/Loading.jsx'
 
 function LoginPage() {
-    return (
-        <Box sx={{ mx: 5 }}>
-            <Typography variant='h2' component={'h2'} sx={{ textAlign: 'center' }}>
-                Login Page
-            </Typography>
-        </Box>
-    )
+    return <Loading />
 }
 
 export default LoginPage

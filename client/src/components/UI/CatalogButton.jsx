@@ -1,13 +1,15 @@
 import { React, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import MenuIcon from '@mui/icons-material/Menu'
 import { getCategories } from '../../redux/selectors/categories.selectors.js'
+import { setSelectedCategory } from '../../redux/slices/selectCategory.slice.js'
 
 export default function CatalogButton() {
     const categories = useSelector(getCategories)
+    const dispatch = useDispatch()
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 
@@ -15,8 +17,9 @@ export default function CatalogButton() {
         setAnchorEl(event.currentTarget)
     }
 
-    const handleClose = () => {
+    const handleClose = event => {
         setAnchorEl(null)
+        dispatch(setSelectedCategory(event.currentTarget.getAttribute('label')))
     }
 
     return (
@@ -45,7 +48,11 @@ export default function CatalogButton() {
             >
                 {categories &&
                     categories.map(category => (
-                        <MenuItem key={category._id} onClick={handleClose}>
+                        <MenuItem
+                            key={category._id}
+                            label={category.name}
+                            onClick={handleClose}
+                        >
                             {category.name}
                         </MenuItem>
                     ))}
