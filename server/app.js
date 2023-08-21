@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import chalk from 'chalk'
+import cors from 'cors'
 import 'dotenv/config'
 import router from './routes/index.js'
 import initDatabase from './startUp/initDatabase.js'
@@ -9,6 +10,7 @@ const app = express()
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cors())
 app.use('/api', router)
 
 const PORT = process.env.PORT ?? 4000
