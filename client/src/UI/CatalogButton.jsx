@@ -1,22 +1,21 @@
 import { React, useState } from 'react'
 import Button from '@mui/material/Button'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import API from '../api'
+// import Menu from '@mui/material/Menu'
+// import MenuItem from '@mui/material/MenuItem'
+// import API from '../api'
 
 export default function CatalogButton() {
     const [anchorEl, setAnchorEl] = useState(null)
-    // const [currentCategory, setCurrentCategory] = useState('Вся литература')
     const open = Boolean(anchorEl)
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget)
     }
 
-    const handleClose = target => {
-        setAnchorEl(null)
-        // setCurrentCategory(target.innerText)
-    }
+    // const handleClose = target => {
+    //     setAnchorEl(null)
+    //     // setCurrentCategory(target.innerText)
+    // }
 
     return (
         <div>
@@ -32,7 +31,7 @@ export default function CatalogButton() {
             >
                 Каталог
             </Button>
-            <Menu
+            {/* <Menu
                 id='basic-menu'
                 anchorEl={anchorEl}
                 open={open}
@@ -42,14 +41,11 @@ export default function CatalogButton() {
                 }}
             >
                 {API.categories.map(category => (
-                    <MenuItem
-                        key={category}
-                        onClick={handleClose}
-                    >
+                    <MenuItem key={category} onClick={handleClose}>
                         {category}
                     </MenuItem>
                 ))}
-            </Menu>
+            </Menu> */}
         </div>
     )
 }
