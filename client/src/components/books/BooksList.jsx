@@ -1,6 +1,6 @@
 import { React } from 'react'
 import { Container, Grid } from '@mui/material'
-import BookPage from './pages/BookPage.jsx'
+import BookCard from './BookCard.jsx'
 
 function BooksList({ handleBuyClick, handleBookmarkClick, books }) {
     return (
@@ -8,12 +8,13 @@ function BooksList({ handleBuyClick, handleBookmarkClick, books }) {
             {books && (
                 <Grid container spacing={3} sx={{ mt: 3 }}>
                     {books.map(book => (
-                        <BookPage
-                            key={book._id}
-                            {...book}
-                            handleBuyClick={handleBuyClick}
-                            handleBookmarkClick={handleBookmarkClick}
-                        />
+                        <Grid item xs={12} md={3} key={book._id}>
+                            <BookCard
+                                {...book}
+                                handleBuyClick={handleBuyClick}
+                                handleBookmarkClick={handleBookmarkClick}
+                            />
+                        </Grid>
                     ))}
                 </Grid>
             )}

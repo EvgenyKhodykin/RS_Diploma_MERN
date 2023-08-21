@@ -5,6 +5,7 @@ import MainPage from './components/pages/MainPage'
 import CartLayout from './layouts/CartLayout'
 import LoginLayout from './layouts/LoginLayout'
 import AppLoader from './UI/hoc/AppLoader.jsx'
+import BookPage from './components/pages/BookPage.jsx'
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                 <Routes>
                     <Route path='/' element={<MainLayout />}>
                         <Route index element={<MainPage />} />
+                        <Route path='books/:bookId' element={<BookPage />} />
                         <Route path='cart' element={<CartLayout />} />
                         <Route path='login' element={<LoginLayout />} />
                     </Route>

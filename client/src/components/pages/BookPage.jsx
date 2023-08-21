@@ -1,100 +1,88 @@
-import React from 'react'
 import {
+    Button,
     Card,
+    CardActions,
     CardContent,
     CardMedia,
-    Grid,
-    Typography,
-    CardActions,
-    Button,
-    IconButton,
-    Tooltip,
-    Rating
+    Container,
+    Rating,
+    Typography
 } from '@mui/material'
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
-import BookmarkIcon from '@mui/icons-material/Bookmark'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getBookById } from '../../redux/selectors/books.selectors.js'
 
-function BookPage(props) {
-    const {
-        _id,
-        name,
-        cover,
-        price,
-        rate,
-        handleBuyClick,
-        handleBookmarkClick,
-        isBookmarked
-    } = props
+function BookPage() {
+    const { bookId } = useParams()
+    const currentBook = useSelector(getBookById(bookId))
+    // sconsole.log(currentBook)
 
     return (
-        <Grid item xs={12} md={3}>
-            <Card
+        <>
+            <Container
                 sx={{
-                    height: '100%',
+                    maxWidth: 'xl',
+                    mt: 8,
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'space-between'
+                    alignItems: 'center'
                 }}
             >
-                <CardMedia
-                    image={cover}
-                    component='img'
-                    alt={name}
-                    title={name}
-                    sx={{ maxHeight: 250, objectFit: 'contain', marginBottom: 2 }}
-                />
-                <CardContent>
-                    <Typography variant='BUTTON TEXT' sx={{ color: 'red' }}>
-                        {price} &#8381;
-                    </Typography>
-                    <Typography
-                        sx={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            display: '-webkit-box',
-                            WebkitLineClamp: '2',
-                            WebkitBoxOrient: 'vertical',
-                            my: 2
-                        }}
-                        variant='body1'
-                        component='h3'
-                    >
-                        {name}
-                    </Typography>
-                </CardContent>
-                <Rating readOnly defaultValue={rate} precision={0.5} />
-                <CardActions
+                <Card
                     sx={{
+                        height: '100%',
                         display: 'flex',
+                        flexDirection: 'column',
                         justifyContent: 'space-between'
                     }}
                 >
-                    <Button
-                        size='large'
-                        variant='contained'
-                        sx={{ backgroundColor: '#26a9e0' }}
-                        onClick={() => handleBuyClick(_id)}
+                    <CardMedia
+                        image={currentBook.cover}
+                        component='img'
+                        alt={currentBook.name}
+                        title={currentBook.name}
+                        sx={{ maxHeight: 400, objectFit: 'contain', marginBottom: 2 }}
+                    />
+                    <CardContent>
+                        <Typography variant='BUTTON TEXT' sx={{ color: 'red' }}>
+                            {currentBook.price} &#8381;
+                        </Typography>
+                        <Typography
+                            sx={{
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                display: '-webkit-box',
+                                WebkitLineClamp: '2',
+                                WebkitBoxOrient: 'vertical',
+                                my: 2
+                            }}
+                            variant='body1'
+                            component='h3'
+                        >
+                            {currentBook.name}
+                        </Typography>
+                    </CardContent>
+                    <Rating readOnly defaultValue={currentBook.rate} precision={0.5} />
+                    <CardActions
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                        }}
                     >
-                        Купить
-                    </Button>
-                    <Tooltip title='Добавить в избранное'>
-                        <IconButton onClick={() => handleBookmarkClick(_id)}>
-                            {!isBookmarked ? (
-                                <BookmarkBorderIcon
-                                    fontSize='large'
-                                    sx={{ color: '#26a9e0' }}
-                                />
-                            ) : (
-                                <BookmarkIcon
-                                    fontSize='large'
-                                    sx={{ color: '#26a9e0' }}
-                                />
-                            )}
-                        </IconButton>
-                    </Tooltip>
-                </CardActions>
-            </Card>
-        </Grid>
+                        <Button
+                            size='large'
+                            variant='contained'
+                            sx={{ backgroundColor: '#26a9e0' }}
+                            // onClick={() => handleBuyClick(_id)}
+                        >
+                            Купить
+                        </Button>
+                        {/* <Tooltip title='Добавить в избранное'></Tooltip> */}
+                    </CardActions>
+                </Card>
+            </Container>
+        </>
     )
 }
 
