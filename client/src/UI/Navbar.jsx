@@ -54,10 +54,7 @@ function Navbar() {
     }))
 
     return (
-        <AppBar
-            position='static'
-            sx={{ height: 90, display: 'flex' }}
-        >
+        <AppBar position='static' sx={{ height: 90, display: 'flex' }}>
             <Toolbar
                 sx={{
                     height: 90,
@@ -67,16 +64,9 @@ function Navbar() {
                 }}
             >
                 <Box sx={{ display: 'flex' }}>
-                    <Avatar
-                        variant='square'
-                        alt='logo'
-                        src='../public/favicon.png'
-                    />
+                    <Avatar variant='square' alt='logo' src='../public/favicon.png' />
                     <Link to='/'>
-                        <Button
-                            size='large'
-                            sx={{ color: 'white' }}
-                        >
+                        <Button size='large' sx={{ color: 'white' }}>
                             Book Shop
                         </Button>
                     </Link>
@@ -94,14 +84,6 @@ function Navbar() {
                     </Search>
                 </Box>
                 <Box>
-                    <Link to='/login'>
-                        <BottomNavigationAction
-                            showLabel
-                            sx={{ color: 'white' }}
-                            label='Войти'
-                            icon={<AccountCircleIcon />}
-                        ></BottomNavigationAction>
-                    </Link>
                     <Link to='/bookmarks'>
                         <BottomNavigationAction
                             showLabel
@@ -116,6 +98,14 @@ function Navbar() {
                             sx={{ color: 'white' }}
                             label='Корзина'
                             icon={<ShoppingBagOutlinedIcon />}
+                        ></BottomNavigationAction>
+                    </Link>
+                    <Link to='/login'>
+                        <BottomNavigationAction
+                            showLabel
+                            sx={{ color: 'white' }}
+                            label='Войти'
+                            icon={<AccountCircleIcon />}
                         ></BottomNavigationAction>
                     </Link>
                 </Box>
