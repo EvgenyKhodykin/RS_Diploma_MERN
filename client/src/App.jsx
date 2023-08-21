@@ -1,6 +1,7 @@
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
-import MainPage from './components/MainPage'
+import MainPage from './components/pages/MainPage'
 import CartLayout from './layouts/CartLayout'
 import LoginLayout from './layouts/LoginLayout'
 

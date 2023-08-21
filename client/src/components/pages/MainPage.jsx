@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Container } from '@mui/material'
-import BooksList from './BooksList'
-import Snack from '../UI/SnackBar'
-import API from '../api'
+import BooksList from '../BooksList'
+import Snack from '../../UI/SnackBar'
+import API from '../../api'
 
 function MainPage() {
     const [books, setBooks] = useState([])
