@@ -1,40 +1,23 @@
-import {
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Container,
-    Rating,
-    Typography
-} from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { Card, CardMedia, Container, Typography } from '@mui/material'
 import { getBookById } from '../../redux/selectors/books.selectors.js'
+import Loading from '../UI/Loading.jsx'
 
 function BookPage() {
     const { bookId } = useParams()
     const currentBook = useSelector(getBookById(bookId))
-    // sconsole.log(currentBook)
 
-    return (
-        <>
-            <Container
-                sx={{
-                    maxWidth: 'xl',
-                    mt: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center'
-                }}
-            >
-                <Card
+    if (currentBook) {
+        return (
+            <>
+                <Container
                     sx={{
-                        height: '100%',
+                        maxWidth: 'xl',
+                        mt: 8,
                         display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between'
+                        border: '1px red solid'
                     }}
                 >
                     <CardMedia
@@ -42,48 +25,16 @@ function BookPage() {
                         component='img'
                         alt={currentBook.name}
                         title={currentBook.name}
-                        sx={{ maxHeight: 400, objectFit: 'contain', marginBottom: 2 }}
+                        sx={{ maxHeight: 500, objectFit: 'contain' }}
                     />
-                    <CardContent>
-                        <Typography variant='BUTTON TEXT' sx={{ color: 'red' }}>
-                            {currentBook.price} &#8381;
-                        </Typography>
-                        <Typography
-                            sx={{
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                display: '-webkit-box',
-                                WebkitLineClamp: '2',
-                                WebkitBoxOrient: 'vertical',
-                                my: 2
-                            }}
-                            variant='body1'
-                            component='h3'
-                        >
-                            {currentBook.name}
-                        </Typography>
-                    </CardContent>
-                    <Rating readOnly defaultValue={currentBook.rate} precision={0.5} />
-                    <CardActions
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between'
-                        }}
-                    >
-                        <Button
-                            size='large'
-                            variant='contained'
-                            sx={{ backgroundColor: '#26a9e0' }}
-                            // onClick={() => handleBuyClick(_id)}
-                        >
-                            Купить
-                        </Button>
-                        {/* <Tooltip title='Добавить в избранное'></Tooltip> */}
-                    </CardActions>
-                </Card>
-            </Container>
-        </>
-    )
+                    <Card>
+                        <Typography>{currentBook.description}</Typography>
+                    </Card>
+                </Container>
+            </>
+        )
+    }
+    return <Loading />
 }
 
 export default BookPage
