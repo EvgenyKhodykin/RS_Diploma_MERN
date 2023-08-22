@@ -11,12 +11,12 @@ module.exports = {
     },
     plugins: ['react'],
     rules: {
-        indent: ['error', 4],
+        indent: ['off'],
         'react/prop-types': 0,
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
         'no-console': 'warn',
-        'space-before-function-paren': ['error', 'never'],
+        'space-before-function-paren': ['off'],
         'multiline-ternary': ['off']
     }
 }

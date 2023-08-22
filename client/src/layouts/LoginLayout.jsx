@@ -1,8 +1,13 @@
 import React from 'react'
-import LoginPage from '../components/pages/LoginPage.jsx'
+import { Container } from '@mui/material'
+import { Outlet } from 'react-router-dom'
 
-function LoginLayout() {
-    return <LoginPage />
+function AuthLayout() {
+    return (
+        <Container maxWidth='sm' sx={{ mt: 8 }}>
+            <Outlet />
+        </Container>
+    )
 }
 
-export default LoginLayout
+export default AuthLayout

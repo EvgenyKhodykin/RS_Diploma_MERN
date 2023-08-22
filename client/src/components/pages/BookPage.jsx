@@ -1,111 +1,111 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import {
-    Card,
-    CardContent,
-    CardMedia,
-    Grid,
-    Typography,
-    CardActions,
     Button,
+    Card,
+    CardActions,
+    CardMedia,
+    Container,
     IconButton,
+    Rating,
     Tooltip,
-    Rating
+    Typography
 } from '@mui/material'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
-import BookmarkIcon from '@mui/icons-material/Bookmark'
+import { getBookById } from '../../redux/selectors/books.selectors.js'
+import Loading from '../UI/Loading.jsx'
 
-function BookPage(props) {
-    const {
-        id,
-        name,
-        poster,
-        price,
-        rate,
-        handleBuyClick,
-        handleBookmarkClick,
-        isBookmarked
-    } = props
+function BookPage() {
+    const { bookId } = useParams()
+    const currentBook = useSelector(getBookById(bookId))
 
-    return (
-        <Grid
-            item
-            xs={12}
-            md={3}
-        >
-            <Card
-                sx={{
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                }}
-            >
-                <CardMedia
-                    image={poster}
-                    component='img'
-                    alt={name}
-                    title={name}
-                    sx={{ maxHeight: 200, objectFit: 'contain' }}
-                />
-                <CardContent>
-                    <Typography
-                        variant='BUTTON TEXT'
-                        sx={{ color: 'red' }}
-                    >
-                        {price} &#8381;
-                    </Typography>
-                    <Typography
-                        sx={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            display: '-webkit-box',
-                            WebkitLineClamp: '2',
-                            WebkitBoxOrient: 'vertical'
-                        }}
-                        variant='body1'
-                        component='h3'
-                    >
-                        {name}
-                    </Typography>
-                </CardContent>
-                <Rating
-                    readOnly
-                    defaultValue={rate}
-                    precision={0.5}
-                />
-                <CardActions
+    if (currentBook) {
+        return (
+            <>
+                <Container
                     sx={{
+                        width: 'xl',
+                        mt: 8,
                         display: 'flex',
+                        flexDirection: 'row',
                         justifyContent: 'space-between'
                     }}
                 >
-                    <Button
-                        size='large'
-                        variant='contained'
-                        sx={{ backgroundColor: '#26a9e0' }}
-                        onClick={() => handleBuyClick(id)}
+                    <Card>
+                        <CardMedia
+                            image={currentBook.cover}
+                            component='img'
+                            alt={currentBook.name}
+                            title={currentBook.name}
+                            sx={{ height: 500, objectFit: 'contain' }}
+                        />
+                    </Card>
+                    <Card
+                        sx={{
+                            marginLeft: 5,
+                            width: '60%',
+                            textAlign: 'center',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between'
+                        }}
                     >
-                        Купить
-                    </Button>
-                    <Tooltip title='Добавить в избранное'>
-                        <IconButton onClick={() => handleBookmarkClick(id)}>
-                            {!isBookmarked ? (
-                                <BookmarkBorderIcon
-                                    fontSize='large'
-                                    sx={{ color: '#26a9e0' }}
-                                />
-                            ) : (
-                                <BookmarkIcon
-                                    fontSize='large'
-                                    sx={{ color: '#26a9e0' }}
-                                />
-                            )}
-                        </IconButton>
-                    </Tooltip>
-                </CardActions>
-            </Card>
-        </Grid>
-    )
+                        <Typography
+                            variant='h6'
+                            sx={{ textAlign: 'center', marginBottom: 6 }}
+                        >
+                            {currentBook.name}
+                        </Typography>
+                        <Typography>
+                            <Rating
+                                readOnly
+                                defaultValue={currentBook.rate}
+                                precision={0.5}
+                            />
+                        </Typography>
+                        <Typography variant='h4' sx={{ color: 'red', marginTop: 6 }}>
+                            {currentBook.price} &#8381;
+                        </Typography>
+                        <CardActions
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'space-between'
+                            }}
+                        >
+                            <Button
+                                size='large'
+                                variant='contained'
+                                sx={{ backgroundColor: '#26a9e0' }}
+                            >
+                                Купить
+                            </Button>
+                            <Tooltip title='Добавить в избранное'>
+                                <IconButton>
+                                    <BookmarkBorderIcon
+                                        fontSize='large'
+                                        sx={{ color: '#26a9e0' }}
+                                    />
+                                </IconButton>
+                            </Tooltip>
+                        </CardActions>
+                    </Card>
+                </Container>
+                <Container
+                    sx={{
+                        maxWidth: 'xl',
+                        mt: 8,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between'
+                    }}
+                >
+                    <Typography variant='body1'>{currentBook.description}</Typography>
+                </Container>
+            </>
+        )
+    }
+    return <Loading />
 }
 
 export default BookPage

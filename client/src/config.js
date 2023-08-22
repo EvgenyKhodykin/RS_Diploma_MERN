@@ -1,6 +1,5 @@
 const configFile = {
-    apiEndPoint: 'https://book-shop-11659-default-rtdb.europe-west1.firebasedatabase.app/',
-    isFireBase: true
+    apiEndPoint: 'http://localhost:4000/api'
 }
 
 export default configFile
