@@ -10,9 +10,6 @@ function BooksList({ handleBuyClick, handleBookmarkClick, books }) {
         ? books.filter(book => book.category === selectedCategory)
         : books
 
-    console.log(filteredBooks)
-    console.log(selectedCategory)
-
     return (
         <Container maxWidth='xl'>
             {books && (
