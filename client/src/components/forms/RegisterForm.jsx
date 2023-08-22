@@ -14,6 +14,10 @@ import {
 import { Link } from 'react-router-dom'
 
 function RegisterForm() {
+    const handleClick = event => {
+        console.log(event.target.name)
+    }
+
     return (
         <Paper elevation={5} sx={{ p: 1 }}>
             <Typography variant='h4' sx={{ m: 1 }}>
@@ -23,7 +27,8 @@ function RegisterForm() {
                 <TextField
                     required
                     label='Электронная почта'
-                    type='email'
+                    type='text'
+                    name='email'
                     autoComplete='email'
                     sx={{ width: '100%', my: 1 }}
                 ></TextField>
@@ -31,13 +36,15 @@ function RegisterForm() {
                     required
                     label='Пароль'
                     type='password'
-                    autoComplete='current-password'
+                    name='password'
+                    autoComplete='password'
                     sx={{ width: '100%', my: 1 }}
                 ></TextField>
                 <TextField
                     required
                     label='Имя'
-                    type='name'
+                    type='text'
+                    name='name'
                     autoComplete='current-name'
                     sx={{ width: '100%', my: 1 }}
                 ></TextField>
@@ -46,7 +53,8 @@ function RegisterForm() {
                     <RadioGroup
                         aria-labelledby='demo-radio-buttons-group-label'
                         defaultValue='male'
-                        name='radio-buttons-group'
+                        name='sex'
+                        onClick={handleClick}
                     >
                         <FormControlLabel
                             value='male'

@@ -20,7 +20,7 @@ function LoginForm() {
                     required
                     label='Пароль'
                     type='password'
-                    autoComplete='current-password'
+                    autoComplete='password'
                     sx={{ width: '100%', my: 1 }}
                 ></TextField>
                 <Button variant='contained' size='large' sx={{ width: '100%', my: 2 }}>
