@@ -6,7 +6,6 @@ import { getBooks } from '../../redux/selectors/books.selectors.js'
 import BooksList from '../books/BooksList.jsx'
 import Snack from '../UI/Snackbar.jsx'
 import Loading from '../UI/Loading.jsx'
-// import { setSelectedCategory } from '../../redux/slices/selectCategory.slice.js'
 // import { getSelectedCategory } from '../../redux/selectors/selectCategory.selectors.js'
 
 function MainPage() {
@@ -17,10 +16,6 @@ function MainPage() {
     const [snackText, setSnackText] = useState('')
 
     // const filteredBooks = books.filter(book => book.category === selectedCategory)
-
-    // useEffect(() => {
-    //     dispatch(setSelectedCategory(null))
-    // }, [selectedCategory])
 
     const handleBuyClick = id => {
         setSnackOpen(true)
