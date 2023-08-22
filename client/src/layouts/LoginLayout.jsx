@@ -1,8 +1,13 @@
 import React from 'react'
-import LoginPage from '../components/pages/LoginPage.jsx'
+import { Container } from '@mui/material'
+import LoginForm from '../components/forms/LoginForm.jsx'
 
 function LoginLayout() {
-    return <LoginPage />
+    return (
+        <Container maxWidth='sm' sx={{ mt: 5 }}>
+            <LoginForm />
+        </Container>
+    )
 }
 
 export default LoginLayout
