@@ -15,11 +15,13 @@ import SearchIcon from '@mui/icons-material/Search'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import CatalogButton from './CatalogButton'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedCategory } from '../../redux/slices/selectCategory.slice.js'
+import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 
 function Navbar() {
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector(getIsLoggedIn)
 
     const handleBookShopClick = () => {
         dispatch(setSelectedCategory(null))
@@ -96,14 +98,17 @@ function Navbar() {
                     </Search>
                 </Box>
                 <Box>
-                    <Link to='/bookmarks'>
-                        <BottomNavigationAction
-                            showLabel
-                            sx={{ color: 'white' }}
-                            label='Избранное'
-                            icon={<BookmarkBorderIcon />}
-                        ></BottomNavigationAction>
-                    </Link>
+                    {isLoggedIn && (
+                        <Link to='/bookmarks'>
+                            <BottomNavigationAction
+                                showLabel
+                                sx={{ color: 'white' }}
+                                label='Избранное'
+                                icon={<BookmarkBorderIcon />}
+                            ></BottomNavigationAction>
+                        </Link>
+                    )}
+
                     <Link to='/cart'>
                         <BottomNavigationAction
                             showLabel
