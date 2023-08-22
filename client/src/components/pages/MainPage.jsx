@@ -1,21 +1,15 @@
 import React, { useState } from 'react'
-import { Container } from '@mui/material'
-// import Snack from '../../UI/SnackBar'
+import { Container, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
 import BooksList from '../books/BooksList.jsx'
 import Snack from '../UI/Snackbar.jsx'
 import Loading from '../UI/Loading.jsx'
-// import { getSelectedCategory } from '../../redux/selectors/selectCategory.selectors.js'
 
 function MainPage() {
     const books = useSelector(getBooks)
-    // const dispatch = useDispatch()
-    // const selectedCategory = useSelector(getSelectedCategory)
     const [isSnackOpen, setSnackOpen] = useState(false)
     const [snackText, setSnackText] = useState('')
-
-    // const filteredBooks = books.filter(book => book.category === selectedCategory)
 
     const handleBuyClick = id => {
         setSnackOpen(true)
@@ -41,10 +35,12 @@ function MainPage() {
     if (books) {
         return (
             <>
+                <Typography variant='h3' sx={{ textAlign: 'center', my: 4 }}>
+                    НОВИНКИ ЛИТЕРАТУРЫ
+                </Typography>
                 <Container
                     sx={{
                         maxWidth: 'xl',
-                        mt: 2,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center'
