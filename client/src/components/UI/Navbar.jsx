@@ -112,7 +112,7 @@ function Navbar() {
                             icon={<ShoppingBagOutlinedIcon />}
                         ></BottomNavigationAction>
                     </Link>
-                    <Link to='/login'>
+                    <Link to='auth/signIn'>
                         <BottomNavigationAction
                             showLabel
                             sx={{ color: 'white' }}

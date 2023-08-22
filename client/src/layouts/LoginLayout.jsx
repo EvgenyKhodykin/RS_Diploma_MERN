@@ -1,13 +1,13 @@
 import React from 'react'
 import { Container } from '@mui/material'
-import LoginForm from '../components/forms/LoginForm.jsx'
+import { Outlet } from 'react-router-dom'
 
-function LoginLayout() {
+function AuthLayout() {
     return (
         <Container maxWidth='sm' sx={{ mt: 8 }}>
-            <LoginForm />
+            <Outlet />
         </Container>
     )
 }
 
-export default LoginLayout
+export default AuthLayout

@@ -6,7 +6,7 @@ function LoginForm() {
     return (
         <Paper elevation={5} sx={{ p: 1 }}>
             <Typography variant='h4' sx={{ m: 1 }}>
-                Вход и регистрация:
+                Вход:
             </Typography>
             <Box component='form'>
                 <TextField
@@ -28,7 +28,10 @@ function LoginForm() {
                 </Button>
                 <Typography sx={{ mt: 2 }}>
                     Нет учётной записи?{' '}
-                    <Link style={{ textDecoration: 'none', color: 'red' }}>
+                    <Link
+                        to='/auth/signUp'
+                        style={{ textDecoration: 'none', color: 'red' }}
+                    >
                         Зарегистрироваться
                     </Link>
                 </Typography>

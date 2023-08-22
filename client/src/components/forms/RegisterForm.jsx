@@ -28,7 +28,12 @@ function RegisterForm() {
                 </Button>
                 <Typography sx={{ mt: 2 }}>
                     Уже есть учётная запись?{' '}
-                    <Link style={{ textDecoration: 'none', color: 'red' }}>Войти</Link>
+                    <Link
+                        to='/auth/signIn'
+                        style={{ textDecoration: 'none', color: 'red' }}
+                    >
+                        Войти
+                    </Link>
                 </Typography>
             </Box>
         </Paper>
