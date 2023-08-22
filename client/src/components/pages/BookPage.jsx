@@ -8,6 +8,7 @@ import {
     CardMedia,
     Container,
     IconButton,
+    Paper,
     Rating,
     Tooltip,
     Typography
@@ -41,7 +42,8 @@ function BookPage() {
                             sx={{ height: 500, objectFit: 'contain' }}
                         />
                     </Card>
-                    <Card
+                    <Paper
+                        elevation={1}
                         sx={{
                             marginLeft: 5,
                             width: '60%',
@@ -89,7 +91,7 @@ function BookPage() {
                                 </IconButton>
                             </Tooltip>
                         </CardActions>
-                    </Card>
+                    </Paper>
                 </Container>
                 <Container
                     sx={{
