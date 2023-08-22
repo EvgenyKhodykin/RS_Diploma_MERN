@@ -15,8 +15,16 @@ import SearchIcon from '@mui/icons-material/Search'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import CatalogButton from './CatalogButton'
+import { useDispatch } from 'react-redux'
+import { setSelectedCategory } from '../../redux/slices/selectCategory.slice.js'
 
 function Navbar() {
+    const dispatch = useDispatch()
+
+    const handleBookShopClick = () => {
+        dispatch(setSelectedCategory(null))
+    }
+
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
@@ -66,7 +74,11 @@ function Navbar() {
                 <Box sx={{ display: 'flex' }}>
                     <Avatar variant='square' alt='logo' src='../public/favicon.png' />
                     <Link to='/'>
-                        <Button size='large' sx={{ color: 'white' }}>
+                        <Button
+                            size='large'
+                            sx={{ color: 'white' }}
+                            onClick={handleBookShopClick}
+                        >
                             Book Shop
                         </Button>
                     </Link>
