@@ -1,22 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Box,
     Button,
     FormControl,
     FormControlLabel,
     FormLabel,
+    InputAdornment,
     Paper,
     Radio,
     RadioGroup,
     TextField,
+    Tooltip,
     Typography
 } from '@mui/material'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { Link } from 'react-router-dom'
 
 function RegisterForm() {
-    const handleClick = event => {
-        console.log(event.target.name)
+    const [showPassword, setShowPassword] = useState(false)
+
+    const toggleShowPassword = () => {
+        setShowPassword(prevState => !prevState)
     }
+
+    const handleClick = event => {}
 
     return (
         <Paper elevation={5} sx={{ p: 1 }}>
@@ -31,15 +39,30 @@ function RegisterForm() {
                     name='email'
                     autoComplete='email'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                />
                 <TextField
                     required
                     label='Пароль'
-                    type='password'
+                    type={showPassword ? 'text' : 'password'}
                     name='password'
                     autoComplete='password'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <Tooltip title='Показать/скрыть пароль'>
+                                    <Button onClick={toggleShowPassword}>
+                                        {showPassword ? (
+                                            <VisibilityIcon />
+                                        ) : (
+                                            <VisibilityOffIcon />
+                                        )}
+                                    </Button>
+                                </Tooltip>
+                            </InputAdornment>
+                        )
+                    }}
+                />
                 <TextField
                     required
                     label='Имя'
@@ -47,7 +70,7 @@ function RegisterForm() {
                     name='name'
                     autoComplete='current-name'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                />
                 <FormControl sx={{ ml: 1 }}>
                     <FormLabel id='demo-radio-buttons-group-label'>Пол</FormLabel>
                     <RadioGroup

@@ -1,8 +1,24 @@
-import React from 'react'
-import { Box, Button, Paper, TextField, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import {
+    Box,
+    Button,
+    InputAdornment,
+    Paper,
+    TextField,
+    Tooltip,
+    Typography
+} from '@mui/material'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { Link } from 'react-router-dom'
 
 function LoginForm() {
+    const [showPassword, setShowPassword] = useState(false)
+
+    const toggleShowPassword = () => {
+        setShowPassword(prevState => !prevState)
+    }
+
     return (
         <Paper elevation={5} sx={{ p: 1 }}>
             <Typography variant='h4' sx={{ m: 1 }}>
@@ -15,14 +31,29 @@ function LoginForm() {
                     type='email'
                     autoComplete='email'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                />
                 <TextField
                     required
                     label='Пароль'
-                    type='password'
+                    type={showPassword ? 'text' : 'password'}
                     autoComplete='password'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <Tooltip title='Показать/скрыть пароль'>
+                                    <Button onClick={toggleShowPassword}>
+                                        {showPassword ? (
+                                            <VisibilityIcon />
+                                        ) : (
+                                            <VisibilityOffIcon />
+                                        )}
+                                    </Button>
+                                </Tooltip>
+                            </InputAdornment>
+                        )
+                    }}
+                />
                 <Button variant='contained' size='large' sx={{ width: '100%', my: 2 }}>
                     Войти
                 </Button>
