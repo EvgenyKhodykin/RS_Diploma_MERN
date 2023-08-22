@@ -25,7 +25,7 @@ function BookPage() {
             <>
                 <Container
                     sx={{
-                        maxWidth: 'xl',
+                        width: 'xl',
                         mt: 8,
                         display: 'flex',
                         flexDirection: 'row',
