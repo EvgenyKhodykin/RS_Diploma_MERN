@@ -12,7 +12,7 @@ import {
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { Link, useNavigate } from 'react-router-dom'
-import { signIn } from '../../redux/slices/users.slice.js'
+import { loadUsersList, signIn } from '../../redux/slices/users.slice.js'
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 
 function LoginForm() {
@@ -23,7 +23,10 @@ function LoginForm() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (isLoggedIn) navigate('/')
+        if (isLoggedIn) {
+            dispatch(loadUsersList)
+            navigate('/')
+        }
     }, [isLoggedIn])
 
     const handleChange = event => {

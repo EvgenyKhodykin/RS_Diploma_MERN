@@ -17,11 +17,13 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import CatalogButton from './CatalogButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedCategory } from '../../redux/slices/selectCategory.slice.js'
-import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import { getCurrentUser, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import NavProfile from './NavProfile.jsx'
 
 function Navbar() {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(getIsLoggedIn)
+    const currentUser = useSelector(getCurrentUser)
 
     const handleBookShopClick = () => {
         dispatch(setSelectedCategory(null))
@@ -117,14 +119,23 @@ function Navbar() {
                             icon={<ShoppingBagOutlinedIcon />}
                         ></BottomNavigationAction>
                     </Link>
-                    <Link to='auth/signIn'>
+                    {isLoggedIn ? (
                         <BottomNavigationAction
                             showLabel
-                            sx={{ color: 'white' }}
-                            label='Войти'
-                            icon={<AccountCircleIcon />}
+                            sx={{ color: '#26a9e0' }}
+                            label={currentUser.name}
+                            icon={<NavProfile />}
                         ></BottomNavigationAction>
-                    </Link>
+                    ) : (
+                        <Link to='auth/signIn'>
+                            <BottomNavigationAction
+                                showLabel
+                                sx={{ color: 'white' }}
+                                label='Войти'
+                                icon={<AccountCircleIcon />}
+                            ></BottomNavigationAction>
+                        </Link>
+                    )}
                 </Box>
             </Toolbar>
         </AppBar>
