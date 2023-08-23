@@ -1,19 +1,21 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
+// import { useSelector } from 'react-redux'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 // import BookmarkIcon from '@mui/icons-material/Bookmark'
 import { Button, CardActions, IconButton, Tooltip } from '@mui/material'
-import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
+import { useDispatch } from 'react-redux'
+import { addBookId } from '../../redux/slices/cart.slice.js'
+// import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 
 function BuyBookmarkButtons({ bookId }) {
-    const currentUser = useSelector(getCurrentUser)
-    const [favorites, setFavorites] = useState(currentUser.favorites)
+    const dispatch = useDispatch()
+    // const currentUser = useSelector(getCurrentUser)
+    // const [favorites, setFavorites] = useState(currentUser.favorites)
 
-    const handleBookmarkClick = id => {
-        const newFavorites = [...favorites]
-        newFavorites.push(id)
-        setFavorites(newFavorites)
-        console.log(favorites)
+    const handleBookmarkClick = id => {}
+
+    const handleBuyClick = id => {
+        dispatch(addBookId(id))
     }
 
     return (
@@ -23,7 +25,12 @@ function BuyBookmarkButtons({ bookId }) {
                 justifyContent: 'space-between'
             }}
         >
-            <Button size='large' variant='contained' sx={{ backgroundColor: '#26a9e0' }}>
+            <Button
+                size='large'
+                variant='contained'
+                sx={{ backgroundColor: '#26a9e0' }}
+                onClick={() => handleBuyClick(bookId)}
+            >
                 Купить
             </Button>
             <Tooltip title='Добавить в избранное'>

@@ -16,7 +16,7 @@ import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import CatalogButton from './CatalogButton'
 import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedCategory } from '../../redux/slices/selectCategory.slice.js'
+import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
 import { getCurrentUser, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import NavProfile from './NavProfile.jsx'
 

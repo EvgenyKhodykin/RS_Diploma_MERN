@@ -3,12 +3,12 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import MainPage from './components/pages/MainPage'
 import AuthLayout from './layouts/LoginLayout'
-import BookPage from './components/pages/BookPage.jsx'
 import AppLoader from './components/UI/hoc/AppLoader.jsx'
 import LoginForm from './components/forms/LoginForm.jsx'
 import RegisterForm from './components/forms/RegisterForm.jsx'
 import LogOut from './layouts/LogOut.jsx'
 import CartPage from './components/pages/CartPage.jsx'
+import BookPage from './components/books/BookPage.jsx'
 
 function App() {
     return (

@@ -2,7 +2,7 @@ import { React } from 'react'
 import { Container, Grid } from '@mui/material'
 import BookCard from './BookCard.jsx'
 import { useSelector } from 'react-redux'
-import { getSelectedCategory } from '../../redux/selectors/selectCategory.selectors.js'
+import { getSelectedCategory } from '../../redux/selectors/selectedCategory.selectors.js'
 
 function BooksList({ handleBuyClick, handleBookmarkClick, books }) {
     const selectedCategory = useSelector(getSelectedCategory)
