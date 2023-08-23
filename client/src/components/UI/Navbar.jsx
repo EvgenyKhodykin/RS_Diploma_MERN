@@ -106,7 +106,7 @@ function Navbar() {
                                 showLabel
                                 sx={{ color: 'white' }}
                                 label='Избранное'
-                                icon={<BookmarkBorderIcon />}
+                                icon={<BookmarkBorderIcon sx={{ my: 1 }} />}
                             ></BottomNavigationAction>
                         </Link>
                     )}
@@ -116,14 +116,14 @@ function Navbar() {
                             showLabel
                             sx={{ color: 'white' }}
                             label='Корзина'
-                            icon={<ShoppingBagOutlinedIcon />}
+                            icon={<ShoppingBagOutlinedIcon sx={{ my: 1 }} />}
                         ></BottomNavigationAction>
                     </Link>
                     {isLoggedIn && currentUser ? (
                         <BottomNavigationAction
-                            showLabel
-                            sx={{ color: '#26a9e0' }}
-                            label={currentUser.name}
+                            // showLabel
+                            // sx={{ color: 'white' }}
+                            // label={<ArrowDropDownIcon />}
                             icon={<NavProfile />}
                         ></BottomNavigationAction>
                     ) : (
@@ -132,7 +132,7 @@ function Navbar() {
                                 showLabel
                                 sx={{ color: 'white' }}
                                 label='Войти'
-                                icon={<AccountCircleIcon />}
+                                icon={<AccountCircleIcon sx={{ my: 1 }} />}
                             ></BottomNavigationAction>
                         </Link>
                     )}
