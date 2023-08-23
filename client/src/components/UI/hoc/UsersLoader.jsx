@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getDataStatus } from '../../../store/users/selectors'
 import Loading from '../Loading'
-import { loadUsersList } from '../../../store/users/slice'
+import { getDataStatus } from '../../../redux/selectors/users.selectors.js'
+import { loadUsersList } from '../../../redux/slices/users.slice.js'
 
 function UsersLoader({ children }) {
     const dataStatus = useSelector(getDataStatus)
