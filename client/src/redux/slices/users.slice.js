@@ -26,6 +26,18 @@ const usersSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
+        usersRequested(state) {
+            state.isLoading = true
+        },
+        usersRecieved(state, action) {
+            state.entities = action.payload
+            state.dataLoaded = true
+            state.isLoading = false
+        },
+        usersRequestFailed(state, action) {
+            state.error = action.payload
+            state.isLoading = false
+        },
         userCreated(state, action) {
             if (!Array.isArray(state.entities)) {
                 state.entities = []
@@ -58,7 +70,15 @@ const usersSlice = createSlice({
 })
 
 const { actions, reducer: usersReducer } = usersSlice
-const { userUpdated, userLoggedOut, authRequestSuccess, authRequestFailed } = actions
+const {
+    usersRequested,
+    usersRecieved,
+    usersRequestFailed,
+    userUpdated,
+    userLoggedOut,
+    authRequestSuccess,
+    authRequestFailed
+} = actions
 
 const authRequested = createAction('users/authRequested')
 
@@ -90,6 +110,16 @@ export const signUp = payload => async dispatch => {
         dispatch(authRequestSuccess({ userId: data.userId }))
     } catch (error) {
         dispatch(authRequestFailed(error.message))
+    }
+}
+
+export const loadUsersList = async dispatch => {
+    dispatch(usersRequested())
+    try {
+        const { content } = await userService.fetchAll()
+        dispatch(usersRecieved(content))
+    } catch (error) {
+        dispatch(usersRequestFailed(error.message))
     }
 }
 
