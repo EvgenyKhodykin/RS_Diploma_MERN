@@ -95,10 +95,7 @@ function LoginForm() {
                 </Button>
                 <Typography sx={{ mt: 2 }}>
                     Нет учётной записи?{' '}
-                    <Link
-                        to='/auth/signUp'
-                        style={{ textDecoration: 'none', color: 'red' }}
-                    >
+                    <Link to='/auth/signUp' style={{ color: 'red' }}>
                         Зарегистрироваться
                     </Link>
                 </Typography>

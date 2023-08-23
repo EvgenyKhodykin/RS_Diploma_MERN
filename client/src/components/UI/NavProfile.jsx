@@ -3,6 +3,7 @@ import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { useSelector } from 'react-redux'
 import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
+import { Link } from 'react-router-dom'
 
 function NavProfile() {
     const currentUser = useSelector(getCurrentUser)
@@ -38,7 +39,9 @@ function NavProfile() {
                     }}
                 >
                     <MenuItem>Профиль</MenuItem>
-                    <MenuItem>Выйти</MenuItem>
+                    <Link to='/logout'>
+                        <MenuItem>Выйти</MenuItem>
+                    </Link>
                 </Menu>
             </div>
         )

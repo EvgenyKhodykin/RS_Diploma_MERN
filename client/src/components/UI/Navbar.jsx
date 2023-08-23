@@ -104,7 +104,7 @@ function Navbar() {
                         <Link to='/bookmarks'>
                             <BottomNavigationAction
                                 showLabel
-                                sx={{ color: 'white' }}
+                                sx={{ color: 'white', fontSize: 'large' }}
                                 label='Избранное'
                                 icon={<BookmarkBorderIcon sx={{ my: 1 }} />}
                             ></BottomNavigationAction>

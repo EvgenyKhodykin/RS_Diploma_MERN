@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import MainPage from './components/pages/MainPage'
 import CartLayout from './layouts/CartLayout'
@@ -8,6 +8,7 @@ import BookPage from './components/pages/BookPage.jsx'
 import AppLoader from './components/UI/hoc/AppLoader.jsx'
 import LoginForm from './components/forms/LoginForm.jsx'
 import RegisterForm from './components/forms/RegisterForm.jsx'
+import LogOut from './layouts/LogOut.jsx'
 
 function App() {
     return (
@@ -22,6 +23,8 @@ function App() {
                             <Route path='signIn' element={<LoginForm />} />
                             <Route path='signUp' element={<RegisterForm />} />
                         </Route>
+                        <Route path='logout' element={<LogOut />} />
+                        <Route path='*' element={<Navigate to='/' />} />
                     </Route>
                 </Routes>
             </AppLoader>
