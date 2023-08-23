@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 // import BookmarkIcon from '@mui/icons-material/Bookmark'
 import { Button, CardActions, IconButton, Tooltip } from '@mui/material'
+import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 
-function BuyBookmarkButtons() {
+function BuyBookmarkButtons({ bookId }) {
+    const currentUser = useSelector(getCurrentUser)
+    const [favorites, setFavorites] = useState(currentUser.favorites)
+
+    const handleBookmarkClick = id => {
+        const newFavorites = [...favorites]
+        newFavorites.push(id)
+        setFavorites(newFavorites)
+        console.log(favorites)
+    }
+
     return (
         <CardActions
             sx={{
@@ -15,9 +27,9 @@ function BuyBookmarkButtons() {
                 Купить
             </Button>
             <Tooltip title='Добавить в избранное'>
-                <IconButton>
+                <IconButton onClick={() => handleBookmarkClick(bookId)}>
                     <BookmarkBorderIcon fontSize='large' sx={{ color: '#26a9e0' }} />
-                    {/* <BookmarkIcon fontSize='large' sx={{ color: '#26a9e0' }} /> */}
+                    {/* <BookmarkIcon fontSize='large' sx={{ color: 'red' }} /> */}
                 </IconButton>
             </Tooltip>
         </CardActions>

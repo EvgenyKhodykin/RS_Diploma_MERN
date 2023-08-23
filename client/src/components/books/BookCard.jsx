@@ -44,7 +44,7 @@ function BookCard(props) {
                 </Typography>
             </CardContent>
             <Rating readOnly defaultValue={rate} precision={0.5} />
-            <BuyBookmarkButtons />
+            <BuyBookmarkButtons bookId={_id} />
         </Card>
     )
 }

@@ -58,7 +58,7 @@ function BookPage() {
                         <Typography variant='h4' sx={{ color: 'red', marginTop: 6 }}>
                             {currentBook.price} &#8381;
                         </Typography>
-                        <BuyBookmarkButtons />
+                        <BuyBookmarkButtons bookId={bookId} />
                     </Paper>
                 </Container>
                 <Container

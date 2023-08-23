@@ -25,7 +25,7 @@ function LoginForm() {
     useEffect(() => {
         if (isLoggedIn) {
             dispatch(loadUsersList)
-            navigate('/')
+            navigate('/', { replace: true })
         }
     }, [isLoggedIn])
 

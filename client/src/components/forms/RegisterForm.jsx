@@ -35,7 +35,7 @@ function RegisterForm() {
     useEffect(() => {
         if (isLoggedIn) {
             dispatch(loadUsersList)
-            navigate('/')
+            navigate('/', { replace: true })
         }
     }, [isLoggedIn])
 
@@ -110,7 +110,7 @@ function RegisterForm() {
                         aria-labelledby='demo-radio-buttons-group-label'
                         defaultValue='male'
                         name='sex'
-                        // onChange={handleChange}
+                        onChange={handleChange}
                     >
                         <FormControlLabel
                             value='male'
