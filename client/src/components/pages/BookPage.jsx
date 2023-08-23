@@ -1,21 +1,10 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import {
-    Button,
-    Card,
-    CardActions,
-    CardMedia,
-    Container,
-    IconButton,
-    Paper,
-    Rating,
-    Tooltip,
-    Typography
-} from '@mui/material'
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
+import { Card, CardMedia, Container, Paper, Rating, Typography } from '@mui/material'
 import { getBookById } from '../../redux/selectors/books.selectors.js'
 import Loading from '../UI/Loading.jsx'
+import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 
 function BookPage() {
     const { bookId } = useParams()
@@ -69,28 +58,7 @@ function BookPage() {
                         <Typography variant='h4' sx={{ color: 'red', marginTop: 6 }}>
                             {currentBook.price} &#8381;
                         </Typography>
-                        <CardActions
-                            sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between'
-                            }}
-                        >
-                            <Button
-                                size='large'
-                                variant='contained'
-                                sx={{ backgroundColor: '#26a9e0' }}
-                            >
-                                Купить
-                            </Button>
-                            <Tooltip title='Добавить в избранное'>
-                                <IconButton>
-                                    <BookmarkBorderIcon
-                                        fontSize='large'
-                                        sx={{ color: '#26a9e0' }}
-                                    />
-                                </IconButton>
-                            </Tooltip>
-                        </CardActions>
+                        <BuyBookmarkButtons />
                     </Paper>
                 </Container>
                 <Container
