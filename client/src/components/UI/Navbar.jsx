@@ -119,7 +119,7 @@ function Navbar() {
                             icon={<ShoppingBagOutlinedIcon />}
                         ></BottomNavigationAction>
                     </Link>
-                    {isLoggedIn ? (
+                    {isLoggedIn && currentUser ? (
                         <BottomNavigationAction
                             showLabel
                             sx={{ color: '#26a9e0' }}

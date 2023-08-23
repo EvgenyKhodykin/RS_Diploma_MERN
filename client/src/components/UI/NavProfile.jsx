@@ -1,14 +1,41 @@
-import React from 'react'
-import { Avatar } from '@mui/material'
+import React, { useState } from 'react'
+import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 
 function NavProfile() {
     const currentUser = useSelector(getCurrentUser)
-    console.log(currentUser)
+    const [anchorEl, setAnchorEl] = useState(null)
+    const open = Boolean(anchorEl)
+
+    const handleClick = event => {
+        setAnchorEl(event.currentTarget)
+    }
+
+    const handleClose = event => {
+        setAnchorEl(null)
+    }
 
     if (currentUser) {
-        return <Avatar alt={currentUser.name} src={currentUser.image} />
+        return (
+            <div>
+                <Button onClick={handleClick}>
+                    <Avatar alt={currentUser.name} src={currentUser.image} />
+                </Button>
+                <Menu
+                    id='basic-menu'
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                        'aria-labelledby': 'basic-button'
+                    }}
+                >
+                    <MenuItem>Профиль</MenuItem>
+                    <MenuItem>Выйти</MenuItem>
+                </Menu>
+            </div>
+        )
     }
     return 'Loading'
 }
