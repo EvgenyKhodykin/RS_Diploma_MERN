@@ -99,7 +99,7 @@ function Navbar() {
                         />
                     </Search>
                 </Box>
-                <Box>
+                <Box sx={{ display: 'flex' }}>
                     {isLoggedIn && (
                         <Link to='/bookmarks'>
                             <BottomNavigationAction
@@ -110,7 +110,6 @@ function Navbar() {
                             ></BottomNavigationAction>
                         </Link>
                     )}
-
                     <Link to='/cart'>
                         <BottomNavigationAction
                             showLabel
@@ -120,12 +119,7 @@ function Navbar() {
                         ></BottomNavigationAction>
                     </Link>
                     {isLoggedIn && currentUser ? (
-                        <BottomNavigationAction
-                            // showLabel
-                            // sx={{ color: 'white' }}
-                            // label={<ArrowDropDownIcon />}
-                            icon={<NavProfile />}
-                        ></BottomNavigationAction>
+                        <NavProfile />
                     ) : (
                         <Link to='auth/signIn'>
                             <BottomNavigationAction
