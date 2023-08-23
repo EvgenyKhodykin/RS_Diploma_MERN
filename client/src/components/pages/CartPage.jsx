@@ -11,9 +11,6 @@ function CartPage() {
                 flexDirection: 'column'
             }}
         >
-            <Typography variant='h3' component={'h2'} sx={{ mt: 3 }}>
-                Корзина
-            </Typography>
             <Container sx={{ mt: 20, textAlign: 'center' }}>
                 <img src={emptyCartImage} alt='emptyCartImage' />
                 <Typography variant='h5' sx={{ mt: 2 }}>
