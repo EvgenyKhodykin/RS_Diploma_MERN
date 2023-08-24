@@ -2,6 +2,7 @@ const TOKEN_KEY = 'jwt-token'
 const REFRESH_KEY = 'jwt-refresh-token'
 const EXPIRES_KEY = 'jwt-expires'
 const USERID_KEY = 'user-local-id'
+const BOOK_IDS = 'book-ids'
 
 const setTokens = ({ refreshToken, accessToken, userId, expiresIn = 3600 }) => {
     const expiresDate = new Date().getTime() + expiresIn * 1000
@@ -34,13 +35,28 @@ const removeAuthData = () => {
     localStorage.removeItem(EXPIRES_KEY)
 }
 
+const setBookId = id => {
+    localStorage.setItem(BOOK_IDS, id)
+}
+
+const getBookIds = () => {
+    return localStorage.getItem(BOOK_IDS)
+}
+
+const removeBookIds = () => {
+    localStorage.removeItem(BOOK_IDS)
+}
+
 const localStorageService = {
     setTokens,
     getAccessToken,
     getRefreshToken,
     getTokenExpiresDate,
     getUserId,
-    removeAuthData
+    removeAuthData,
+    setBookId,
+    getBookIds,
+    removeBookIds
 }
 
 export default localStorageService

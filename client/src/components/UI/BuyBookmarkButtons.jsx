@@ -3,19 +3,33 @@ import React from 'react'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 // import BookmarkIcon from '@mui/icons-material/Bookmark'
 import { Button, CardActions, IconButton, Tooltip } from '@mui/material'
-import { useDispatch } from 'react-redux'
-import { addBookId } from '../../redux/slices/cart.slice.js'
+import localStorageService from '../../services/localStorage.service.js'
 // import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 
 function BuyBookmarkButtons({ bookId }) {
-    const dispatch = useDispatch()
     // const currentUser = useSelector(getCurrentUser)
     // const [favorites, setFavorites] = useState(currentUser.favorites)
 
     const handleBookmarkClick = id => {}
 
     const handleBuyClick = id => {
-        dispatch(addBookId(id))
+        if (!localStorageService.getBookIds()) {
+            const bookIdsArray = []
+            bookIdsArray.push(id)
+            localStorageService.setBookId(JSON.stringify(bookIdsArray))
+        } else if (
+            localStorageService.getBookIds() &&
+            localStorageService.getBookIds().length === 0
+        ) {
+            const bookIdsArray = JSON.parse(localStorageService.getBookIds())
+            localStorageService.removeBookIds()
+            bookIdsArray.push(id)
+            localStorageService.setBookId(JSON.stringify(bookIdsArray))
+        } else {
+            const bookIdsArray = JSON.parse(localStorageService.getBookIds())
+            bookIdsArray.push(id)
+            localStorageService.setBookId(JSON.stringify(bookIdsArray))
+        }
     }
 
     return (
