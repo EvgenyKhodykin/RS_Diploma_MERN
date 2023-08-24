@@ -20,11 +20,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
 import { getCurrentUser, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import NavProfile from './NavProfile.jsx'
+import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 
 function Navbar() {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(getIsLoggedIn)
     const currentUser = useSelector(getCurrentUser)
+    const cartStore = useSelector(getCartStore)
+
+    let cartBadgeNumber = null
+
+    if (cartStore.length > 0) {
+        cartBadgeNumber = cartStore.length
+    }
 
     const handleBookShopClick = () => {
         dispatch(setSelectedCategory(null))
@@ -118,7 +126,6 @@ function Navbar() {
                         width: '20%',
                         ml: 'auto',
                         height: 60
-                        // border: '1px solid black'
                     }}
                 >
                     <Box sx={{ textAlign: 'center' }}>
@@ -142,7 +149,7 @@ function Navbar() {
 
                     <Box sx={{ textAlign: 'center', ml: 'auto' }}>
                         <Link to='/cart'>
-                            <Badge badgeContent={' '} color='secondary'>
+                            <Badge badgeContent={cartBadgeNumber} color='secondary'>
                                 <ShoppingBagOutlinedIcon
                                     fontSize='large'
                                     sx={{ color: 'white' }}
