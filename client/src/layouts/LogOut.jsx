@@ -9,7 +9,7 @@ function LogOut() {
 
     useEffect(() => {
         dispatch(userLogOut)
-        localStorageService.removeBookIds()
+        localStorageService.removeAllBooksIds()
     }, [])
 
     return <Navigate to='/' />

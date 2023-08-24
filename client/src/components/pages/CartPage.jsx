@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Typography, Container, Box, Paper, Button } from '@mui/material'
 import emptyCartImage from '../../assets/empty-cart.png'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
 import BookCart from '../books/BookCart.jsx'
-import localStorageService from '../../services/localStorage.service.js'
+import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 
 function CartPage() {
     const allBooks = useSelector(getBooks)
-    const storageBooksIds = JSON.parse(localStorageService.getBookIds())
+    const storageBooksIds = useSelector(getCartStore)
     const currentBooks = allBooks.filter(book => storageBooksIds.includes(book._id))
 
-    useEffect(() => {}, [storageBooksIds])
-
-    if (currentBooks.length > 0 && allBooks.length > 0) {
+    if (currentBooks.length > 0 && allBooks.length > 0 && storageBooksIds) {
         return (
             <Box
                 sx={{
@@ -71,7 +69,7 @@ function CartPage() {
                 </Box>
             </Box>
         )
-    } else {
+    } else if (storageBooksIds.length === 0 || !storageBooksIds) {
         return (
             <Container
                 sx={{

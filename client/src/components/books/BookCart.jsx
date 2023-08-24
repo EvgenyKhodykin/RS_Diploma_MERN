@@ -1,14 +1,14 @@
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Box, Button, CardMedia, Paper } from '@mui/material'
-import localStorageService from '../../services/localStorage.service.js'
+import { useDispatch } from 'react-redux'
+import { removeBookId } from '../../redux/slices/cart.slice.js'
 
 function BookCart({ _id, cover, name }) {
+    const dispatch = useDispatch()
+
     const handleDeleteClick = id => {
-        const storageBooksIds = JSON.parse(localStorageService.getBookIds())
-        localStorageService.removeBookIds()
-        const newStorageBooksIds = storageBooksIds.filter(bookId => bookId !== id)
-        localStorageService.setBookId(JSON.stringify(newStorageBooksIds))
+        dispatch(removeBookId(id))
     }
 
     return (

@@ -35,15 +35,35 @@ const removeAuthData = () => {
     localStorage.removeItem(EXPIRES_KEY)
 }
 
-const setBookId = id => {
-    localStorage.setItem(BOOK_IDS, id)
-}
-
-const getBookIds = () => {
+function getBooksIds() {
     return localStorage.getItem(BOOK_IDS)
 }
 
-const removeBookIds = () => {
+function setBookId(id) {
+    if (!getBooksIds()) {
+        const bookIdsArray = []
+        bookIdsArray.push(id)
+        localStorage.setItem(BOOK_IDS, JSON.stringify(bookIdsArray))
+    } else if (getBooksIds() && getBooksIds().length === 0) {
+        const booksIdsArray = JSON.parse(getBooksIds())
+        removeAllBooksIds()
+        booksIdsArray.push(id)
+        localStorage.setItem(BOOK_IDS, JSON.stringify(booksIdsArray))
+    } else {
+        const booksIdsArray = JSON.parse(getBooksIds())
+        booksIdsArray.push(id)
+        localStorage.setItem(BOOK_IDS, JSON.stringify(booksIdsArray))
+    }
+}
+
+function removeBookId(id) {
+    const booksIdsArray = JSON.parse(getBooksIds())
+    removeAllBooksIds()
+    const newBooksIdsArray = booksIdsArray.filter(bookId => bookId !== id)
+    localStorage.setItem(BOOK_IDS, JSON.stringify(newBooksIdsArray))
+}
+
+function removeAllBooksIds() {
     localStorage.removeItem(BOOK_IDS)
 }
 
@@ -55,8 +75,9 @@ const localStorageService = {
     getUserId,
     removeAuthData,
     setBookId,
-    getBookIds,
-    removeBookIds
+    getBooksIds,
+    removeBookId,
+    removeAllBooksIds
 }
 
 export default localStorageService
