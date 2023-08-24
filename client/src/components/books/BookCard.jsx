@@ -21,7 +21,7 @@ function BookCard(props) {
                     component='img'
                     alt={name}
                     title={name}
-                    sx={{ maxHeight: 250, objectFit: 'contain', marginBottom: 2 }}
+                    sx={{ height: 250, objectFit: 'contain', marginBottom: 2 }}
                 />
             </Link>
             <CardContent>

@@ -4,11 +4,12 @@ import { styled } from '@mui/material/styles'
 import {
     AppBar,
     Avatar,
-    BottomNavigationAction,
     Box,
     Button,
     Toolbar,
-    InputBase
+    InputBase,
+    Badge,
+    Typography
 } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SearchIcon from '@mui/icons-material/Search'
@@ -66,16 +67,21 @@ function Navbar() {
     }))
 
     return (
-        <AppBar position='static' sx={{ height: 90, display: 'flex' }}>
+        <AppBar
+            position='static'
+            sx={{ height: 90, display: 'flex', backgroundColor: '#26a9e0' }}
+        >
             <Toolbar
                 sx={{
                     height: 90,
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    backgroundColor: '#26a9e0'
+                    display: 'flex'
                 }}
             >
-                <Box sx={{ display: 'flex' }}>
+                <Box
+                    sx={{
+                        display: 'flex'
+                    }}
+                >
                     <Avatar variant='square' alt='logo' src='../public/favicon.png' />
                     <Link to='/'>
                         <Button
@@ -87,7 +93,13 @@ function Navbar() {
                         </Button>
                     </Link>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
+
+                <Box
+                    sx={{
+                        display: 'flex',
+                        ml: '20%'
+                    }}
+                >
                     <CatalogButton />
                     <Search>
                         <SearchIconWrapper>
@@ -99,37 +111,67 @@ function Navbar() {
                         />
                     </Search>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                    {isLoggedIn && (
-                        <Link to='/bookmarks'>
-                            <BottomNavigationAction
-                                showLabel
-                                sx={{ color: 'white', fontSize: 'large' }}
-                                label='Избранное'
-                                icon={<BookmarkBorderIcon sx={{ my: 1 }} />}
-                            ></BottomNavigationAction>
+
+                <Box
+                    sx={{
+                        display: 'flex',
+                        width: '20%',
+                        ml: 'auto',
+                        height: 60
+                        // border: '1px solid black'
+                    }}
+                >
+                    <Box sx={{ textAlign: 'center' }}>
+                        {isLoggedIn && (
+                            <Link to='/bookmarks'>
+                                <Badge badgeContent={' '} color='secondary'>
+                                    <BookmarkBorderIcon
+                                        fontSize='large'
+                                        sx={{ color: 'white' }}
+                                    />
+                                </Badge>
+                                <Typography
+                                    variant='body2'
+                                    sx={{ color: 'white', mt: 1 }}
+                                >
+                                    Избранное
+                                </Typography>
+                            </Link>
+                        )}
+                    </Box>
+
+                    <Box sx={{ textAlign: 'center', ml: 'auto' }}>
+                        <Link to='/cart'>
+                            <Badge badgeContent={' '} color='secondary'>
+                                <ShoppingBagOutlinedIcon
+                                    fontSize='large'
+                                    sx={{ color: 'white' }}
+                                />
+                            </Badge>
+                            <Typography variant='body2' sx={{ color: 'white', mt: 1 }}>
+                                Корзина
+                            </Typography>
                         </Link>
-                    )}
-                    <Link to='/cart'>
-                        <BottomNavigationAction
-                            showLabel
-                            sx={{ color: 'white' }}
-                            label='Корзина'
-                            icon={<ShoppingBagOutlinedIcon sx={{ my: 1 }} />}
-                        ></BottomNavigationAction>
-                    </Link>
-                    {isLoggedIn && currentUser ? (
-                        <NavProfile />
-                    ) : (
-                        <Link to='auth/signIn'>
-                            <BottomNavigationAction
-                                showLabel
-                                sx={{ color: 'white' }}
-                                label='Войти'
-                                icon={<AccountCircleIcon sx={{ my: 1 }} />}
-                            ></BottomNavigationAction>
-                        </Link>
-                    )}
+                    </Box>
+                    <Box sx={{ textAlign: 'center', ml: 'auto', width: 50 }}>
+                        {isLoggedIn && currentUser ? (
+                            <NavProfile />
+                        ) : (
+                            <Link to='auth/signIn'>
+                                <AccountCircleIcon
+                                    fontSize='large'
+                                    sx={{ color: 'white' }}
+                                />
+
+                                <Typography
+                                    variant='body2'
+                                    sx={{ color: 'white', mt: 0.5 }}
+                                >
+                                    Войти
+                                </Typography>
+                            </Link>
+                        )}
+                    </Box>
                 </Box>
             </Toolbar>
         </AppBar>

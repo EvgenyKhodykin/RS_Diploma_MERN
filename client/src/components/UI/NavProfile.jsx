@@ -20,7 +20,7 @@ function NavProfile() {
 
     if (currentUser) {
         return (
-            <div>
+            <>
                 <Button onClick={handleClick}>
                     <Avatar
                         alt={currentUser.name}
@@ -43,7 +43,7 @@ function NavProfile() {
                         <MenuItem>Выйти</MenuItem>
                     </Link>
                 </Menu>
-            </div>
+            </>
         )
     }
     return 'Loading'

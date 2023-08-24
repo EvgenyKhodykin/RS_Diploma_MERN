@@ -10,6 +10,7 @@ function CartPage() {
     const allBooks = useSelector(getBooks)
     const storageBooksIds = useSelector(getCartStore)
     const currentBooks = allBooks.filter(book => storageBooksIds.includes(book._id))
+    const totalPrice = currentBooks.reduce((acc, book) => acc + book.price, 0)
 
     if (currentBooks.length > 0 && allBooks.length > 0 && storageBooksIds) {
         return (
@@ -60,7 +61,7 @@ function CartPage() {
                             Итоговая сумма заказа:
                         </Typography>
                         <Typography variant='h4' sx={{ color: 'red' }}>
-                            &#8381;
+                            {totalPrice} &#8381;
                         </Typography>
                         <Button variant='contained' sx={{ width: '100%' }}>
                             Оформить заказ

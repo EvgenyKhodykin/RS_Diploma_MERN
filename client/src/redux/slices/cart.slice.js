@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import localStorageService from '../../services/localStorage.service.js'
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -23,17 +22,14 @@ const { actions, reducer: cartReducer } = cartSlice
 const { bookIdAdded, bookIdRemoved, allBookIdsRemoved } = actions
 
 export const addBookId = payload => dispatch => {
-    localStorageService.setBookId(payload)
     dispatch(bookIdAdded(payload))
 }
 
 export const removeBookId = payload => dispatch => {
-    localStorageService.removeBookId(payload)
     dispatch(bookIdRemoved(payload))
 }
 
 export const removeAllIds = dispatch => {
-    localStorageService.removeAllBooksIds()
     dispatch(allBookIdsRemoved())
 }
 
