@@ -129,22 +129,17 @@ function Navbar() {
                     }}
                 >
                     <Box sx={{ textAlign: 'center' }}>
-                        {isLoggedIn && (
-                            <Link to='/bookmarks'>
-                                <Badge badgeContent={' '} color='secondary'>
-                                    <BookmarkBorderIcon
-                                        fontSize='large'
-                                        sx={{ color: 'white' }}
-                                    />
-                                </Badge>
-                                <Typography
-                                    variant='body2'
-                                    sx={{ color: 'white', mt: 1 }}
-                                >
-                                    Избранное
-                                </Typography>
-                            </Link>
-                        )}
+                        <Link to='/bookmarks'>
+                            <Badge badgeContent={null} color='secondary'>
+                                <BookmarkBorderIcon
+                                    fontSize='large'
+                                    sx={{ color: 'white' }}
+                                />
+                            </Badge>
+                            <Typography variant='body2' sx={{ color: 'white', mt: 1 }}>
+                                Избранное
+                            </Typography>
+                        </Link>
                     </Box>
 
                     <Box sx={{ textAlign: 'center', ml: 'auto' }}>
