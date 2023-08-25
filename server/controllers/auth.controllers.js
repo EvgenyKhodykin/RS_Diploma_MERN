@@ -49,6 +49,7 @@ export async function postSignUpHandler(request, response) {
 export async function postSignInWithPasswordHandler(request, response) {
     try {
         const errors = validationResult(request)
+
         if (!errors.isEmpty()) {
             return response.status(400).json({
                 error: {
@@ -69,6 +70,7 @@ export async function postSignInWithPasswordHandler(request, response) {
                     code: 400
                 }
             })
+            return
         }
 
         const isPasswordEqual = bcrypt.compare(password, existingUser.password)
@@ -79,6 +81,7 @@ export async function postSignInWithPasswordHandler(request, response) {
                     code: 400
                 }
             })
+            return
         }
 
         const tokens = tokenService.generate({ _id: existingUser._id })

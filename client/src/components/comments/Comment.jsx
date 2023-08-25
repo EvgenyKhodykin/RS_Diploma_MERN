@@ -8,7 +8,6 @@ import getCommentDate from '../../utils/getCommentDate.js'
 
 function Comment({ _id, created_at, content, userId, onRemove }) {
     const commentAuthor = useSelector(getUserById(userId))
-    console.log(_id)
 
     return (
         <Paper
