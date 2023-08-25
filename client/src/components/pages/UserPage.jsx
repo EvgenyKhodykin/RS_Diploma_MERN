@@ -32,7 +32,8 @@ function UserPage() {
                     width: '80%',
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    py: 1
                 }}
             >
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
@@ -65,10 +66,6 @@ function UserPage() {
                     Пол:
                 </Typography>
                 <Typography variant='h6'>{currentUser.sex}</Typography>
-                <Typography variant='subtitlte1' sx={{ mt: 3 }} color='primary'>
-                    Электронная почта:
-                </Typography>
-                <Typography variant='h6'>{currentUser.email}</Typography>
             </Paper>
         </Container>
     )

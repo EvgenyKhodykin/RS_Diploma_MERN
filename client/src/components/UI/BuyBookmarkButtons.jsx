@@ -11,10 +11,12 @@ function BuyBookmarkButtons({ bookId }) {
     const cartStore = useSelector(getCartStore)
     let buyButtonText = 'Купить'
     let buyButtonColor = { backgroundColor: '#26a9e0' }
+    let toolTipBuyButtonText = 'Добавить в корзину'
 
     if (cartStore.includes(bookId)) {
         buyButtonText = <AddShoppingCartIcon />
         buyButtonColor = { backgroundColor: '#37ceb4' }
+        toolTipBuyButtonText = null
     }
 
     const handleBookmarkClick = id => {}
@@ -30,7 +32,7 @@ function BuyBookmarkButtons({ bookId }) {
                 justifyContent: 'space-between'
             }}
         >
-            <Tooltip title='Добавить в корзину'>
+            <Tooltip title={toolTipBuyButtonText}>
                 <Button
                     size='large'
                     variant='contained'

@@ -1,6 +1,6 @@
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { Box, Button, CardMedia, Paper } from '@mui/material'
+import { Box, Button, CardMedia, Paper, Tooltip } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { removeBookId } from '../../redux/slices/cart.slice.js'
 
@@ -28,9 +28,11 @@ function BookCart({ _id, cover, name }) {
                     justifyContent: 'center'
                 }}
             >
-                <Button onClick={() => handleDeleteClick(_id)}>
-                    <DeleteIcon color='primary' />
-                </Button>
+                <Tooltip title='Удалить из корзины'>
+                    <Button onClick={() => handleDeleteClick(_id)}>
+                        <DeleteIcon color='primary' />
+                    </Button>
+                </Tooltip>
             </Box>
         </Paper>
     )
