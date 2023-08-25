@@ -1,22 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { Card, CardMedia, Container, Paper, Rating, Typography } from '@mui/material'
+import {
+    Box,
+    Button,
+    Card,
+    CardMedia,
+    Container,
+    Paper,
+    Rating,
+    Typography
+} from '@mui/material'
 import { getBookById } from '../../redux/selectors/books.selectors.js'
 import Loading from '../UI/Loading.jsx'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
+import NewCommentForm from '../comments/NewCommentForm.jsx'
 
 function BookPage() {
+    const [formIsVisible, setFormIsVisible] = useState(false)
     const { bookId } = useParams()
     const currentBook = useSelector(getBookById(bookId))
 
+    const handleCommentClick = () => {
+        if (!formIsVisible) setFormIsVisible(true)
+        setFormIsVisible(!formIsVisible)
+    }
+
     if (currentBook) {
         return (
-            <>
+            <Container maxWidth='xl'>
                 <Container
+                    maxWidth='lg'
                     sx={{
-                        width: 'xl',
-                        mt: 8,
+                        mt: 4,
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'space-between'
@@ -35,7 +51,7 @@ function BookPage() {
                         elevation={1}
                         sx={{
                             marginLeft: 5,
-                            width: '60%',
+                            width: '35%',
                             textAlign: 'center',
                             display: 'flex',
                             flexDirection: 'column',
@@ -63,8 +79,8 @@ function BookPage() {
                 </Container>
                 <Container
                     sx={{
-                        maxWidth: 'xl',
-                        mt: 8,
+                        maxWidth: 'lg',
+                        mt: 4,
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'space-between'
@@ -72,7 +88,29 @@ function BookPage() {
                 >
                     <Typography variant='body1'>{currentBook.description}</Typography>
                 </Container>
-            </>
+                <Container
+                    sx={{
+                        maxWidth: 'lg',
+                        mt: 4,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between'
+                    }}
+                >
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Typography variant='h3'>отзывы</Typography>
+                        <Button
+                            variant='contained'
+                            size='large'
+                            sx={{ backgroundColor: '#26a9e0', height: 40, ml: 5 }}
+                            onClick={handleCommentClick}
+                        >
+                            Оставить отзыв
+                        </Button>
+                    </Box>
+                </Container>
+                {formIsVisible && <NewCommentForm />}
+            </Container>
         )
     }
     return <Loading />
