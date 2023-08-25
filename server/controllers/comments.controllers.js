@@ -26,15 +26,17 @@ export async function postCommentHandler(request, response) {
 export async function deleteCommentHandler(request, response) {
     try {
         const { commentId } = request.params
+        console.log(commentId)
         const removedComment = await Comment.findById(commentId)
 
         if (removedComment.userId.toString() === request.user._id) {
-            await removedComment.remove()
+            await removedComment.deleteOne()
             return response.send(null)
         } else {
             return response.status(401).json({ message: 'Unauthorized' })
         }
     } catch (error) {
+        console.log(error.message)
         response.status(500).json({ message: 'Server error. Can not delete a comment' })
     }
 }

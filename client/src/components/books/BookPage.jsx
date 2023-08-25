@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { orderBy } from 'lodash'
 import {
+    Badge,
     Box,
     Button,
     Card,
@@ -17,7 +18,11 @@ import Loading from '../UI/Loading.jsx'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 import NewCommentForm from '../comments/NewCommentForm.jsx'
 import { getCurrentUserId, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
-import { createComment, loadCommentsList } from '../../redux/slices/comments.slice.js'
+import {
+    createComment,
+    loadCommentsList,
+    removeComment
+} from '../../redux/slices/comments.slice.js'
 import CommentsList from '../comments/CommentsList.jsx'
 import {
     getComments,
@@ -57,6 +62,10 @@ function BookPage() {
         }
         dispatch(createComment(newComment))
         setFormIsVisible(false)
+    }
+
+    const handleRemoveComment = id => {
+        dispatch(removeComment(id))
     }
 
     if (currentBook) {
@@ -131,7 +140,10 @@ function BookPage() {
                     }}
                 >
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography variant='h3'>отзывы</Typography>
+                        <Badge badgeContent={comments.length} color='secondary'>
+                            <Typography variant='h3'>отзывы</Typography>
+                        </Badge>
+
                         <Button
                             variant='contained'
                             size='large'
@@ -143,7 +155,12 @@ function BookPage() {
                     </Box>
                 </Container>
                 {formIsVisible && <NewCommentForm onSubmit={handleSubmit} />}
-                {!isLoading && <CommentsList comments={sortedComments} />}
+                {!isLoading && (
+                    <CommentsList
+                        comments={sortedComments}
+                        onRemove={handleRemoveComment}
+                    />
+                )}
             </Container>
         )
     }
