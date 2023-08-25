@@ -36,7 +36,6 @@ export async function deleteCommentHandler(request, response) {
             return response.status(401).json({ message: 'Unauthorized' })
         }
     } catch (error) {
-        console.log(error.message)
         response.status(500).json({ message: 'Server error. Can not delete a comment' })
     }
 }
