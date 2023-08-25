@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Typography } from '@mui/material'
 
-function ProfileEditPage() {
+function UserEditPage() {
     return (
         <Container maxWidth='sm'>
             <Typography variant='h3'>Profile Edit Page</Typography>
@@ -9,4 +9,4 @@ function ProfileEditPage() {
     )
 }
 
-export default ProfileEditPage
+export default UserEditPage

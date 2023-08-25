@@ -30,14 +30,16 @@ function BuyBookmarkButtons({ bookId }) {
                 justifyContent: 'space-between'
             }}
         >
-            <Button
-                size='large'
-                variant='contained'
-                sx={buyButtonColor}
-                onClick={() => handleBuyClick(bookId)}
-            >
-                {buyButtonText}
-            </Button>
+            <Tooltip title='Добавить в корзину'>
+                <Button
+                    size='large'
+                    variant='contained'
+                    sx={buyButtonColor}
+                    onClick={() => handleBuyClick(bookId)}
+                >
+                    {buyButtonText}
+                </Button>
+            </Tooltip>
             <Tooltip title='Добавить в избранное'>
                 <IconButton onClick={() => handleBookmarkClick(bookId)}>
                     <BookmarkBorderIcon fontSize='large' sx={{ color: '#26a9e0' }} />

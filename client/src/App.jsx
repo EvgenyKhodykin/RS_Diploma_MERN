@@ -12,7 +12,7 @@ import BookPage from './components/books/BookPage.jsx'
 import ProtectedRoutes from './components/UI/ProtectedRoutes.jsx'
 import FavoritesPage from './components/pages/FavoritesPage.jsx'
 import UserPage from './components/pages/UserPage.jsx'
-import ProfileEditPage from './components/pages/ProfileEditPage.jsx'
+import UserEditPage from './components/pages/UserEditPage.jsx'
 
 function App() {
     return (
@@ -28,9 +28,8 @@ function App() {
                         </Route>
                         <Route element={<ProtectedRoutes />}>
                             <Route path='favorites' element={<FavoritesPage />} />
-                            <Route path='user' element={<UserPage />}>
-                                <Route path='edit' element={<ProfileEditPage />} />
-                            </Route>
+                            <Route path='user/:userId' element={<UserPage />} />
+                            <Route path='user/:userId/edit' element={<UserEditPage />} />
                         </Route>
                         <Route path='logout' element={<LogOut />} />
                         <Route path='cart' element={<CartPage />} />

@@ -14,7 +14,7 @@ function NavProfile() {
         setAnchorEl(event.currentTarget)
     }
 
-    const handleClose = event => {
+    const handleClose = () => {
         setAnchorEl(null)
     }
 
@@ -38,8 +38,8 @@ function NavProfile() {
                         'aria-labelledby': 'basic-button'
                     }}
                 >
-                    <Link to='/user'>
-                        <MenuItem>Профиль</MenuItem>
+                    <Link to={`/user/${currentUser._id}`}>
+                        <MenuItem onClick={handleClose}>Профиль</MenuItem>
                     </Link>
                     <Link to='/logout'>
                         <MenuItem>Выйти</MenuItem>

@@ -1,6 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Box, Button, CardMedia, Container, Paper, Typography } from '@mui/material'
+import { Link } from 'react-router-dom'
+import {
+    Box,
+    Button,
+    CardMedia,
+    Container,
+    Paper,
+    Tooltip,
+    Typography
+} from '@mui/material'
 import SettingsIcon from '@mui/icons-material/Settings'
 import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 
@@ -27,9 +36,13 @@ function UserPage() {
                 }}
             >
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-                    <Button>
-                        <SettingsIcon />
-                    </Button>
+                    <Tooltip title='Редактировать профиль'>
+                        <Link to={`/user/${currentUser._id}/edit`}>
+                            <Button>
+                                <SettingsIcon />
+                            </Button>
+                        </Link>
+                    </Tooltip>
                 </Box>
                 <CardMedia
                     image={currentUser.image}
@@ -42,15 +55,20 @@ function UserPage() {
                         objectFit: 'contain',
                         mb: 4,
                         borderRadius: '50%'
-                        // boxShadow: '2px 2px 5px 2px lightgrey'
                     }}
                 />
-                <Typography variant='subtitlte1'>Имя:</Typography>
+                <Typography variant='subtitlte1' color='primary'>
+                    Имя:
+                </Typography>
                 <Typography variant='h6'>{currentUser.name}</Typography>
-                <Typography variant='subtitlte1' sx={{ mt: 4 }}>
+                <Typography variant='subtitlte1' sx={{ mt: 3 }} color='primary'>
                     Пол:
                 </Typography>
                 <Typography variant='h6'>{currentUser.sex}</Typography>
+                <Typography variant='subtitlte1' sx={{ mt: 3 }} color='primary'>
+                    Электронная почта:
+                </Typography>
+                <Typography variant='h6'>{currentUser.email}</Typography>
             </Paper>
         </Container>
     )
