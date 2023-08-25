@@ -24,7 +24,7 @@ function RegisterForm() {
     const [data, setData] = useState({
         email: '',
         password: '',
-        sex: 'male',
+        sex: 'Мужской',
         name: ''
     })
     const [showPassword, setShowPassword] = useState(false)
@@ -113,12 +113,12 @@ function RegisterForm() {
                         onChange={handleChange}
                     >
                         <FormControlLabel
-                            value='male'
+                            value='Мужской'
                             control={<Radio />}
                             label='Мужской'
                         />
                         <FormControlLabel
-                            value='female'
+                            value='Женский'
                             control={<Radio />}
                             label='Женский'
                         />

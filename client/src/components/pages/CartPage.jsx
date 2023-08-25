@@ -12,21 +12,18 @@ function CartPage() {
     const currentBooks = allBooks.filter(book => storageBooksIds.includes(book._id))
     const totalPrice = currentBooks.reduce((acc, book) => acc + book.price, 0)
 
-    if (currentBooks.length > 0 && allBooks.length > 0 && storageBooksIds) {
+    if (currentBooks.length > 0) {
         return (
             <Box
                 sx={{
-                    my: 4,
                     display: 'flex',
                     width: '100vw',
-                    height: '100vh',
                     p: 2
                 }}
             >
                 <Box
                     sx={{
                         display: 'flex',
-                        mx: 2,
                         width: '60%',
                         flexWrap: 'wrap'
                     }}
@@ -41,14 +38,14 @@ function CartPage() {
                         justifyContent: 'center',
                         mx: 2,
                         width: '40%',
-                        height: '50%',
-                        flexWrap: 'wrap'
+                        height: '50%'
                     }}
                 >
                     <Paper
                         elevation={5}
                         sx={{
                             p: 1,
+                            mt: 1,
                             width: '80%',
                             height: 380,
                             display: 'flex',

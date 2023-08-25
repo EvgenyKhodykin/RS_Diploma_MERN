@@ -38,7 +38,9 @@ function NavProfile() {
                         'aria-labelledby': 'basic-button'
                     }}
                 >
-                    <MenuItem>Профиль</MenuItem>
+                    <Link to='/user'>
+                        <MenuItem>Профиль</MenuItem>
+                    </Link>
                     <Link to='/logout'>
                         <MenuItem>Выйти</MenuItem>
                     </Link>

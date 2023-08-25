@@ -9,6 +9,10 @@ import RegisterForm from './components/forms/RegisterForm.jsx'
 import LogOut from './layouts/LogOut.jsx'
 import CartPage from './components/pages/CartPage.jsx'
 import BookPage from './components/books/BookPage.jsx'
+import ProtectedRoutes from './components/UI/ProtectedRoutes.jsx'
+import FavoritesPage from './components/pages/FavoritesPage.jsx'
+import UserPage from './components/pages/UserPage.jsx'
+import ProfileEditPage from './components/pages/ProfileEditPage.jsx'
 
 function App() {
     return (
@@ -21,6 +25,12 @@ function App() {
                         <Route path='auth' element={<AuthLayout />}>
                             <Route path='signIn' element={<LoginForm />} />
                             <Route path='signUp' element={<RegisterForm />} />
+                        </Route>
+                        <Route element={<ProtectedRoutes />}>
+                            <Route path='favorites' element={<FavoritesPage />} />
+                            <Route path='user' element={<UserPage />}>
+                                <Route path='edit' element={<ProfileEditPage />} />
+                            </Route>
                         </Route>
                         <Route path='logout' element={<LogOut />} />
                         <Route path='cart' element={<CartPage />} />

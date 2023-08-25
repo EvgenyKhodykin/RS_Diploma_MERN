@@ -129,7 +129,7 @@ function Navbar() {
                     }}
                 >
                     <Box sx={{ textAlign: 'center' }}>
-                        <Link to='/bookmarks'>
+                        <Link to='/favorites'>
                             <Badge badgeContent={null} color='secondary'>
                                 <BookmarkBorderIcon
                                     fontSize='large'
