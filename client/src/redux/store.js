@@ -4,13 +4,15 @@ import categoriesReducer from './slices/categories.slice.js'
 import selectedCategoryReducer from './slices/selectedCategory.slice.js'
 import usersReducer from './slices/users.slice.js'
 import cartReducer from './slices/cart.slice.js'
+import commentsReducer from './slices/comments.slice.js'
 
 const rootReducer = combineReducers({
     books: booksReducer,
     categories: categoriesReducer,
     users: usersReducer,
     selectedCategory: selectedCategoryReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    comments: commentsReducer
 })
 
 const store = configureStore({ reducer: rootReducer })

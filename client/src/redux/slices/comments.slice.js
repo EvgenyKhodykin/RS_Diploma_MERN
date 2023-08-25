@@ -43,10 +43,10 @@ const commentCreateFailed = createAction('comments/commentCreateFailed')
 const commentRemoveRequested = createAction('comments/commentRemoveRequested')
 const commentRemoveFailed = createAction('comments/commentRemoveFailed')
 
-export const loadCommentsList = userId => async dispatch => {
+export const loadCommentsList = bookId => async dispatch => {
     dispatch(commentsRequested())
     try {
-        const { content } = await commentsService.getComments(userId)
+        const { content } = await commentsService.getComments(bookId)
         dispatch(commentsRecieved(content))
     } catch (error) {
         dispatch(commentsRequestFailed(error.message))

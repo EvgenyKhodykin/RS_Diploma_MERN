@@ -4,7 +4,7 @@ import Comment from './Comment.jsx'
 
 function CommentsList() {
     return (
-        <Container>
+        <Container maxWidth='lg' sx={{ mt: 4 }}>
             <Comment />
         </Container>
     )

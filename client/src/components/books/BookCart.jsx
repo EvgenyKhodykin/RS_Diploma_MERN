@@ -30,7 +30,7 @@ function BookCart({ _id, cover, name }) {
             >
                 <Tooltip title='Удалить из корзины'>
                     <Button onClick={() => handleDeleteClick(_id)}>
-                        <DeleteIcon color='primary' />
+                        <DeleteIcon sx={{ color: '#26a9e0' }} />
                     </Button>
                 </Tooltip>
             </Box>
