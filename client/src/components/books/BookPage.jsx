@@ -15,15 +15,26 @@ import { getBookById } from '../../redux/selectors/books.selectors.js'
 import Loading from '../UI/Loading.jsx'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 import NewCommentForm from '../comments/NewCommentForm.jsx'
+import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 
 function BookPage() {
+    const isLoggedIn = useSelector(getIsLoggedIn)
     const [formIsVisible, setFormIsVisible] = useState(false)
     const { bookId } = useParams()
     const currentBook = useSelector(getBookById(bookId))
 
     const handleCommentClick = () => {
-        if (!formIsVisible) setFormIsVisible(true)
-        setFormIsVisible(!formIsVisible)
+        if (isLoggedIn) {
+            if (!formIsVisible) setFormIsVisible(true)
+            setFormIsVisible(!formIsVisible)
+        } else {
+            return alert('Чтобы оставить отзыв нужна авторизация!')
+        }
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        setFormIsVisible(false)
     }
 
     if (currentBook) {
@@ -109,7 +120,7 @@ function BookPage() {
                         </Button>
                     </Box>
                 </Container>
-                {formIsVisible && <NewCommentForm />}
+                {formIsVisible && <NewCommentForm onSubmit={handleSubmit} />}
             </Container>
         )
     }
