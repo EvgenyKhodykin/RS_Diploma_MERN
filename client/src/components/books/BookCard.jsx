@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardContent, CardMedia, Typography, Rating } from '@mui/material'
+import { CardContent, CardMedia, Typography, Rating, Paper } from '@mui/material'
 import { Link } from 'react-router-dom'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 
@@ -7,12 +7,14 @@ function BookCard(props) {
     const { _id, name, cover, price, rate } = props
 
     return (
-        <Card
+        <Paper
+            elevation={2}
             sx={{
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+                pt: 1
             }}
         >
             <Link to={`/books/${_id}`}>
@@ -45,7 +47,7 @@ function BookCard(props) {
             </CardContent>
             <Rating readOnly defaultValue={rate} precision={0.5} />
             <BuyBookmarkButtons bookId={_id} />
-        </Card>
+        </Paper>
     )
 }
 
