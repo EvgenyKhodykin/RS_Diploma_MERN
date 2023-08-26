@@ -1,37 +1,101 @@
-import React from 'react'
-import { Box, Button, Paper, TextField, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+    Box,
+    Button,
+    InputAdornment,
+    Paper,
+    TextField,
+    Tooltip,
+    Typography
+} from '@mui/material'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import { Link, useNavigate } from 'react-router-dom'
+import { loadUsersList, signIn } from '../../redux/slices/users.slice.js'
+import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 
 function LoginForm() {
+    const [data, setData] = useState({ email: '', password: '' })
+    const [showPassword, setShowPassword] = useState(false)
+    const dispatch = useDispatch()
+    const isLoggedIn = useSelector(getIsLoggedIn)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            dispatch(loadUsersList)
+            navigate('/', { replace: true })
+        }
+    }, [isLoggedIn])
+
+    const handleChange = event => {
+        const { target } = event
+        setData(prevState => ({
+            ...prevState,
+            [target.name]: target.value
+        }))
+    }
+
+    const toggleShowPassword = () => {
+        setShowPassword(prevState => !prevState)
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        dispatch(signIn(data))
+    }
+
     return (
         <Paper elevation={5} sx={{ p: 1 }}>
             <Typography variant='h4' sx={{ m: 1 }}>
                 Вход:
             </Typography>
-            <Box component='form'>
+            <Box component='form' onSubmit={handleSubmit}>
                 <TextField
                     required
                     label='Электронная почта'
+                    name='email'
                     type='email'
                     autoComplete='email'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                    onChange={handleChange}
+                />
                 <TextField
                     required
                     label='Пароль'
-                    type='password'
+                    name='password'
+                    type={showPassword ? 'text' : 'password'}
                     autoComplete='password'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
-                <Button variant='contained' size='large' sx={{ width: '100%', my: 2 }}>
+                    onChange={handleChange}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <Tooltip title='Показать/скрыть пароль'>
+                                    <Button onClick={toggleShowPassword}>
+                                        {showPassword ? (
+                                            <VisibilityIcon />
+                                        ) : (
+                                            <VisibilityOffIcon />
+                                        )}
+                                    </Button>
+                                </Tooltip>
+                            </InputAdornment>
+                        )
+                    }}
+                />
+                <Button
+                    variant='contained'
+                    size='large'
+                    sx={{ width: '100%', my: 2 }}
+                    type='submit'
+                >
                     Войти
                 </Button>
                 <Typography sx={{ mt: 2 }}>
                     Нет учётной записи?{' '}
-                    <Link
-                        to='/auth/signUp'
-                        style={{ textDecoration: 'none', color: 'red' }}
-                    >
+                    <Link to='/auth/signUp' style={{ color: 'red' }}>
                         Зарегистрироваться
                     </Link>
                 </Typography>

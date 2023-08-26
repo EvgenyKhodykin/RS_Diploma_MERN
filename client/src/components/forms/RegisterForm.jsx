@@ -1,21 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Box,
     Button,
     FormControl,
     FormControlLabel,
     FormLabel,
+    InputAdornment,
     Paper,
     Radio,
     RadioGroup,
     TextField,
+    Tooltip,
     Typography
 } from '@mui/material'
-import { Link } from 'react-router-dom'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import { loadUsersList, signUp } from '../../redux/slices/users.slice.js'
 
 function RegisterForm() {
-    const handleClick = event => {
-        console.log(event.target.name)
+    const [data, setData] = useState({
+        email: '',
+        password: '',
+        sex: 'Мужской',
+        name: ''
+    })
+    const [showPassword, setShowPassword] = useState(false)
+    const isLoggedIn = useSelector(getIsLoggedIn)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            dispatch(loadUsersList)
+            navigate('/', { replace: true })
+        }
+    }, [isLoggedIn])
+
+    const toggleShowPassword = () => {
+        setShowPassword(prevState => !prevState)
+    }
+
+    const handleChange = event => {
+        const { target } = event
+        setData(prevState => ({
+            ...prevState,
+            [target.name]: target.value
+        }))
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        dispatch(signUp(data))
     }
 
     return (
@@ -23,7 +61,7 @@ function RegisterForm() {
             <Typography variant='h4' sx={{ m: 1 }}>
                 Регистрация:
             </Typography>
-            <Box component='form'>
+            <Box component='form' onSubmit={handleSubmit}>
                 <TextField
                     required
                     label='Электронная почта'
@@ -31,15 +69,32 @@ function RegisterForm() {
                     name='email'
                     autoComplete='email'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                    onChange={handleChange}
+                />
                 <TextField
                     required
                     label='Пароль'
-                    type='password'
+                    type={showPassword ? 'text' : 'password'}
                     name='password'
                     autoComplete='password'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                    onChange={handleChange}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position='end'>
+                                <Tooltip title='Показать/скрыть пароль'>
+                                    <Button onClick={toggleShowPassword}>
+                                        {showPassword ? (
+                                            <VisibilityIcon />
+                                        ) : (
+                                            <VisibilityOffIcon />
+                                        )}
+                                    </Button>
+                                </Tooltip>
+                            </InputAdornment>
+                        )
+                    }}
+                />
                 <TextField
                     required
                     label='Имя'
@@ -47,28 +102,34 @@ function RegisterForm() {
                     name='name'
                     autoComplete='current-name'
                     sx={{ width: '100%', my: 1 }}
-                ></TextField>
+                    onChange={handleChange}
+                />
                 <FormControl sx={{ ml: 1 }}>
                     <FormLabel id='demo-radio-buttons-group-label'>Пол</FormLabel>
                     <RadioGroup
                         aria-labelledby='demo-radio-buttons-group-label'
                         defaultValue='male'
                         name='sex'
-                        onClick={handleClick}
+                        onChange={handleChange}
                     >
                         <FormControlLabel
-                            value='male'
+                            value='Мужской'
                             control={<Radio />}
                             label='Мужской'
                         />
                         <FormControlLabel
-                            value='female'
+                            value='Женский'
                             control={<Radio />}
                             label='Женский'
                         />
                     </RadioGroup>
                 </FormControl>
-                <Button variant='contained' size='large' sx={{ width: '100%', my: 2 }}>
+                <Button
+                    variant='contained'
+                    size='large'
+                    sx={{ width: '100%', my: 2 }}
+                    type='submit'
+                >
                     Зарегистрироваться
                 </Button>
                 <Typography sx={{ mt: 2 }}>

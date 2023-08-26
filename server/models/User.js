@@ -6,7 +6,7 @@ const schema = new Schema(
         email: { type: String, required: true, unique: true },
         password: { type: String },
         image: { type: String },
-        sex: { type: String, enum: ['male', 'female'] },
+        sex: { type: String, enum: ['Мужской', 'Женский'] },
         favorites: [{ type: String }]
     },
     {

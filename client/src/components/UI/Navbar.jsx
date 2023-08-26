@@ -4,22 +4,35 @@ import { styled } from '@mui/material/styles'
 import {
     AppBar,
     Avatar,
-    BottomNavigationAction,
     Box,
     Button,
     Toolbar,
-    InputBase
+    InputBase,
+    Badge,
+    Typography
 } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import CatalogButton from './CatalogButton'
-import { useDispatch } from 'react-redux'
-import { setSelectedCategory } from '../../redux/slices/selectCategory.slice.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
+import { getCurrentUser, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import NavProfile from './NavProfile.jsx'
+import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 
 function Navbar() {
     const dispatch = useDispatch()
+    const isLoggedIn = useSelector(getIsLoggedIn)
+    const currentUser = useSelector(getCurrentUser)
+    const cartStore = useSelector(getCartStore)
+
+    let cartBadgeNumber = null
+
+    if (cartStore.length > 0) {
+        cartBadgeNumber = cartStore.length
+    }
 
     const handleBookShopClick = () => {
         dispatch(setSelectedCategory(null))
@@ -62,16 +75,21 @@ function Navbar() {
     }))
 
     return (
-        <AppBar position='static' sx={{ height: 90, display: 'flex' }}>
+        <AppBar
+            position='static'
+            sx={{ height: 90, display: 'flex', backgroundColor: '#26a9e0' }}
+        >
             <Toolbar
                 sx={{
                     height: 90,
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    backgroundColor: '#26a9e0'
+                    display: 'flex'
                 }}
             >
-                <Box sx={{ display: 'flex' }}>
+                <Box
+                    sx={{
+                        display: 'flex'
+                    }}
+                >
                     <Avatar variant='square' alt='logo' src='../public/favicon.png' />
                     <Link to='/'>
                         <Button
@@ -83,7 +101,13 @@ function Navbar() {
                         </Button>
                     </Link>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
+
+                <Box
+                    sx={{
+                        display: 'flex',
+                        ml: '20%'
+                    }}
+                >
                     <CatalogButton />
                     <Search>
                         <SearchIconWrapper>
@@ -95,31 +119,61 @@ function Navbar() {
                         />
                     </Search>
                 </Box>
-                <Box>
-                    <Link to='/bookmarks'>
-                        <BottomNavigationAction
-                            showLabel
-                            sx={{ color: 'white' }}
-                            label='Избранное'
-                            icon={<BookmarkBorderIcon />}
-                        ></BottomNavigationAction>
-                    </Link>
-                    <Link to='/cart'>
-                        <BottomNavigationAction
-                            showLabel
-                            sx={{ color: 'white' }}
-                            label='Корзина'
-                            icon={<ShoppingBagOutlinedIcon />}
-                        ></BottomNavigationAction>
-                    </Link>
-                    <Link to='auth/signIn'>
-                        <BottomNavigationAction
-                            showLabel
-                            sx={{ color: 'white' }}
-                            label='Войти'
-                            icon={<AccountCircleIcon />}
-                        ></BottomNavigationAction>
-                    </Link>
+
+                <Box
+                    sx={{
+                        display: 'flex',
+                        width: '20%',
+                        ml: 'auto',
+                        height: 60
+                    }}
+                >
+                    <Box sx={{ textAlign: 'center' }}>
+                        <Link to='/favorites'>
+                            <Badge badgeContent={null} color='secondary'>
+                                <BookmarkBorderIcon
+                                    fontSize='large'
+                                    sx={{ color: 'white' }}
+                                />
+                            </Badge>
+                            <Typography variant='body2' sx={{ color: 'white', mt: 1 }}>
+                                Избранное
+                            </Typography>
+                        </Link>
+                    </Box>
+
+                    <Box sx={{ textAlign: 'center', ml: 'auto' }}>
+                        <Link to='/cart'>
+                            <Badge badgeContent={cartBadgeNumber} color='secondary'>
+                                <ShoppingBagOutlinedIcon
+                                    fontSize='large'
+                                    sx={{ color: 'white' }}
+                                />
+                            </Badge>
+                            <Typography variant='body2' sx={{ color: 'white', mt: 1 }}>
+                                Корзина
+                            </Typography>
+                        </Link>
+                    </Box>
+                    <Box sx={{ textAlign: 'center', ml: 'auto', width: 50 }}>
+                        {isLoggedIn && currentUser ? (
+                            <NavProfile />
+                        ) : (
+                            <Link to='auth/signIn'>
+                                <AccountCircleIcon
+                                    fontSize='large'
+                                    sx={{ color: 'white' }}
+                                />
+
+                                <Typography
+                                    variant='body2'
+                                    sx={{ color: 'white', mt: 0.5 }}
+                                >
+                                    Войти
+                                </Typography>
+                            </Link>
+                        )}
+                    </Box>
                 </Box>
             </Toolbar>
         </AppBar>

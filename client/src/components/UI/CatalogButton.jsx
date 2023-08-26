@@ -1,11 +1,9 @@
 import { React, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Button from '@mui/material/Button'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
+import { Menu, MenuItem, Button } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { getCategories } from '../../redux/selectors/categories.selectors.js'
-import { setSelectedCategory } from '../../redux/slices/selectCategory.slice.js'
+import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
 
 export default function CatalogButton() {
     const categories = useSelector(getCategories)

@@ -1,30 +1,10 @@
 import React from 'react'
-import {
-    Card,
-    CardContent,
-    CardMedia,
-    Typography,
-    CardActions,
-    Button,
-    IconButton,
-    Tooltip,
-    Rating
-} from '@mui/material'
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
-import BookmarkIcon from '@mui/icons-material/Bookmark'
+import { Card, CardContent, CardMedia, Typography, Rating } from '@mui/material'
 import { Link } from 'react-router-dom'
+import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 
 function BookCard(props) {
-    const {
-        _id,
-        name,
-        cover,
-        price,
-        rate,
-        handleBuyClick,
-        handleBookmarkClick,
-        isBookmarked
-    } = props
+    const { _id, name, cover, price, rate } = props
 
     return (
         <Card
@@ -41,7 +21,7 @@ function BookCard(props) {
                     component='img'
                     alt={name}
                     title={name}
-                    sx={{ maxHeight: 250, objectFit: 'contain', marginBottom: 2 }}
+                    sx={{ height: 250, objectFit: 'contain', marginBottom: 2 }}
                 />
             </Link>
             <CardContent>
@@ -64,33 +44,7 @@ function BookCard(props) {
                 </Typography>
             </CardContent>
             <Rating readOnly defaultValue={rate} precision={0.5} />
-            <CardActions
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between'
-                }}
-            >
-                <Button
-                    size='large'
-                    variant='contained'
-                    sx={{ backgroundColor: '#26a9e0' }}
-                    onClick={() => handleBuyClick(_id)}
-                >
-                    Купить
-                </Button>
-                <Tooltip title='Добавить в избранное'>
-                    <IconButton onClick={() => handleBookmarkClick(_id)}>
-                        {!isBookmarked ? (
-                            <BookmarkBorderIcon
-                                fontSize='large'
-                                sx={{ color: '#26a9e0' }}
-                            />
-                        ) : (
-                            <BookmarkIcon fontSize='large' sx={{ color: '#26a9e0' }} />
-                        )}
-                    </IconButton>
-                </Tooltip>
-            </CardActions>
+            <BuyBookmarkButtons bookId={_id} />
         </Card>
     )
 }

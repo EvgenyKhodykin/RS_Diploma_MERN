@@ -2,6 +2,7 @@ const TOKEN_KEY = 'jwt-token'
 const REFRESH_KEY = 'jwt-refresh-token'
 const EXPIRES_KEY = 'jwt-expires'
 const USERID_KEY = 'user-local-id'
+const BOOK_IDS = 'book-ids'
 
 const setTokens = ({ refreshToken, accessToken, userId, expiresIn = 3600 }) => {
     const expiresDate = new Date().getTime() + expiresIn * 1000
@@ -34,13 +35,49 @@ const removeAuthData = () => {
     localStorage.removeItem(EXPIRES_KEY)
 }
 
+function getBooksIds() {
+    return localStorage.getItem(BOOK_IDS)
+}
+
+function setBookId(id) {
+    if (!getBooksIds()) {
+        const bookIdsArray = []
+        bookIdsArray.push(id)
+        localStorage.setItem(BOOK_IDS, JSON.stringify(bookIdsArray))
+    } else if (getBooksIds() && getBooksIds().length === 0) {
+        const booksIdsArray = JSON.parse(getBooksIds())
+        removeAllBooksIds()
+        booksIdsArray.push(id)
+        localStorage.setItem(BOOK_IDS, JSON.stringify(booksIdsArray))
+    } else {
+        const booksIdsArray = JSON.parse(getBooksIds())
+        booksIdsArray.push(id)
+        localStorage.setItem(BOOK_IDS, JSON.stringify(booksIdsArray))
+    }
+}
+
+function removeBookId(id) {
+    const booksIdsArray = JSON.parse(getBooksIds())
+    removeAllBooksIds()
+    const newBooksIdsArray = booksIdsArray.filter(bookId => bookId !== id)
+    localStorage.setItem(BOOK_IDS, JSON.stringify(newBooksIdsArray))
+}
+
+function removeAllBooksIds() {
+    localStorage.removeItem(BOOK_IDS)
+}
+
 const localStorageService = {
     setTokens,
     getAccessToken,
     getRefreshToken,
     getTokenExpiresDate,
     getUserId,
-    removeAuthData
+    removeAuthData,
+    setBookId,
+    getBooksIds,
+    removeBookId,
+    removeAllBooksIds
 }
 
 export default localStorageService

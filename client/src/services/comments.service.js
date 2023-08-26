@@ -2,16 +2,16 @@ import httpService from './http.service'
 
 const commentEndPoint = 'comments/'
 
-const commentService = {
+const commentsService = {
     createComment: async payload => {
         const { data } = await httpService.post(commentEndPoint, payload)
         return data
     },
-    getComments: async pageId => {
+    getComments: async bookId => {
         const { data } = await httpService.get(commentEndPoint, {
             params: {
-                orderBy: 'pageId',
-                equalTo: `${pageId}`
+                orderBy: 'bookId',
+                equalTo: `${bookId}`
             }
         })
         return data
@@ -22,4 +22,4 @@ const commentService = {
     }
 }
 
-export default commentService
+export default commentsService
