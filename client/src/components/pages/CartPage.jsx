@@ -11,6 +11,7 @@ function CartPage() {
     const storageBooksIds = useSelector(getCartStore)
     const currentBooks = allBooks?.filter(book => storageBooksIds.includes(book._id))
     const totalPrice = currentBooks?.reduce((acc, book) => acc + book.price, 0)
+    const location = 'cart'
 
     if (currentBooks && currentBooks?.length > 0) {
         return (
@@ -29,7 +30,7 @@ function CartPage() {
                     }}
                 >
                     {currentBooks.map(book => (
-                        <BookCard key={book._id} {...book} />
+                        <BookCard key={book._id} {...book} location={location} />
                     ))}
                 </Box>
                 <Box

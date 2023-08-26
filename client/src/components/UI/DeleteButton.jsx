@@ -1,11 +1,11 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Box, Button, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useDispatch } from 'react-redux'
 import { removeBookId } from '../../redux/slices/cart.slice.js'
 
-function DeleteButton() {
-    const dispatch = useDispatch
+function DeleteButton({ bookId }) {
+    const dispatch = useDispatch()
 
     const handleDeleteClick = id => {
         dispatch(removeBookId(id))
@@ -15,13 +15,12 @@ function DeleteButton() {
         <Box
             sx={{
                 display: 'flex',
-                mt: 3,
                 width: '100%',
                 justifyContent: 'center'
             }}
         >
             <Tooltip title='Удалить из корзины'>
-                <Button onClick={handleDeleteClick}>
+                <Button size='large' onClick={() => handleDeleteClick(bookId)}>
                     <DeleteIcon />
                 </Button>
             </Tooltip>

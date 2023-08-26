@@ -4,11 +4,12 @@ import BookCard from './BookCard.jsx'
 import { useSelector } from 'react-redux'
 import { getSelectedCategory } from '../../redux/selectors/selectedCategory.selectors.js'
 
-function BooksList({ handleBuyClick, handleBookmarkClick, books }) {
+function BooksList({ books }) {
     const selectedCategory = useSelector(getSelectedCategory)
     const filteredBooks = selectedCategory
         ? books.filter(book => book.category === selectedCategory)
         : books
+    const location = 'booksList'
 
     return (
         <Box
@@ -20,12 +21,7 @@ function BooksList({ handleBuyClick, handleBookmarkClick, books }) {
             }}
         >
             {filteredBooks.map(book => (
-                <BookCard
-                    key={book._id}
-                    {...book}
-                    handleBuyClick={handleBuyClick}
-                    handleBookmarkClick={handleBookmarkClick}
-                />
+                <BookCard key={book._id} {...book} location={location} />
             ))}
         </Box>
     )
