@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
-// import { useSelector } from 'react-redux'
-// import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 import { Link } from 'react-router-dom'
 
-function NavProfile() {
-    const currentUser = null
+function NavProfile({ user }) {
+    const currentUser = user
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 
