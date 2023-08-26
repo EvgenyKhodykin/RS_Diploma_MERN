@@ -18,14 +18,14 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import CatalogButton from './CatalogButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
-import { getCurrentUser, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import NavProfile from './NavProfile.jsx'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 
 function Navbar() {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(getIsLoggedIn)
-    const currentUser = useSelector(getCurrentUser)
+    const currentUser = null
     const cartStore = useSelector(getCartStore)
 
     let cartBadgeNumber = null

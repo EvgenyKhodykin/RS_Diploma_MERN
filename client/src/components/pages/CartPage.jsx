@@ -14,11 +14,11 @@ function CartPage() {
 
     if (currentBooks && currentBooks?.length > 0) {
         return (
-            <Box
+            <Container
+                maxWidth='xl'
                 sx={{
                     display: 'flex',
-                    width: '100vw',
-                    p: 2
+                    mt: 4
                 }}
             >
                 <Box
@@ -35,10 +35,9 @@ function CartPage() {
                 <Box
                     sx={{
                         display: 'flex',
-                        justifyContent: 'center',
-                        mx: 2,
-                        width: '40%',
-                        height: '50%'
+                        justifyContent: 'flex-end',
+                        ml: 2,
+                        width: '40%'
                     }}
                 >
                     <Paper
@@ -68,7 +67,7 @@ function CartPage() {
                         </Button>
                     </Paper>
                 </Box>
-            </Box>
+            </Container>
         )
     } else if (storageBooksIds.length === 0 || !storageBooksIds) {
         return (

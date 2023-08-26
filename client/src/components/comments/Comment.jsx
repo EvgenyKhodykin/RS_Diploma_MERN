@@ -3,11 +3,12 @@ import React from 'react'
 import { Box, Button, CardMedia, Paper, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useSelector } from 'react-redux'
-import { getUserById } from '../../redux/selectors/users.selectors.js'
 import getCommentDate from '../../utils/getCommentDate.js'
+import { getUsersList } from '../../redux/selectors/users.selectors.js'
 
 function Comment({ _id, created_at, content, userId, onRemove }) {
-    const commentAuthor = useSelector(getUserById(userId))
+    const usersList = useSelector(getUsersList)
+    const commentAuthor = usersList?.filter(user => user._id === userId)[0]
 
     return (
         <Paper

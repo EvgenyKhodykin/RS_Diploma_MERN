@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
     Box,
@@ -11,10 +11,10 @@ import {
     Typography
 } from '@mui/material'
 import SettingsIcon from '@mui/icons-material/Settings'
-import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
+// import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 
 function UserPage() {
-    const currentUser = useSelector(getCurrentUser)
+    const currentUser = { name: 'User' }
 
     return (
         <Container

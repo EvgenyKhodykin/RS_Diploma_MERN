@@ -12,7 +12,7 @@ function BookCart({ _id, cover, name }) {
     }
 
     return (
-        <Paper elevation={5} sx={{ m: 1, p: 1, width: 250, height: 380 }}>
+        <Paper elevation={5} sx={{ m: 1, width: 250, height: 380 }}>
             <CardMedia
                 image={cover}
                 component='img'
