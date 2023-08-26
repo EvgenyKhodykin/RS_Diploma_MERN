@@ -20,36 +20,38 @@ function NavProfile() {
         setAnchorEl(null)
     }
 
-    return (
-        <>
-            <Button onClick={handleClick}>
-                <Avatar
-                    alt={currentUser.name}
-                    src={currentUser.image}
-                    sx={{ height: 50 }}
-                />
-                <ArrowDropDownIcon sx={{ color: 'white' }} />
-            </Button>
-            <Menu
-                id='basic-menu'
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button'
-                }}
-            >
-                <Link to={`/user/${'currentUser._id'}`}>
-                    <MenuItem onClick={handleClose}>Профиль</MenuItem>
-                </Link>
-                <Link to='/logout'>
-                    <MenuItem>Выйти</MenuItem>
-                </Link>
-            </Menu>
-        </>
-    )
+    if (currentUser) {
+        return (
+            <>
+                <Button onClick={handleClick}>
+                    <Avatar
+                        alt={currentUser.name}
+                        src={currentUser.image}
+                        sx={{ height: 50 }}
+                    />
+                    <ArrowDropDownIcon sx={{ color: 'white' }} />
+                </Button>
+                <Menu
+                    id='basic-menu'
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                        'aria-labelledby': 'basic-button'
+                    }}
+                >
+                    <Link to={`/user/${currentUser._id}`}>
+                        <MenuItem onClick={handleClose}>Профиль</MenuItem>
+                    </Link>
+                    <Link to='/logout'>
+                        <MenuItem>Выйти</MenuItem>
+                    </Link>
+                </Menu>
+            </>
+        )
+    }
 
-    // return 'Loading'
+    return 'Loading'
 }
 
 export default NavProfile
