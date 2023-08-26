@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { Typography, Container, Box, Paper, Button } from '@mui/material'
 import emptyCartImage from '../../assets/empty-cart.png'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
-import BookCart from '../books/BookCart.jsx'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
+import BookCard from '../books/BookCard.jsx'
 
 function CartPage() {
     const allBooks = useSelector(getBooks)
@@ -29,7 +29,7 @@ function CartPage() {
                     }}
                 >
                     {currentBooks.map(book => (
-                        <BookCart key={book._id} {...book} />
+                        <BookCard key={book._id} {...book} />
                     ))}
                 </Box>
                 <Box
