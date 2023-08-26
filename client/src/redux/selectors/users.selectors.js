@@ -1,8 +1,8 @@
-// export const getCurrentUser = state => {
-//     return state.users.entities
-//         ? state.users.entities.find(user => user._id === state.users.auth.userId)
-//         : null
-// }
+export const getCurrentUser = state => {
+    return state.users.entities
+        ? state.users.entities.find(user => user._id === state.users.auth.userId)
+        : null
+}
 
 // export const getUserById = userId => state => {
 //     if (state.users.entities) {

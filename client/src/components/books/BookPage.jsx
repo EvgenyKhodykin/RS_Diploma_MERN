@@ -147,7 +147,7 @@ function BookPage() {
                         <Button
                             variant='contained'
                             size='large'
-                            sx={{ backgroundColor: '#26a9e0', height: 40, ml: 5 }}
+                            sx={{ height: 40, ml: 5 }}
                             onClick={handleCommentClick}
                         >
                             Оставить отзыв

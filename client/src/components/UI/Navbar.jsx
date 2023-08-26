@@ -84,7 +84,11 @@ function Navbar() {
                         display: 'flex'
                     }}
                 >
-                    <Avatar variant='square' alt='logo' src='../public/favicon.png' />
+                    <Avatar
+                        variant='square'
+                        alt='logo'
+                        src='../../../public/favicon.png'
+                    />
                     <Link to='/'>
                         <Button
                             size='large'

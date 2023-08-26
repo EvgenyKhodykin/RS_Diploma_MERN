@@ -53,16 +53,13 @@ function CartPage() {
                             justifyContent: 'space-between'
                         }}
                     >
-                        <Typography variant='h4' color='#26a9e0'>
+                        <Typography variant='h4' color='primary'>
                             Итоговая сумма заказа:
                         </Typography>
                         <Typography variant='h4' sx={{ color: 'red' }}>
                             {totalPrice} &#8381;
                         </Typography>
-                        <Button
-                            variant='contained'
-                            sx={{ width: '100%', backgroundColor: '#26a9e0' }}
-                        >
+                        <Button variant='contained' sx={{ width: '100%' }}>
                             Оформить заказ
                         </Button>
                     </Paper>

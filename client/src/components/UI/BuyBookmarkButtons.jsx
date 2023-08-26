@@ -10,12 +10,10 @@ function BuyBookmarkButtons({ bookId }) {
     const dispatch = useDispatch()
     const cartStore = useSelector(getCartStore)
     let buyButtonText = 'Купить'
-    let buyButtonColor = { backgroundColor: '#26a9e0' }
     let toolTipBuyButtonText = 'Добавить в корзину'
 
     if (cartStore.includes(bookId)) {
         buyButtonText = <AddShoppingCartIcon />
-        buyButtonColor = { backgroundColor: '#37ceb4' }
         toolTipBuyButtonText = null
     }
 
@@ -36,7 +34,6 @@ function BuyBookmarkButtons({ bookId }) {
                 <Button
                     size='large'
                     variant='contained'
-                    sx={buyButtonColor}
                     onClick={() => handleBuyClick(bookId)}
                 >
                     {buyButtonText}
@@ -44,7 +41,7 @@ function BuyBookmarkButtons({ bookId }) {
             </Tooltip>
             <Tooltip title='Добавить в избранное'>
                 <IconButton onClick={() => handleBookmarkClick(bookId)}>
-                    <BookmarkBorderIcon fontSize='large' sx={{ color: '#26a9e0' }} />
+                    <BookmarkBorderIcon fontSize='large' color='primary' />
                     {/* <BookmarkIcon fontSize='large' sx={{ color: 'red' }} /> */}
                 </IconButton>
             </Tooltip>
