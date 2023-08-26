@@ -40,8 +40,7 @@ function Comment({ _id, created_at, content, userId, onRemove }) {
                         <Typography color='primary' sx={{ mr: 1 }}>
                             {commentAuthor.name}
                         </Typography>
-                        {' -- '}
-                        <Typography color='primary' sx={{ ml: 1 }}>
+                        <Typography color='secondary' sx={{ ml: 1 }}>
                             {getCommentDate(new Date(created_at))}
                         </Typography>
                     </Box>
