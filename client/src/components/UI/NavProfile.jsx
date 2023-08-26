@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import { Avatar, Button, Menu, MenuItem } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { getCurrentUserId, getUsersList } from '../../redux/selectors/users.selectors.js'
 
 function NavProfile() {
-    // const currentUser = user
+    const usersList = useSelector(getUsersList)
+    const currentUserId = useSelector(getCurrentUserId)
+    const currentUser = usersList.filter(user => user._id === currentUserId)[0]
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 
@@ -19,7 +23,11 @@ function NavProfile() {
     return (
         <>
             <Button onClick={handleClick}>
-                <Avatar alt={''} src={''} sx={{ height: 50 }} />
+                <Avatar
+                    alt={currentUser.name}
+                    src={currentUser.image}
+                    sx={{ height: 50 }}
+                />
                 <ArrowDropDownIcon sx={{ color: 'white' }} />
             </Button>
             <Menu
