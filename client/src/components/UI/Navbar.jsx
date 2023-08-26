@@ -19,9 +19,9 @@ import CatalogButton from './CatalogButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
 import {
-    getCurrentUserId,
-    getIsLoggedIn,
-    getUsersList
+    // getCurrentUserId,
+    getIsLoggedIn
+    // getUsersList
 } from '../../redux/selectors/users.selectors.js'
 import NavProfile from './NavProfile.jsx'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
@@ -29,16 +29,13 @@ import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 function Navbar() {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(getIsLoggedIn)
-    const usersList = useSelector(getUsersList)
-    const currentUserId = useSelector(getCurrentUserId)
-    const currentUser = usersList?.filter(user => user._id === currentUserId)[0]
+    // const usersList = useSelector(getUsersList)
+    // const currentUserId = isLoggedIn ? useSelector(getCurrentUserId) : null
+    // const currentUser = null
+
     const cartStore = useSelector(getCartStore)
 
-    let cartBadgeNumber = null
-
-    if (cartStore.length > 0) {
-        cartBadgeNumber = cartStore.length
-    }
+    const cartBadgeNumber = cartStore.length > 0 ? cartStore.length : null
 
     const handleBookShopClick = () => {
         dispatch(setSelectedCategory(null))
@@ -162,8 +159,8 @@ function Navbar() {
                         </Link>
                     </Box>
                     <Box sx={{ textAlign: 'center', ml: 'auto', width: 50 }}>
-                        {isLoggedIn && currentUser ? (
-                            <NavProfile user={currentUser} />
+                        {isLoggedIn ? (
+                            <NavProfile />
                         ) : (
                             <Link to='auth/signIn'>
                                 <AccountCircleIcon

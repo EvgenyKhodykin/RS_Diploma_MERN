@@ -4,10 +4,17 @@ import { Box, Button, CardMedia, Paper, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useSelector } from 'react-redux'
 import getCommentDate from '../../utils/getCommentDate.js'
-import { getUsersList } from '../../redux/selectors/users.selectors.js'
+import {
+    getCurrentUserId,
+    getIsLoggedIn,
+    getUsersList
+} from '../../redux/selectors/users.selectors.js'
 
 function Comment({ _id, created_at, content, userId, onRemove }) {
     const usersList = useSelector(getUsersList)
+    const isLoggedIn = useSelector(getIsLoggedIn)
+    const currentUserId = isLoggedIn ? useSelector(getCurrentUserId) : null
+    const currentUser = usersList?.filter(user => user._id === currentUserId)[0]
     const commentAuthor = usersList?.filter(user => user._id === userId)[0]
 
     return (
@@ -48,9 +55,11 @@ function Comment({ _id, created_at, content, userId, onRemove }) {
                     <Box>{content}</Box>
                 </Box>
             </Box>
-            <Button onClick={() => onRemove(_id)}>
-                <DeleteIcon color='primary' />
-            </Button>
+            {isLoggedIn && currentUser._id === userId && (
+                <Button onClick={() => onRemove(_id)}>
+                    <DeleteIcon color='primary' />
+                </Button>
+            )}
         </Paper>
     )
 }
