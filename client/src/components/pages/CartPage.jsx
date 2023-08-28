@@ -19,7 +19,7 @@ function CartPage() {
                 maxWidth='xl'
                 sx={{
                     display: 'flex',
-                    mt: 4
+                    mt: 8
                 }}
             >
                 <Box

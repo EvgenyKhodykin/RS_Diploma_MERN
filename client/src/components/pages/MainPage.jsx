@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
 import BooksList from '../books/BooksList.jsx'
@@ -10,12 +10,12 @@ function MainPage() {
 
     if (books) {
         return (
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant='h3' sx={{ my: 4 }}>
+            <>
+                <Typography variant='h3' sx={{ mt: 8 }}>
                     НОВИНКИ ЛИТЕРАТУРЫ
                 </Typography>
                 <BooksList books={books} />
-            </Box>
+            </>
         )
     }
 

@@ -17,7 +17,8 @@ function BooksList({ books }) {
                 width: '80%',
                 display: 'flex',
                 flexWrap: 'wrap',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                mt: 4
             }}
         >
             {filteredBooks.map(book => (

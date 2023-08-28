@@ -74,7 +74,7 @@ function BookPage() {
                 <Container
                     maxWidth='lg'
                     sx={{
-                        mt: 4,
+                        mt: 8,
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'space-between'

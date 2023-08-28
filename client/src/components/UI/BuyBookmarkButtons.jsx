@@ -50,7 +50,11 @@ function BuyBookmarkButtons({ bookId }) {
             </Tooltip>
             <Tooltip title='Добавить в избранное'>
                 <IconButton onClick={() => handleBookmarkClick(bookId)}>
-                    <BookmarkBorderIcon fontSize='large' color='primary' />
+                    <BookmarkBorderIcon
+                        fontSize='large'
+                        color='primary'
+                        sx={{ backgroundColor: '#ecf6fe' }}
+                    />
                     {/* <BookmarkIcon fontSize='large' sx={{ color: 'red' }} /> */}
                 </IconButton>
             </Tooltip>
