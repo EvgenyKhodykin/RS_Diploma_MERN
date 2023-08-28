@@ -18,13 +18,21 @@ const favoritesSlice = createSlice({
         },
         bookIdRemoved(state, action) {
             state.entities = state.entities.filter(item => item !== action.payload)
+        },
+        allFavoritesRemoved(state) {
+            state.entities = []
         }
     }
 })
 
 const { actions, reducer: favoritesReducer } = favoritesSlice
-const { userFavoritesRequested, userFavoritesRecieved, bookIdAdded, bookIdRemoved } =
-    actions
+const {
+    userFavoritesRequested,
+    userFavoritesRecieved,
+    bookIdAdded,
+    bookIdRemoved,
+    allFavoritesRemoved
+} = actions
 
 export const setUserFavorites = payload => dispatch => {
     dispatch(userFavoritesRequested())
@@ -37,6 +45,10 @@ export const addFavoriteBookId = payload => dispatch => {
 
 export const removeFavoriteBookId = payload => dispatch => {
     dispatch(bookIdRemoved(payload))
+}
+
+export const removeAllFavorites = dispatch => {
+    dispatch(allFavoritesRemoved())
 }
 
 export default favoritesReducer

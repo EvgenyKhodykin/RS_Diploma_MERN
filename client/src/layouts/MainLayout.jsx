@@ -7,9 +7,9 @@ import { getCurrentUser, getIsLoggedIn } from '../redux/selectors/users.selector
 import { setUserFavorites } from '../redux/slices/favorites.slice.js'
 
 function MainLayout() {
+    const dispatch = useDispatch()
     const isLoggedIn = useSelector(getIsLoggedIn)
     const currentUser = isLoggedIn ? useSelector(getCurrentUser) : null
-    const dispatch = useDispatch()
 
     useEffect(() => {
         if (isLoggedIn) dispatch(setUserFavorites(currentUser?.favorites))
