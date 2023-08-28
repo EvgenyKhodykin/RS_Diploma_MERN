@@ -19,7 +19,7 @@ function BuyBookmarkButtons({ bookId }) {
     const cartStore = useSelector(getCartStore)
     const favoritesStore = useSelector(getFavoritesStore)
     const isLoggedIn = useSelector(getIsLoggedIn)
-    const currentUser = useSelector(getCurrentUser)
+    const currentUser = isLoggedIn ? useSelector(getCurrentUser) : null
     let buyButtonText = 'Купить'
     let buyButtonColor = 'primary'
     let toolTipBuyButtonText = 'Добавить в корзину'

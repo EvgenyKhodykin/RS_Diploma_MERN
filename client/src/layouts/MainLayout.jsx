@@ -8,7 +8,7 @@ import { setUserFavorites } from '../redux/slices/favorites.slice.js'
 
 function MainLayout() {
     const isLoggedIn = useSelector(getIsLoggedIn)
-    const currentUser = useSelector(getCurrentUser)
+    const currentUser = isLoggedIn ? useSelector(getCurrentUser) : null
     const dispatch = useDispatch()
 
     useEffect(() => {
