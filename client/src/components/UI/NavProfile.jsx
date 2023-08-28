@@ -8,7 +8,7 @@ import { getCurrentUserId, getUsersList } from '../../redux/selectors/users.sele
 function NavProfile() {
     const usersList = useSelector(getUsersList)
     const currentUserId = useSelector(getCurrentUserId)
-    const currentUser = usersList.filter(user => user._id === currentUserId)[0]
+    const currentUser = usersList?.filter(user => user._id === currentUserId)[0]
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 

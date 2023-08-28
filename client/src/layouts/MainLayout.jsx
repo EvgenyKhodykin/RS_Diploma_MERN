@@ -12,7 +12,7 @@ function MainLayout() {
     const currentUser = isLoggedIn ? useSelector(getCurrentUser) : null
 
     useEffect(() => {
-        if (isLoggedIn) dispatch(setUserFavorites(currentUser?.favorites))
+        if (isLoggedIn && currentUser) dispatch(setUserFavorites(currentUser.favorites))
     }, [])
 
     return (
