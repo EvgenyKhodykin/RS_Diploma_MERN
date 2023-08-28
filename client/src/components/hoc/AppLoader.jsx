@@ -13,7 +13,6 @@ function AppLoader({ children }) {
     useEffect(() => {
         dispatch(loadBooksList)
         dispatch(loadCategoriesList)
-
         dispatch(loadUsersList)
     }, [])
 

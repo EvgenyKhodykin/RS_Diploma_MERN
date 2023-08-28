@@ -21,11 +21,14 @@ import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.j
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import NavProfile from './NavProfile.jsx'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
+import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
 
 function Navbar() {
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(getIsLoggedIn)
     const cartStore = useSelector(getCartStore)
+    const favoritesStore = useSelector(getFavoritesStore)
+    const favoritesBadgeNumber = favoritesStore.length > 0 ? favoritesStore.length : null
     const cartBadgeNumber = cartStore.length > 0 ? cartStore.length : null
 
     const handleBookShopClick = () => {
@@ -128,7 +131,7 @@ function Navbar() {
                 >
                     <Box sx={{ textAlign: 'center' }}>
                         <Link to='/favorites'>
-                            <Badge badgeContent={null} color='secondary'>
+                            <Badge badgeContent={favoritesBadgeNumber} color='secondary'>
                                 <BookmarkBorderIcon
                                     fontSize='large'
                                     sx={{ color: 'white' }}
