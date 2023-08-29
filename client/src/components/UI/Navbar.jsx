@@ -8,9 +8,7 @@ import {
     Toolbar,
     Badge,
     Typography,
-    Menu,
-    MenuItem,
-    Input
+    InputBase
 } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
@@ -34,8 +32,6 @@ function Navbar() {
     const favoritesBadgeNumber = favoritesStore.length > 0 ? favoritesStore.length : null
     const cartBadgeNumber = cartStore.length > 0 ? cartStore.length : null
     const [searchValue, setSearchValue] = useState('')
-    const [anchorEl, setAnchorEl] = useState(null)
-    const open = Boolean(anchorEl)
 
     console.log(searchValue)
 
@@ -43,12 +39,8 @@ function Navbar() {
         dispatch(setSelectedCategory(null))
     }
 
-    const handleClose = event => {
-        setAnchorEl(event.currentTarget)
-    }
-
-    const handleSearch = ({ target }) => {
-        setSearchValue(target.value)
+    const handleSearch = event => {
+        setSearchValue(event.target.value)
     }
 
     // const filteredBooks = books
@@ -97,7 +89,7 @@ function Navbar() {
                         }}
                     >
                         <CatalogButton />
-                        <Input
+                        <InputBase
                             sx={{
                                 display: 'flex',
                                 backgroundColor: 'white',
@@ -112,28 +104,7 @@ function Navbar() {
                             onChange={handleSearch}
                             value={searchValue}
                         />
-                        <Menu
-                            id='basic-menu'
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button'
-                            }}
-                            sx={{ display: 'flex', width: 560, mt: 4.5, ml: 82 }}
-                        >
-                            {books.map(book => (
-                                <MenuItem
-                                    key={book._id}
-                                    label={book.name}
-                                    // onClick={handleClose}
-                                >
-                                    {book.name}
-                                </MenuItem>
-                            ))}
-                        </Menu>
                     </Box>
-
                     <Box
                         sx={{
                             display: 'flex',
