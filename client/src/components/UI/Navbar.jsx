@@ -9,8 +9,7 @@ import {
     Badge,
     Typography,
     InputBase,
-    List,
-    ListItemButton
+    List
 } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
@@ -24,6 +23,7 @@ import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
 import Loading from './Loading.jsx'
+import BookSearchCard from '../books/BookSearchCard.jsx'
 
 function Navbar() {
     const navigate = useNavigate()
@@ -185,6 +185,7 @@ function Navbar() {
                     <Box
                         sx={{
                             width: 600,
+                            p: 1,
                             display: 'flex',
                             flexDirection: 'column',
                             position: 'absolute',
@@ -197,12 +198,11 @@ function Navbar() {
                     >
                         <List>
                             {filteredBooks.map(book => (
-                                <ListItemButton
+                                <BookSearchCard
                                     key={book._id}
-                                    onClick={() => handleListClick(book._id)}
-                                >
-                                    {book.name}
-                                </ListItemButton>
+                                    {...book}
+                                    onClick={handleListClick}
+                                />
                             ))}
                         </List>
                     </Box>
