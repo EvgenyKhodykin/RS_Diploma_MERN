@@ -39,14 +39,17 @@ function BookCard(props) {
                     WebkitLineClamp: '2',
                     WebkitBoxOrient: 'vertical',
                     mt: 2,
-                    ml: 2
+                    ml: 2,
+                    color: 'black'
                 }}
                 variant='body1'
                 component='h3'
             >
                 {name}
             </Typography>
-            <Typography>{author}</Typography>
+            <Typography variant='body1' sx={{ color: 'gray', m: 2 }}>
+                {author}
+            </Typography>
             {location === 'booksList' ? (
                 <BuyBookmarkButtons bookId={_id} />
             ) : (

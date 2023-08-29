@@ -10,7 +10,6 @@ import {
     CardMedia,
     Container,
     Paper,
-    Rating,
     Typography
 } from '@mui/material'
 import { getBookById } from '../../redux/selectors/books.selectors.js'
@@ -106,13 +105,7 @@ function BookPage() {
                         >
                             {currentBook.name}
                         </Typography>
-                        <Typography>
-                            <Rating
-                                readOnly
-                                defaultValue={currentBook.rate}
-                                precision={0.5}
-                            />
-                        </Typography>
+                        <Typography>{currentBook.author}</Typography>
                         <Typography variant='h4' sx={{ color: 'red', marginTop: 6 }}>
                             {currentBook.price} &#8381;
                         </Typography>

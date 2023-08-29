@@ -1,7 +1,7 @@
-import { CardMedia, ListItemButton } from '@mui/material'
+import { Box, CardMedia, ListItemButton, Typography } from '@mui/material'
 import React from 'react'
 
-function BookSearchCard({ _id, cover, name, onClick }) {
+function BookSearchCard({ _id, cover, name, author, onClick }) {
     const handleClick = id => {
         onClick(id)
     }
@@ -12,7 +12,6 @@ function BookSearchCard({ _id, cover, name, onClick }) {
                 display: 'flex',
                 mb: 2,
                 alignItems: 'center'
-                // cursor: 'pointer'
             }}
             onClick={() => handleClick(_id)}
         >
@@ -20,9 +19,32 @@ function BookSearchCard({ _id, cover, name, onClick }) {
                 component='img'
                 src={cover}
                 alt={name}
-                sx={{ height: 50, width: 50, objectFit: 'contain', mr: 2 }}
+                sx={{ height: 60, width: 50, objectFit: 'contain', mr: 2 }}
             />
-            {name}
+            <Box
+                sx={{
+                    height: 60,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                }}
+            >
+                <Typography
+                    variant='body1'
+                    sx={{
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: '-webkit-box',
+                        WebkitLineClamp: '1',
+                        WebkitBoxOrient: 'vertical'
+                    }}
+                >
+                    {name}
+                </Typography>
+                <Typography variant='body2' sx={{ color: 'grey' }}>
+                    {author}
+                </Typography>
+            </Box>
         </ListItemButton>
     )
 }
