@@ -1,18 +1,22 @@
 import React from 'react'
-import { Card, CardContent, CardMedia, Typography, Rating } from '@mui/material'
+import { CardMedia, Typography, Rating, Paper } from '@mui/material'
 import { Link } from 'react-router-dom'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
+import DeleteButton from '../UI/DeleteButton.jsx'
 
 function BookCard(props) {
-    const { _id, name, cover, price, rate } = props
+    const { _id, name, cover, price, rate, location } = props
 
     return (
-        <Card
+        <Paper
+            elevation={3}
             sx={{
-                height: '100%',
+                height: 480,
+                width: 300,
+                p: 1,
+                m: 1,
                 display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
+                flexDirection: 'column'
             }}
         >
             <Link to={`/books/${_id}`}>
@@ -21,31 +25,34 @@ function BookCard(props) {
                     component='img'
                     alt={name}
                     title={name}
-                    sx={{ height: 250, objectFit: 'contain', marginBottom: 2 }}
+                    sx={{ height: 250, objectFit: 'contain', marginBottom: 3 }}
                 />
             </Link>
-            <CardContent>
-                <Typography variant='BUTTON TEXT' sx={{ color: 'red' }}>
-                    {price} &#8381;
-                </Typography>
-                <Typography
-                    sx={{
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        display: '-webkit-box',
-                        WebkitLineClamp: '2',
-                        WebkitBoxOrient: 'vertical',
-                        my: 2
-                    }}
-                    variant='body1'
-                    component='h3'
-                >
-                    {name}
-                </Typography>
-            </CardContent>
-            <Rating readOnly defaultValue={rate} precision={0.5} />
-            <BuyBookmarkButtons bookId={_id} />
-        </Card>
+            <Typography variant='BUTTON TEXT' sx={{ color: 'red', ml: 2 }}>
+                {price} &#8381;
+            </Typography>
+            <Typography
+                sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    display: '-webkit-box',
+                    WebkitLineClamp: '2',
+                    WebkitBoxOrient: 'vertical',
+                    mt: 2,
+                    ml: 2
+                }}
+                variant='body1'
+                component='h3'
+            >
+                {name}
+            </Typography>
+            <Rating readOnly defaultValue={rate} precision={0.5} sx={{ my: 2, ml: 2 }} />
+            {location === 'booksList' ? (
+                <BuyBookmarkButtons bookId={_id} />
+            ) : (
+                <DeleteButton bookId={_id} />
+            )}
+        </Paper>
     )
 }
 

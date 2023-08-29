@@ -4,11 +4,11 @@ export const getCurrentUser = state => {
         : null
 }
 
-export const getUserById = userId => state => {
-    if (state.users.entities) {
-        return state.users.entities.find(user => user._id === userId)
-    }
-}
+// export const getUserById = userId => state => {
+//     if (state.users.entities) {
+//         return state.users.entities.find(user => user._id === userId)
+//     }
+// }
 
 export const getUsersList = state => state.users.entities
 export const getIsLoggedIn = state => state.users.isLoggedIn

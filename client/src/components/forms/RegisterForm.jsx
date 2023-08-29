@@ -108,7 +108,7 @@ function RegisterForm() {
                     <FormLabel id='demo-radio-buttons-group-label'>Пол</FormLabel>
                     <RadioGroup
                         aria-labelledby='demo-radio-buttons-group-label'
-                        defaultValue='male'
+                        defaultValue='Мужской'
                         name='sex'
                         onChange={handleChange}
                     >

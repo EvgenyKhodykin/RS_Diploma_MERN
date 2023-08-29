@@ -8,10 +8,7 @@ import {
 
 const commentsRouter = express.Router({ mergeParams: true })
 
-commentsRouter
-    .route('/')
-    .get(authMiddleware, getCommentsHandler)
-    .post(authMiddleware, postCommentHandler)
+commentsRouter.route('/').get(getCommentsHandler).post(authMiddleware, postCommentHandler)
 
 commentsRouter.delete('/:commentId', authMiddleware, deleteCommentHandler)
 

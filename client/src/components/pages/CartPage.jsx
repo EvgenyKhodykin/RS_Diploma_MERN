@@ -3,22 +3,23 @@ import { useSelector } from 'react-redux'
 import { Typography, Container, Box, Paper, Button } from '@mui/material'
 import emptyCartImage from '../../assets/empty-cart.png'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
-import BookCart from '../books/BookCart.jsx'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
+import BookCard from '../books/BookCard.jsx'
 
 function CartPage() {
     const allBooks = useSelector(getBooks)
     const storageBooksIds = useSelector(getCartStore)
     const currentBooks = allBooks?.filter(book => storageBooksIds.includes(book._id))
     const totalPrice = currentBooks?.reduce((acc, book) => acc + book.price, 0)
+    const location = 'cart'
 
     if (currentBooks && currentBooks?.length > 0) {
         return (
-            <Box
+            <Container
+                maxWidth='xl'
                 sx={{
                     display: 'flex',
-                    width: '100vw',
-                    p: 2
+                    mt: 8
                 }}
             >
                 <Box
@@ -29,16 +30,15 @@ function CartPage() {
                     }}
                 >
                     {currentBooks.map(book => (
-                        <BookCart key={book._id} {...book} />
+                        <BookCard key={book._id} {...book} location={location} />
                     ))}
                 </Box>
                 <Box
                     sx={{
                         display: 'flex',
-                        justifyContent: 'center',
-                        mx: 2,
-                        width: '40%',
-                        height: '50%'
+                        justifyContent: 'flex-end',
+                        ml: 2,
+                        width: '40%'
                     }}
                 >
                     <Paper
@@ -54,21 +54,18 @@ function CartPage() {
                             justifyContent: 'space-between'
                         }}
                     >
-                        <Typography variant='h4' color='#26a9e0'>
+                        <Typography variant='h4' color='primary'>
                             Итоговая сумма заказа:
                         </Typography>
                         <Typography variant='h4' sx={{ color: 'red' }}>
                             {totalPrice} &#8381;
                         </Typography>
-                        <Button
-                            variant='contained'
-                            sx={{ width: '100%', backgroundColor: '#26a9e0' }}
-                        >
+                        <Button variant='contained' sx={{ width: '100%' }}>
                             Оформить заказ
                         </Button>
                     </Paper>
                 </Box>
-            </Box>
+            </Container>
         )
     } else if (storageBooksIds.length === 0 || !storageBooksIds) {
         return (

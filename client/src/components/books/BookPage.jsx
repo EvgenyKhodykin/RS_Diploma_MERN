@@ -17,7 +17,7 @@ import { getBookById } from '../../redux/selectors/books.selectors.js'
 import Loading from '../UI/Loading.jsx'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 import NewCommentForm from '../comments/NewCommentForm.jsx'
-import { getCurrentUserId, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import {
     createComment,
     loadCommentsList,
@@ -35,7 +35,7 @@ function BookPage() {
     const isLoggedIn = useSelector(getIsLoggedIn)
     const currentBook = useSelector(getBookById(bookId))
     const isLoading = useSelector(getCommentsLoadingStatus)
-    const currentUserId = useSelector(getCurrentUserId)
+    const currentUserId = null
     const comments = useSelector(getComments)
     const sortedComments = orderBy(comments, ['created_at'], ['desc'])
 
@@ -74,7 +74,7 @@ function BookPage() {
                 <Container
                     maxWidth='lg'
                     sx={{
-                        mt: 4,
+                        mt: 8,
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'space-between'
@@ -147,7 +147,7 @@ function BookPage() {
                         <Button
                             variant='contained'
                             size='large'
-                            sx={{ backgroundColor: '#26a9e0', height: 40, ml: 5 }}
+                            sx={{ height: 40, ml: 5 }}
                             onClick={handleCommentClick}
                         >
                             Оставить отзыв

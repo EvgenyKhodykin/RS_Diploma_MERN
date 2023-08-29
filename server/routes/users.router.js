@@ -7,7 +7,7 @@ import {
 
 const usersRouter = express.Router({ mergeParams: true })
 
-usersRouter.get('/', authMiddleware, getUsersHandler)
+usersRouter.get('/', getUsersHandler)
 usersRouter.patch('/:userId', authMiddleware, patchSingleUserHandler)
 
 export default usersRouter
