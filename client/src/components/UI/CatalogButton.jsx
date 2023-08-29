@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Menu, MenuItem, Button } from '@mui/material'
+import { Menu, MenuItem, Button, Box } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { getCategories } from '../../redux/selectors/categories.selectors.js'
 import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
@@ -21,7 +21,7 @@ export default function CatalogButton() {
     }
 
     return (
-        <div>
+        <Box>
             <Button
                 variant='contained'
                 size='large'
@@ -55,6 +55,6 @@ export default function CatalogButton() {
                         </MenuItem>
                     ))}
             </Menu>
-        </div>
+        </Box>
     )
 }

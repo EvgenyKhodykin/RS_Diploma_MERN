@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { styled } from '@mui/material/styles'
 import {
     AppBar,
     Avatar,
     Box,
     Button,
     Toolbar,
-    InputBase,
     Badge,
     Typography,
     Menu,
@@ -15,7 +13,6 @@ import {
     Input
 } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import SearchIcon from '@mui/icons-material/Search'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import CatalogButton from './CatalogButton'
@@ -60,42 +57,6 @@ function Navbar() {
     //       )
     //     : books
 
-    const Search = styled('div')(({ theme }) => ({
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: 'white',
-        marginRight: theme.spacing(2),
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(3),
-            width: 'auto'
-        }
-    }))
-
-    const SearchIconWrapper = styled('div')(({ theme }) => ({
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }))
-
-    const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: 'gray',
-        '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
-            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-            transition: theme.transitions.create('width'),
-            width: '100%',
-            [theme.breakpoints.up('md')]: {
-                width: '50ch'
-            }
-        }
-    }))
-
     if (books) {
         return (
             <AppBar
@@ -136,38 +97,41 @@ function Navbar() {
                         }}
                     >
                         <CatalogButton />
-                        <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon color='primary' />
-                            </SearchIconWrapper>
-                            <StyledInputBase placeholder='Что будем искать?'>
-                                <Input
-                                    type='text'
-                                    onChange={handleSearch}
-                                    value={searchValue}
-                                />
-                            </StyledInputBase>
-                            <Menu
-                                id='basic-menu'
-                                anchorEl={anchorEl}
-                                open={open}
-                                onClose={handleClose}
-                                MenuListProps={{
-                                    'aria-labelledby': 'basic-button'
-                                }}
-                                sx={{ display: 'flex', width: 560, mt: 4.5, ml: 82 }}
-                            >
-                                {books.map(book => (
-                                    <MenuItem
-                                        key={book._id}
-                                        label={book.name}
-                                        // onClick={handleClose}
-                                    >
-                                        {book.name}
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Search>
+                        <Input
+                            sx={{
+                                display: 'flex',
+                                backgroundColor: 'white',
+                                borderRadius: 1,
+                                width: 450,
+                                ml: 2,
+                                px: 2,
+                                color: 'gray'
+                            }}
+                            placeholder='Что будем искать?'
+                            type='text'
+                            onChange={handleSearch}
+                            value={searchValue}
+                        />
+                        <Menu
+                            id='basic-menu'
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={handleClose}
+                            MenuListProps={{
+                                'aria-labelledby': 'basic-button'
+                            }}
+                            sx={{ display: 'flex', width: 560, mt: 4.5, ml: 82 }}
+                        >
+                            {books.map(book => (
+                                <MenuItem
+                                    key={book._id}
+                                    label={book.name}
+                                    // onClick={handleClose}
+                                >
+                                    {book.name}
+                                </MenuItem>
+                            ))}
+                        </Menu>
                     </Box>
 
                     <Box
