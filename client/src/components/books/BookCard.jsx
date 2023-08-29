@@ -1,11 +1,11 @@
 import React from 'react'
-import { CardMedia, Typography, Rating, Paper } from '@mui/material'
+import { CardMedia, Typography, Paper } from '@mui/material'
 import { Link } from 'react-router-dom'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 import DeleteButton from '../UI/DeleteButton.jsx'
 
 function BookCard(props) {
-    const { _id, name, cover, price, rate, location } = props
+    const { _id, name, cover, price, author, location } = props
 
     return (
         <Paper
@@ -46,7 +46,7 @@ function BookCard(props) {
             >
                 {name}
             </Typography>
-            <Rating readOnly defaultValue={rate} precision={0.5} sx={{ my: 2, ml: 2 }} />
+            <Typography>{author}</Typography>
             {location === 'booksList' ? (
                 <BuyBookmarkButtons bookId={_id} />
             ) : (

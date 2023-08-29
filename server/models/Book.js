@@ -6,7 +6,7 @@ const schema = new Schema(
         category: { type: String, required: true },
         cover: { type: String },
         description: { type: String },
-        rate: { type: Number },
+        author: { type: String },
         price: { type: Number }
     },
     {
