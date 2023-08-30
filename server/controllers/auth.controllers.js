@@ -60,10 +60,8 @@ export async function postSignInWithPasswordHandler(request, response) {
         }
 
         const { email, password } = request.body
-        console.log(password)
 
         const existingUser = await User.findOne({ email })
-        console.log(existingUser.password)
 
         if (!existingUser) {
             response.status(400).send({

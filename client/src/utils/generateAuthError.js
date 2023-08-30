@@ -3,16 +3,20 @@
 function generateAuthError(message) {
     switch (message) {
         case 'INVALID_PASSWORD':
-            return `Incorrect Password ${String.fromCodePoint(0x1f914)}`
+            return `Неверный пароль ${String.fromCodePoint(0x1f914)}`
 
         case 'EMAIL_EXISTS':
-            return `This Email already exists ${String.fromCodePoint(0x1f914)}`
+            return `Пользователь с такой электронной почтой уже существует ${String.fromCodePoint(
+                0x1f914
+            )}`
 
         case 'EMAIL_NOT_FOUND':
-            return `Incorrect Email ${String.fromCodePoint(0x1f914)}`
+            return `Пользователь с такой электронной почтой не найдет ${String.fromCodePoint(
+                0x1f914
+            )}`
 
         default:
-            return 'Too many login attempts. Try later'
+            return 'Слишком много попыток авторизации. Попробуйте позже...'
     }
 }
 
