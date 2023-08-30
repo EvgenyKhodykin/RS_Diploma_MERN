@@ -19,7 +19,7 @@ import {
 } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import { getAuthError, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import { loadUsersList, signUp } from '../../redux/slices/users.slice.js'
 
 function RegisterForm() {
@@ -31,6 +31,7 @@ function RegisterForm() {
     })
     const [showPassword, setShowPassword] = useState(false)
     const isLoggedIn = useSelector(getIsLoggedIn)
+    const loginError = useSelector(getAuthError)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {
@@ -153,6 +154,9 @@ function RegisterForm() {
                         />
                     </RadioGroup>
                 </FormControl>
+                {loginError && (
+                    <Typography sx={{ color: 'red', mt: 1 }}>{loginError}</Typography>
+                )}
                 <Button
                     variant='contained'
                     size='large'

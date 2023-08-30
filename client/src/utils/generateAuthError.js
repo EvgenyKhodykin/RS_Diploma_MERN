@@ -11,7 +11,7 @@ function generateAuthError(message) {
             )}`
 
         case 'EMAIL_NOT_FOUND':
-            return `Пользователь с такой электронной почтой не найдет ${String.fromCodePoint(
+            return `Пользователь с такой электронной почтой не найден ${String.fromCodePoint(
                 0x1f914
             )}`
 

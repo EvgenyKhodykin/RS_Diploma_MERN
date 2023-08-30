@@ -13,13 +13,14 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import { Link, useNavigate } from 'react-router-dom'
 import { loadUsersList, signIn } from '../../redux/slices/users.slice.js'
-import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import { getAuthError, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 
 function LoginForm() {
     const [data, setData] = useState({ email: '', password: '' })
     const [showPassword, setShowPassword] = useState(false)
     const dispatch = useDispatch()
     const isLoggedIn = useSelector(getIsLoggedIn)
+    const loginError = useSelector(getAuthError)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -83,6 +84,9 @@ function LoginForm() {
                         )
                     }}
                 />
+                {loginError && (
+                    <Typography sx={{ color: 'red', mt: 1 }}>{loginError}</Typography>
+                )}
                 <Button
                     variant='contained'
                     size='large'
