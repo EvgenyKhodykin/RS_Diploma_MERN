@@ -42,7 +42,7 @@ function BuyBookmarkButtons({ bookId }) {
 
     const handleBuyClick = id => {
         if (!isLoggedIn) return alert('Чтобы добавить в корзину нужна авторизация!')
-        dispatch(addCartBookId(id))
+        if (!cartStore.includes(id)) dispatch(addCartBookId(id))
     }
 
     return (

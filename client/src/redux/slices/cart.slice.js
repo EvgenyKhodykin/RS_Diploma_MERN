@@ -28,6 +28,7 @@ export const loadCartBooksIds = dispatch => {
 }
 
 export const addCartBookId = payload => dispatch => {
+    localStorageService.addCartBookId(payload)
     dispatch(cartBookIdAdded(payload))
 }
 

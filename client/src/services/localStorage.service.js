@@ -40,7 +40,7 @@ function getCartBooksIds() {
     return JSON.parse(localStorage.getItem(CART_BOOKS_IDS))
 }
 
-function setCartBookId(id) {
+function addCartBookId(id) {
     if (!getCartBooksIds()) {
         const bookIdsArray = []
         bookIdsArray.push(id)
@@ -75,7 +75,7 @@ const localStorageService = {
     getTokenExpiresDate,
     getUserId,
     removeAuthData,
-    setCartBookId,
+    addCartBookId,
     getCartBooksIds,
     removeCartBookId,
     removeAllCartBooksIds
