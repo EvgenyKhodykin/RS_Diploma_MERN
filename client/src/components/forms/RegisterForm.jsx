@@ -1,4 +1,8 @@
+/* eslint-disable no-unneeded-ternary */
 import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     Box,
     Button,
@@ -15,8 +19,6 @@ import {
 } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import { loadUsersList, signUp } from '../../redux/slices/users.slice.js'
 
@@ -24,13 +26,18 @@ function RegisterForm() {
     const [data, setData] = useState({
         email: '',
         password: '',
-        sex: 'Мужской',
+        sex: '',
         name: ''
     })
     const [showPassword, setShowPassword] = useState(false)
     const isLoggedIn = useSelector(getIsLoggedIn)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm({ mode: 'onChange' })
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -51,9 +58,10 @@ function RegisterForm() {
         }))
     }
 
-    const handleSubmit = event => {
-        event.preventDefault()
-        dispatch(signUp(data))
+    const submitFormHandler = () => {
+        if (!Object.keys(errors).length) {
+            dispatch(signUp(data))
+        }
     }
 
     return (
@@ -61,22 +69,38 @@ function RegisterForm() {
             <Typography variant='h4' sx={{ m: 1 }}>
                 Регистрация:
             </Typography>
-            <Box component='form' onSubmit={handleSubmit}>
+            <Box component='form' onSubmit={handleSubmit(submitFormHandler)}>
                 <TextField
+                    {...register('email', {
+                        pattern: {
+                            message: 'Некорректный адрес электронной почты',
+                            value: /^\S+@\S+\.\S+$/g
+                        }
+                    })}
+                    error={errors?.email ? true : false}
+                    helperText={errors?.email && errors.email.message}
                     required
                     label='Электронная почта'
-                    type='text'
-                    name='email'
-                    autoComplete='email'
                     sx={{ width: '100%', my: 1 }}
                     onChange={handleChange}
                 />
                 <TextField
+                    {...register('password', {
+                        minLength: {
+                            message: 'Длина пароля должна быть не менее 8 символов',
+                            value: 8
+                        },
+                        pattern: {
+                            value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$/,
+                            message:
+                                'Пароль должен содержать хотя бы одну заглавную букву и цифру'
+                        }
+                    })}
+                    error={errors?.password ? true : false}
+                    helperText={errors?.password && errors.password.message}
                     required
                     label='Пароль'
                     type={showPassword ? 'text' : 'password'}
-                    name='password'
-                    autoComplete='password'
                     sx={{ width: '100%', my: 1 }}
                     onChange={handleChange}
                     InputProps={{
@@ -96,11 +120,16 @@ function RegisterForm() {
                     }}
                 />
                 <TextField
+                    {...register('name', {
+                        minLength: {
+                            value: 3,
+                            message: 'Имя должно быть не менее 3-х символов'
+                        }
+                    })}
+                    error={errors?.name ? true : false}
+                    helperText={errors?.name && errors.name.message}
                     required
                     label='Имя'
-                    type='text'
-                    name='name'
-                    autoComplete='current-name'
                     sx={{ width: '100%', my: 1 }}
                     onChange={handleChange}
                 />
