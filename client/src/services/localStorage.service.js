@@ -16,19 +16,15 @@ const setTokens = ({ refreshToken, accessToken, userId, expiresIn = 3600 }) => {
 const getAccessToken = () => {
     return localStorage.getItem(TOKEN_KEY)
 }
-
 const getRefreshToken = () => {
     return localStorage.getItem(REFRESH_KEY)
 }
-
 const getTokenExpiresDate = () => {
     return localStorage.getItem(EXPIRES_KEY)
 }
-
 const getUserId = () => {
     return localStorage.getItem(USERID_KEY)
 }
-
 const removeAuthData = () => {
     localStorage.removeItem(USERID_KEY)
     localStorage.removeItem(TOKEN_KEY)
@@ -37,7 +33,7 @@ const removeAuthData = () => {
 }
 
 function getCartBooksIds() {
-    return JSON.parse(localStorage.getItem(CART_BOOKS_IDS))
+    return JSON.parse(localStorage.getItem(CART_BOOKS_IDS)) || []
 }
 
 function addCartBookId(id) {

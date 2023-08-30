@@ -15,12 +15,16 @@ const cartSlice = createSlice({
         },
         cartBookIdRemoved(state, action) {
             state.entities = state.entities.filter(item => item !== action.payload)
+        },
+        cartStoreCleared(state) {
+            state.entities = null
         }
     }
 })
 
 const { actions, reducer: cartReducer } = cartSlice
-const { cartBooksIdsRecieved, cartBookIdAdded, cartBookIdRemoved } = actions
+const { cartBooksIdsRecieved, cartBookIdAdded, cartBookIdRemoved, cartStoreCleared } =
+    actions
 
 export const loadCartBooksIds = dispatch => {
     const data = localStorageService.getCartBooksIds()
@@ -35,6 +39,11 @@ export const addCartBookId = payload => dispatch => {
 export const removeCartBookId = payload => dispatch => {
     localStorageService.removeCartBookId(payload)
     dispatch(cartBookIdRemoved(payload))
+}
+
+export const clearCartStore = dispatch => {
+    localStorageService.removeAllCartBooksIds()
+    dispatch(cartStoreCleared)
 }
 
 export default cartReducer

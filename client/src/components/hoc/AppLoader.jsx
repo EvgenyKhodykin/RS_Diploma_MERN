@@ -5,7 +5,7 @@ import { loadCategoriesList } from '../../redux/slices/categories.slice.js'
 import { getUsersLoadingStatus } from '../../redux/selectors/users.selectors.js'
 import { loadUsersList } from '../../redux/slices/users.slice.js'
 import Loading from '../UI/Loading.jsx'
-import localStorageService from '../../services/localStorage.service.js'
+// import localStorageService from '../../services/localStorage.service.js'
 import { loadCartBooksIds } from '../../redux/slices/cart.slice.js'
 
 function AppLoader({ children }) {
@@ -16,7 +16,7 @@ function AppLoader({ children }) {
         dispatch(loadBooksList)
         dispatch(loadCategoriesList)
         dispatch(loadUsersList)
-        if (localStorageService.getUserId) dispatch(loadCartBooksIds)
+        dispatch(loadCartBooksIds)
     }, [])
 
     if (usersStatusLoading) return <Loading />
