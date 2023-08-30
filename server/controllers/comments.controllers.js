@@ -26,7 +26,6 @@ export async function postCommentHandler(request, response) {
 export async function deleteCommentHandler(request, response) {
     try {
         const { commentId } = request.params
-        console.log(commentId)
         const removedComment = await Comment.findById(commentId)
 
         if (removedComment.userId.toString() === request.user._id) {

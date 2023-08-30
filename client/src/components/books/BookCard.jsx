@@ -25,7 +25,11 @@ function BookCard(props) {
                     component='img'
                     alt={name}
                     title={name}
-                    sx={{ height: 250, objectFit: 'contain', marginBottom: 3 }}
+                    sx={{
+                        height: 250,
+                        objectFit: 'contain',
+                        marginBottom: 3
+                    }}
                 />
             </Link>
             <Typography variant='BUTTON TEXT' sx={{ color: 'red', ml: 2 }}>

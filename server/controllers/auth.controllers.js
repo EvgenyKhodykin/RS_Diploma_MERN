@@ -17,7 +17,7 @@ export async function postSignUpHandler(request, response) {
             })
         }
 
-        const { email, password, nickName } = request.body
+        const { email, password } = request.body
 
         const existingUser = await User.findOne({ email })
         if (existingUser) {
@@ -60,8 +60,10 @@ export async function postSignInWithPasswordHandler(request, response) {
         }
 
         const { email, password } = request.body
+        console.log(password)
 
         const existingUser = await User.findOne({ email })
+        console.log(existingUser.password)
 
         if (!existingUser) {
             response.status(400).send({
@@ -73,7 +75,7 @@ export async function postSignInWithPasswordHandler(request, response) {
             return
         }
 
-        const isPasswordEqual = bcrypt.compare(password, existingUser.password)
+        const isPasswordEqual = await bcrypt.compare(password, existingUser.password)
         if (!isPasswordEqual) {
             response.status(400).send({
                 error: {

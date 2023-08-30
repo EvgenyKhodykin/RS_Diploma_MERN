@@ -57,7 +57,6 @@ function LoginForm() {
                     label='Электронная почта'
                     name='email'
                     type='email'
-                    autoComplete='email'
                     sx={{ width: '100%', my: 1 }}
                     onChange={handleChange}
                 />

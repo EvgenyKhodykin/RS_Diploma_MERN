@@ -1,4 +1,4 @@
-import { Button, Container, TextField } from '@mui/material'
+import { Box, Button, TextField } from '@mui/material'
 import React, { useState } from 'react'
 
 function NewCommentForm({ onSubmit }) {
@@ -26,10 +26,9 @@ function NewCommentForm({ onSubmit }) {
     }
 
     return (
-        <Container
+        <Box
             component='form'
             onSubmit={handleSubmit}
-            maxWidth='lg'
             sx={{
                 mt: 4,
                 display: 'flex',
@@ -55,7 +54,7 @@ function NewCommentForm({ onSubmit }) {
             >
                 опубликовать
             </Button>
-        </Container>
+        </Box>
     )
 }
 
