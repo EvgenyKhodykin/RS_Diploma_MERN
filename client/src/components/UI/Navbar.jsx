@@ -15,8 +15,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import CatalogButton from './CatalogButton'
-import { useDispatch, useSelector } from 'react-redux'
-import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
+import { useSelector } from 'react-redux'
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import NavProfile from './NavProfile.jsx'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
@@ -27,7 +26,6 @@ import BookSearchCard from '../books/BookSearchCard.jsx'
 
 function Navbar() {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
     const isLoggedIn = useSelector(getIsLoggedIn)
     const cartStore = useSelector(getCartStore)
     const books = useSelector(getBooks)
@@ -36,10 +34,6 @@ function Navbar() {
         favoritesStore?.length > 0 ? favoritesStore?.length : null
     const cartBadgeNumber = cartStore?.length > 0 ? cartStore?.length : null
     const [searchValue, setSearchValue] = useState('')
-
-    const handleBookShopClick = () => {
-        dispatch(setSelectedCategory(null))
-    }
 
     const handleSearch = event => {
         setSearchValue(event.target.value)
@@ -80,11 +74,7 @@ function Navbar() {
                                 src='../../../public/favicon.png'
                             />
                             <Link to='/'>
-                                <Button
-                                    size='large'
-                                    sx={{ color: 'white' }}
-                                    onClick={handleBookShopClick}
-                                >
+                                <Button size='large' sx={{ color: 'white' }}>
                                     Book Shop
                                 </Button>
                             </Link>
