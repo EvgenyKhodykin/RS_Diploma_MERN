@@ -2,19 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { orderBy } from 'lodash'
-import {
-    Badge,
-    Box,
-    Button,
-    Card,
-    CardMedia,
-    Container,
-    Paper,
-    Typography
-} from '@mui/material'
+import { Badge, Box, Button, Container, Typography } from '@mui/material'
 import { getBookById } from '../../redux/selectors/books.selectors.js'
 import Loading from '../UI/Loading.jsx'
-import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 import NewCommentForm from '../comments/NewCommentForm.jsx'
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import {
@@ -27,6 +17,7 @@ import {
     getComments,
     getCommentsLoadingStatus
 } from '../../redux/selectors/comments.selectors.js'
+import BookCard from './BookCard.jsx'
 
 function BookPage() {
     const dispatch = useDispatch()
@@ -69,52 +60,45 @@ function BookPage() {
 
     if (currentBook) {
         return (
-            <Container maxWidth='xl'>
-                <Container
+            <Container maxWidth='lg' sx={{ mt: 7 }}>
+                <Box
                     maxWidth='lg'
                     sx={{
-                        mt: 8,
                         display: 'flex',
-                        flexDirection: 'row',
                         justifyContent: 'space-between'
                     }}
                 >
-                    <Card>
-                        <CardMedia
-                            image={currentBook.cover}
-                            component='img'
-                            alt={currentBook.name}
-                            title={currentBook.name}
-                            sx={{ height: 500, objectFit: 'contain' }}
-                        />
-                    </Card>
-                    <Paper
-                        elevation={1}
+                    <BookCard {...currentBook} location={'booksList'} />
+                    <Box
                         sx={{
-                            marginLeft: 5,
-                            width: '35%',
+                            ml: 5,
+                            width: '65%',
+                            height: 480,
                             textAlign: 'center',
                             display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between'
+                            flexDirection: 'column'
                         }}
                     >
                         <Typography
                             variant='h6'
-                            sx={{ textAlign: 'center', marginBottom: 6 }}
+                            sx={{ textAlign: 'center', mt: 9, mb: 9 }}
                         >
                             {currentBook.name}
                         </Typography>
-                        <Typography>{currentBook.author}</Typography>
-                        <Typography variant='h4' sx={{ color: 'red', marginTop: 6 }}>
-                            {currentBook.price} &#8381;
+                        <Typography variant='body2'>Автор:</Typography>
+                        <Typography variant='body1' sx={{ color: 'grey' }}>
+                            {currentBook.author}
                         </Typography>
-                        <BuyBookmarkButtons bookId={bookId} />
-                    </Paper>
-                </Container>
-                <Container
+                        <Typography variant='body2' sx={{ mt: 3 }}>
+                            Жанр:
+                        </Typography>
+                        <Typography variant='body1' sx={{ color: 'grey' }}>
+                            {currentBook.category}
+                        </Typography>
+                    </Box>
+                </Box>
+                <Box
                     sx={{
-                        maxWidth: 'lg',
                         mt: 4,
                         display: 'flex',
                         flexDirection: 'row',
@@ -122,8 +106,8 @@ function BookPage() {
                     }}
                 >
                     <Typography variant='body1'>{currentBook.description}</Typography>
-                </Container>
-                <Container
+                </Box>
+                <Box
                     sx={{
                         maxWidth: 'lg',
                         mt: 4,
@@ -146,7 +130,7 @@ function BookPage() {
                             Оставить отзыв
                         </Button>
                     </Box>
-                </Container>
+                </Box>
                 {formIsVisible && <NewCommentForm onSubmit={handleSubmit} />}
                 {!isLoading && (
                     <CommentsList

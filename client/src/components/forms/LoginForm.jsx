@@ -66,7 +66,6 @@ function LoginForm() {
                     label='Пароль'
                     name='password'
                     type={showPassword ? 'text' : 'password'}
-                    autoComplete='password'
                     sx={{ width: '100%', my: 1 }}
                     onChange={handleChange}
                     InputProps={{
