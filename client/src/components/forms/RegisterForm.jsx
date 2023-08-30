@@ -26,7 +26,7 @@ function RegisterForm() {
     const [data, setData] = useState({
         email: '',
         password: '',
-        sex: '',
+        sex: 'Мужской',
         name: ''
     })
     const [showPassword, setShowPassword] = useState(false)
