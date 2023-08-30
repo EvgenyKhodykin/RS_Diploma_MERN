@@ -1,13 +1,14 @@
 import { React, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Menu, MenuItem, Button, Box } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { getCategories } from '../../redux/selectors/categories.selectors.js'
-import { setSelectedCategory } from '../../redux/slices/selectedCategory.slice.js'
+import { useNavigate } from 'react-router-dom'
 
 export default function CatalogButton() {
     const categories = useSelector(getCategories)
-    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    // const dispatch = useDispatch()
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 
@@ -15,9 +16,9 @@ export default function CatalogButton() {
         setAnchorEl(event.currentTarget)
     }
 
-    const handleClose = event => {
+    const handleClose = id => {
         setAnchorEl(null)
-        dispatch(setSelectedCategory(event.currentTarget.getAttribute('label')))
+        navigate(`books/categories/${id}`)
     }
 
     return (
@@ -49,7 +50,7 @@ export default function CatalogButton() {
                         <MenuItem
                             key={category._id}
                             label={category.name}
-                            onClick={handleClose}
+                            onClick={() => handleClose(category._id)}
                         >
                             {category.name}
                         </MenuItem>

@@ -13,6 +13,7 @@ import ProtectedRoutes from './components/UI/ProtectedRoutes.jsx'
 import FavoritesPage from './components/pages/FavoritesPage.jsx'
 import UserPage from './components/pages/UserPage.jsx'
 import UserEditPage from './components/pages/UserEditPage.jsx'
+import CategoryPage from './components/pages/CategoryPage.jsx'
 
 function App() {
     return (
@@ -21,6 +22,10 @@ function App() {
                 <Routes>
                     <Route path='/' element={<MainLayout />}>
                         <Route index element={<MainPage />} />
+                        <Route
+                            path='books/categories/:categoryId'
+                            element={<CategoryPage />}
+                        />
                         <Route path='books/:bookId' element={<BookPage />} />
                         <Route path='auth' element={<AuthLayout />}>
                             <Route path='signIn' element={<LoginForm />} />
