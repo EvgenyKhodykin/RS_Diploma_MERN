@@ -1,1 +1,1 @@
-export const getCartStore = state => state.cart.entities
+export const getCartStore = state => state.cart.booksIds

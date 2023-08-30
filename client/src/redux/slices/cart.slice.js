@@ -1,23 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 import localStorageService from '../../services/localStorage.service.js'
 
+const initialState = { booksIds: [] }
+
 const cartSlice = createSlice({
     name: 'cart',
-    initialState: {
-        entities: []
-    },
+    initialState,
     reducers: {
         cartBooksIdsRecieved(state, action) {
-            state.entities = action.payload
+            state.booksIds = action.payload
         },
         cartBookIdAdded(state, action) {
-            state.entities.push(action.payload)
+            state.booksIds.push(action.payload)
         },
         cartBookIdRemoved(state, action) {
-            state.entities = state.entities.filter(item => item !== action.payload)
+            state.booksIds = state.booksIds.filter(item => item !== action.payload)
         },
-        cartStoreCleared(state) {
-            state.entities = null
+        cartStoreCleared(state, action) {
+            state.booksIds = action.payload
         }
     }
 })
@@ -43,7 +43,7 @@ export const removeCartBookId = payload => dispatch => {
 
 export const clearCartStore = dispatch => {
     localStorageService.removeAllCartBooksIds()
-    dispatch(cartStoreCleared)
+    dispatch(cartStoreCleared([]))
 }
 
 export default cartReducer
