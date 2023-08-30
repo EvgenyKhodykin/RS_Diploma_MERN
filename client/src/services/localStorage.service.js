@@ -2,7 +2,8 @@ const TOKEN_KEY = 'jwt-token'
 const REFRESH_KEY = 'jwt-refresh-token'
 const EXPIRES_KEY = 'jwt-expires'
 const USERID_KEY = 'user-local-id'
-const BOOK_IDS = 'book-ids'
+const CART_BOOKS_IDS = 'cart-books-ids'
+// const FAVORITES_BOOKS_IDS = 'favorite-books-ids'
 
 const setTokens = ({ refreshToken, accessToken, userId, expiresIn = 3600 }) => {
     const expiresDate = new Date().getTime() + expiresIn * 1000
@@ -35,36 +36,36 @@ const removeAuthData = () => {
     localStorage.removeItem(EXPIRES_KEY)
 }
 
-function getBooksIds() {
-    return localStorage.getItem(BOOK_IDS)
+function getCartBooksIds() {
+    return JSON.parse(localStorage.getItem(CART_BOOKS_IDS))
 }
 
-function setBookId(id) {
-    if (!getBooksIds()) {
+function setCartBookId(id) {
+    if (!getCartBooksIds()) {
         const bookIdsArray = []
         bookIdsArray.push(id)
-        localStorage.setItem(BOOK_IDS, JSON.stringify(bookIdsArray))
-    } else if (getBooksIds() && getBooksIds().length === 0) {
-        const booksIdsArray = JSON.parse(getBooksIds())
-        removeAllBooksIds()
+        localStorage.setItem(CART_BOOKS_IDS, JSON.stringify(bookIdsArray))
+    } else if (getCartBooksIds() && getCartBooksIds().length === 0) {
+        const booksIdsArray = getCartBooksIds()
+        removeAllCartBooksIds()
         booksIdsArray.push(id)
-        localStorage.setItem(BOOK_IDS, JSON.stringify(booksIdsArray))
+        localStorage.setItem(CART_BOOKS_IDS, JSON.stringify(booksIdsArray))
     } else {
-        const booksIdsArray = JSON.parse(getBooksIds())
+        const booksIdsArray = getCartBooksIds()
         booksIdsArray.push(id)
-        localStorage.setItem(BOOK_IDS, JSON.stringify(booksIdsArray))
+        localStorage.setItem(CART_BOOKS_IDS, JSON.stringify(booksIdsArray))
     }
 }
 
-function removeBookId(id) {
-    const booksIdsArray = JSON.parse(getBooksIds())
-    removeAllBooksIds()
+function removeCartBookId(id) {
+    const booksIdsArray = getCartBooksIds()
+    removeAllCartBooksIds()
     const newBooksIdsArray = booksIdsArray.filter(bookId => bookId !== id)
-    localStorage.setItem(BOOK_IDS, JSON.stringify(newBooksIdsArray))
+    localStorage.setItem(CART_BOOKS_IDS, JSON.stringify(newBooksIdsArray))
 }
 
-function removeAllBooksIds() {
-    localStorage.removeItem(BOOK_IDS)
+function removeAllCartBooksIds() {
+    localStorage.removeItem(CART_BOOKS_IDS)
 }
 
 const localStorageService = {
@@ -74,10 +75,10 @@ const localStorageService = {
     getTokenExpiresDate,
     getUserId,
     removeAuthData,
-    setBookId,
-    getBooksIds,
-    removeBookId,
-    removeAllBooksIds
+    setCartBookId,
+    getCartBooksIds,
+    removeCartBookId,
+    removeAllCartBooksIds
 }
 
 export default localStorageService

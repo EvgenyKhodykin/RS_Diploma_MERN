@@ -2,13 +2,13 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Box, Button, Tooltip } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { removeBookId } from '../../redux/slices/cart.slice.js'
+import { removeCartBookId } from '../../redux/slices/cart.slice.js'
 
 function DeleteButton({ bookId }) {
     const dispatch = useDispatch()
 
     const handleDeleteClick = id => {
-        dispatch(removeBookId(id))
+        dispatch(removeCartBookId(id))
     }
 
     return (

@@ -32,8 +32,9 @@ function Navbar() {
     const cartStore = useSelector(getCartStore)
     const books = useSelector(getBooks)
     const favoritesStore = useSelector(getFavoritesStore)
-    const favoritesBadgeNumber = favoritesStore.length > 0 ? favoritesStore.length : null
-    const cartBadgeNumber = cartStore.length > 0 ? cartStore.length : null
+    const favoritesBadgeNumber =
+        favoritesStore?.length > 0 ? favoritesStore?.length : null
+    const cartBadgeNumber = cartStore?.length > 0 ? cartStore?.length : null
     const [searchValue, setSearchValue] = useState('')
 
     const handleBookShopClick = () => {

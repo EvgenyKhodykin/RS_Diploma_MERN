@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { orderBy } from 'lodash'
-import { Badge, Box, Button, Container, Typography } from '@mui/material'
+import { Badge, Box, Button, Container, Paper, Typography } from '@mui/material'
 import { getBookById } from '../../redux/selectors/books.selectors.js'
 import Loading from '../UI/Loading.jsx'
 import NewCommentForm from '../comments/NewCommentForm.jsx'
@@ -69,9 +69,11 @@ function BookPage() {
                     }}
                 >
                     <BookCard {...currentBook} location={'booksList'} />
-                    <Box
+                    <Paper
                         sx={{
                             ml: 5,
+                            mt: 1,
+                            p: 1,
                             width: '65%',
                             height: 480,
                             textAlign: 'center',
@@ -95,7 +97,7 @@ function BookPage() {
                         <Typography variant='body1' sx={{ color: 'grey' }}>
                             {currentBook.category}
                         </Typography>
-                    </Box>
+                    </Paper>
                 </Box>
                 <Box
                     sx={{

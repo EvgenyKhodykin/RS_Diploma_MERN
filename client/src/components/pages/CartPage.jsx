@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux'
 import { Typography, Container, Box, Paper, Button } from '@mui/material'
 import emptyCartImage from '../../assets/empty-cart.png'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
-import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 import BookCard from '../books/BookCard.jsx'
+import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 
 function CartPage() {
     const allBooks = useSelector(getBooks)
-    const storageBooksIds = useSelector(getCartStore)
-    const currentBooks = allBooks?.filter(book => storageBooksIds.includes(book._id))
+    const cartBooksIds = useSelector(getCartStore)
+    const currentBooks = allBooks?.filter(book => cartBooksIds.includes(book._id))
     const totalPrice = currentBooks?.reduce((acc, book) => acc + book.price, 0)
     const location = 'cart'
 
@@ -67,7 +67,7 @@ function CartPage() {
                 </Box>
             </Container>
         )
-    } else if (storageBooksIds.length === 0 || !storageBooksIds) {
+    } else if (cartBooksIds.length === 0 || !cartBooksIds) {
         return (
             <Container
                 sx={{

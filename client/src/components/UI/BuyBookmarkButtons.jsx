@@ -4,7 +4,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import { Box, Button, IconButton, Tooltip } from '@mui/material'
-import { addBookId } from '../../redux/slices/cart.slice.js'
+import { addCartBookId } from '../../redux/slices/cart.slice.js'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 import { getCurrentUser, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import {
@@ -24,7 +24,7 @@ function BuyBookmarkButtons({ bookId }) {
     let buyButtonColor = 'primary'
     let toolTipBuyButtonText = 'Добавить в корзину'
 
-    if (cartStore.includes(bookId)) {
+    if (cartStore?.includes(bookId)) {
         buyButtonText = <AddShoppingCartIcon />
         buyButtonColor = '#37ceb4'
         toolTipBuyButtonText = null
@@ -41,7 +41,8 @@ function BuyBookmarkButtons({ bookId }) {
     }
 
     const handleBuyClick = id => {
-        if (!cartStore.includes(bookId)) dispatch(addBookId(id))
+        if (!isLoggedIn) return alert('Чтобы добавить в корзину нужна авторизация!')
+        dispatch(addCartBookId(id))
     }
 
     return (
