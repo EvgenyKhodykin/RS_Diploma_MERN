@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 export default function CatalogButton() {
     const categories = useSelector(getCategories)
     const navigate = useNavigate()
-    // const dispatch = useDispatch()
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 

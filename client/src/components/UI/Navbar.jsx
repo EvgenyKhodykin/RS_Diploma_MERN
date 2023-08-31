@@ -5,7 +5,6 @@ import {
     Avatar,
     Box,
     Button,
-    Toolbar,
     Badge,
     Typography,
     InputBase,
@@ -55,122 +54,136 @@ function Navbar() {
             <>
                 <AppBar
                     position='static'
-                    sx={{ height: 90, display: 'flex', backgroundColor: '#26a9e0' }}
+                    sx={{
+                        height: 90,
+                        px: 2,
+                        display: 'flex',
+                        backgroundColor: '#26a9e0',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between'
+                    }}
                 >
-                    <Toolbar
+                    <Box
                         sx={{
-                            height: 90,
                             display: 'flex'
+                        }}
+                    >
+                        <Avatar
+                            variant='square'
+                            alt='logo'
+                            src='../../../public/favicon.png'
+                        />
+                        <Link to='/'>
+                            <Button size='large' sx={{ color: 'white' }}>
+                                Book Shop
+                            </Button>
+                        </Link>
+                    </Box>
+
+                    <Box
+                        sx={{
+                            display: 'flex'
+                        }}
+                    >
+                        <CatalogButton />
+                        <InputBase
+                            sx={{
+                                display: 'flex',
+                                backgroundColor: 'white',
+                                borderRadius: 1,
+                                width: 450,
+                                ml: 2,
+                                px: 2,
+                                color: 'gray'
+                            }}
+                            placeholder='Что будем искать?'
+                            type='text'
+                            onChange={handleSearch}
+                            value={searchValue}
+                        />
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            width: '20%',
+                            height: '100%',
+                            alignItems: 'center'
                         }}
                     >
                         <Box
                             sx={{
-                                display: 'flex'
+                                textAlign: 'center',
+                                width: '33%'
                             }}
                         >
-                            <Avatar
-                                variant='square'
-                                alt='logo'
-                                src='../../../public/favicon.png'
-                            />
-                            <Link to='/'>
-                                <Button size='large' sx={{ color: 'white' }}>
-                                    Book Shop
-                                </Button>
+                            <Link to='/favorites'>
+                                <Badge
+                                    badgeContent={favoritesBadgeNumber}
+                                    color='secondary'
+                                >
+                                    <BookmarkBorderIcon
+                                        fontSize='large'
+                                        sx={{ color: 'white' }}
+                                    />
+                                </Badge>
+                                <Typography
+                                    variant='body2'
+                                    sx={{ color: 'white', mt: 1 }}
+                                >
+                                    Избранное
+                                </Typography>
                             </Link>
                         </Box>
 
                         <Box
                             sx={{
-                                display: 'flex',
-                                ml: '20%'
+                                textAlign: 'center',
+                                width: '33%'
                             }}
                         >
-                            <CatalogButton />
-                            <InputBase
-                                sx={{
-                                    display: 'flex',
-                                    backgroundColor: 'white',
-                                    borderRadius: 1,
-                                    width: 450,
-                                    ml: 2,
-                                    px: 2,
-                                    color: 'gray'
-                                }}
-                                placeholder='Что будем искать?'
-                                type='text'
-                                onChange={handleSearch}
-                                value={searchValue}
-                            />
+                            <Link to='/cart'>
+                                <Badge badgeContent={cartBadgeNumber} color='secondary'>
+                                    <ShoppingBagOutlinedIcon
+                                        fontSize='large'
+                                        sx={{ color: 'white' }}
+                                    />
+                                </Badge>
+                                <Typography
+                                    variant='body2'
+                                    sx={{ color: 'white', mt: 1 }}
+                                >
+                                    Корзина
+                                </Typography>
+                            </Link>
                         </Box>
                         <Box
                             sx={{
                                 display: 'flex',
-                                width: '20%',
-                                ml: 'auto',
-                                height: 60
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '33%'
                             }}
                         >
-                            <Box sx={{ textAlign: 'center' }}>
-                                <Link to='/favorites'>
-                                    <Badge
-                                        badgeContent={favoritesBadgeNumber}
-                                        color='secondary'
-                                    >
-                                        <BookmarkBorderIcon
-                                            fontSize='large'
-                                            sx={{ color: 'white' }}
-                                        />
-                                    </Badge>
+                            {isLoggedIn ? (
+                                <NavProfile />
+                            ) : (
+                                <Link to='auth/signIn'>
+                                    <AccountCircleIcon
+                                        fontSize='large'
+                                        sx={{ color: 'white' }}
+                                    />
+
                                     <Typography
                                         variant='body2'
-                                        sx={{ color: 'white', mt: 1 }}
+                                        sx={{ color: 'white', mt: 0.5 }}
                                     >
-                                        Избранное
+                                        Войти
                                     </Typography>
                                 </Link>
-                            </Box>
-
-                            <Box sx={{ textAlign: 'center', ml: 'auto' }}>
-                                <Link to='/cart'>
-                                    <Badge
-                                        badgeContent={cartBadgeNumber}
-                                        color='secondary'
-                                    >
-                                        <ShoppingBagOutlinedIcon
-                                            fontSize='large'
-                                            sx={{ color: 'white' }}
-                                        />
-                                    </Badge>
-                                    <Typography
-                                        variant='body2'
-                                        sx={{ color: 'white', mt: 1 }}
-                                    >
-                                        Корзина
-                                    </Typography>
-                                </Link>
-                            </Box>
-                            <Box sx={{ textAlign: 'center', ml: 'auto', width: 50 }}>
-                                {isLoggedIn ? (
-                                    <NavProfile />
-                                ) : (
-                                    <Link to='auth/signIn'>
-                                        <AccountCircleIcon
-                                            fontSize='large'
-                                            sx={{ color: 'white' }}
-                                        />
-
-                                        <Typography
-                                            variant='body2'
-                                            sx={{ color: 'white', mt: 0.5 }}
-                                        >
-                                            Войти
-                                        </Typography>
-                                    </Link>
-                                )}
-                            </Box>
+                            )}
                         </Box>
-                    </Toolbar>
+                    </Box>
                 </AppBar>
                 {filteredBooks && (
                     <Box
@@ -182,7 +195,7 @@ function Navbar() {
                             position: 'absolute',
                             zIndex: 1,
                             backgroundColor: 'white',
-                            left: '30%',
+                            left: '33%',
                             borderRadius: 1,
                             boxShadow: '0 0 8px grey'
                         }}
