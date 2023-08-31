@@ -3,7 +3,7 @@ const REFRESH_KEY = 'jwt-refresh-token'
 const EXPIRES_KEY = 'jwt-expires'
 const USERID_KEY = 'user-local-id'
 // const CART_BOOKS_IDS = 'cart-books-ids'
-// const FAVORITES_BOOKS_IDS = 'favorite-books-ids'
+// const FAVORITES_BOOKS_IDS = 'favorites-books-ids'
 
 const setTokens = ({ refreshToken, accessToken, userId, expiresIn = 3600 }) => {
     const expiresDate = new Date().getTime() + expiresIn * 1000

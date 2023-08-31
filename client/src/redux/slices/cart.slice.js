@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import localStorageService from '../../services/localStorage.service.js'
 
-const initialState = { booksIds: [] }
-
 const cartSlice = createSlice({
     name: 'cart',
-    initialState,
+    initialState: { booksIds: [] },
     reducers: {
         cartBooksIdsRecieved(state, action) {
             state.booksIds = action.payload

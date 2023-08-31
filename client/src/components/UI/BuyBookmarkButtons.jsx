@@ -6,20 +6,18 @@ import BookmarkIcon from '@mui/icons-material/Bookmark'
 import { Box, Button, IconButton, Tooltip } from '@mui/material'
 import { addCartBookId } from '../../redux/slices/cart.slice.js'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
-import { getCurrentUser, getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
+import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import {
-    addFavoriteBookId,
-    removeFavoriteBookId
+    addFavoritesBookId,
+    removeFavoritesBookId
 } from '../../redux/slices/favorites.slice.js'
 import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
-import { updateCurrentUser } from '../../redux/slices/users.slice.js'
 
 function BuyBookmarkButtons({ bookId }) {
     const dispatch = useDispatch()
     const cartStore = useSelector(getCartStore)
     const favoritesStore = useSelector(getFavoritesStore)
     const isLoggedIn = useSelector(getIsLoggedIn)
-    const currentUser = isLoggedIn ? useSelector(getCurrentUser) : null
     let buyButtonText = 'Купить'
     let buyButtonColor = 'primary'
     let toolTipBuyButtonText = 'Добавить в корзину'
@@ -33,10 +31,9 @@ function BuyBookmarkButtons({ bookId }) {
     const handleBookmarkClick = id => {
         if (!isLoggedIn) return alert('Чтобы добавить в избранное нужна авторизация!')
         if (!favoritesStore.includes(id)) {
-            dispatch(addFavoriteBookId(id))
-            dispatch(updateCurrentUser({ ...currentUser, favorites: favoritesStore }))
+            dispatch(addFavoritesBookId('favorites-books-ids', id))
         } else {
-            dispatch(removeFavoriteBookId(id))
+            dispatch(removeFavoritesBookId('favorites-books-ids', id))
         }
     }
 

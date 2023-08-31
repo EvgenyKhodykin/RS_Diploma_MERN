@@ -1,54 +1,51 @@
 import { createSlice } from '@reduxjs/toolkit'
+import localStorageService from '../../services/localStorage.service.js'
 
 const favoritesSlice = createSlice({
     name: 'favorites',
-    initialState: {
-        entities: [],
-        isLoading: false
-    },
+    initialState: { booksIds: [] },
     reducers: {
-        userFavoritesRequested(state) {
-            state.isLoading = true
+        favoritesBooksIdsRecieved(state, action) {
+            state.booksIds = action.payload
         },
-        userFavoritesRecieved(state, action) {
-            state.entities = action.payload
+        favoritesBookIdAdded(state, action) {
+            state.booksIds.push(action.payload)
         },
-        bookIdAdded(state, action) {
-            state.entities.push(action.payload)
+        favoritesBookIdRemoved(state, action) {
+            state.booksIds = state.booksIds.filter(item => item !== action.payload)
         },
-        bookIdRemoved(state, action) {
-            state.entities = state.entities.filter(item => item !== action.payload)
-        },
-        allFavoritesRemoved(state) {
-            state.entities = []
+        favoritesStoreCleared(state, action) {
+            state.booksIds = action.payload
         }
     }
 })
 
 const { actions, reducer: favoritesReducer } = favoritesSlice
 const {
-    userFavoritesRequested,
-    userFavoritesRecieved,
-    bookIdAdded,
-    bookIdRemoved,
-    allFavoritesRemoved
+    favoritesBooksIdsRecieved,
+    favoritesBookIdAdded,
+    favoritesBookIdRemoved,
+    favoritesStoreCleared
 } = actions
 
-export const setUserFavorites = payload => dispatch => {
-    dispatch(userFavoritesRequested())
-    dispatch(userFavoritesRecieved(payload))
+export const loadFavoritesBooksIds = key => dispatch => {
+    const data = localStorageService.getBooksIds(key)
+    dispatch(favoritesBooksIdsRecieved(data))
 }
 
-export const addFavoriteBookId = payload => dispatch => {
-    dispatch(bookIdAdded(payload))
+export const addFavoritesBookId = (key, payload) => dispatch => {
+    localStorageService.addBookId(key, payload)
+    dispatch(favoritesBookIdAdded(payload))
 }
 
-export const removeFavoriteBookId = payload => dispatch => {
-    dispatch(bookIdRemoved(payload))
+export const removeFavoritesBookId = (key, payload) => dispatch => {
+    localStorageService.removeBookId(key, payload)
+    dispatch(favoritesBookIdRemoved(payload))
 }
 
-export const removeAllFavorites = dispatch => {
-    dispatch(allFavoritesRemoved())
+export const clearFavoritesStore = key => dispatch => {
+    localStorageService.removeAllBooksIds(key)
+    dispatch(favoritesStoreCleared([]))
 }
 
 export default favoritesReducer

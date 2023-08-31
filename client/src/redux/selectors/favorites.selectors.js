@@ -1,1 +1,1 @@
-export const getFavoritesStore = state => state.favorites.entities
+export const getFavoritesStore = state => state.favorites.booksIds
