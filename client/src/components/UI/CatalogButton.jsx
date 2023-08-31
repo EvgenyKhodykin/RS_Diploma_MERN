@@ -33,7 +33,7 @@ export default function CatalogButton() {
                 aria-controls={open ? 'basic-menu' : undefined}
                 aria-haspopup='true'
                 aria-expanded={open ? 'true' : undefined}
-                sx={{ color: 'white' }}
+                sx={{ color: 'white', height: 40 }}
                 onClick={handleListOpen}
             >
                 Каталог

@@ -32,6 +32,7 @@ function Search() {
                     display: 'flex',
                     backgroundColor: 'white',
                     borderRadius: 1,
+                    height: '100%',
                     width: 460,
                     ml: 2,
                     px: 2,

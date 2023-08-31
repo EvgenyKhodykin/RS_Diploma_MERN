@@ -25,7 +25,7 @@ function Navbar() {
             position='static'
             sx={{
                 height: 90,
-                px: 2,
+                p: 2,
                 display: 'flex',
                 backgroundColor: '#26a9e0',
                 flexDirection: 'row',
@@ -35,7 +35,8 @@ function Navbar() {
         >
             <Box
                 sx={{
-                    display: 'flex'
+                    display: 'flex',
+                    alignItems: 'center'
                 }}
             >
                 <Avatar variant='square' alt='logo' src='../../../public/favicon.png' />
@@ -48,7 +49,9 @@ function Navbar() {
 
             <Box
                 sx={{
-                    display: 'flex'
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: 40
                 }}
             >
                 <CatalogButton />
