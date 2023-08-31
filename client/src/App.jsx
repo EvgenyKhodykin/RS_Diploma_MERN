@@ -31,13 +31,13 @@ function App() {
                             <Route path='signIn' element={<LoginForm />} />
                             <Route path='signUp' element={<RegisterForm />} />
                         </Route>
+                        <Route path='cart' element={<CartPage />} />
+                        <Route path='favorites' element={<FavoritesPage />} />
                         <Route element={<ProtectedRoutes />}>
-                            <Route path='favorites' element={<FavoritesPage />} />
                             <Route path='user/:userId' element={<UserPage />} />
                             <Route path='user/:userId/edit' element={<UserEditPage />} />
                         </Route>
                         <Route path='logout' element={<LogOut />} />
-                        <Route path='cart' element={<CartPage />} />
                         <Route path='*' element={<Navigate to='/' />} />
                     </Route>
                 </Routes>

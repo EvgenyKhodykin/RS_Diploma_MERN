@@ -11,11 +11,15 @@ export default function CatalogButton() {
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
 
-    const handleClick = event => {
+    const handleListOpen = event => {
         setAnchorEl(event.currentTarget)
     }
 
-    const handleClose = id => {
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
+
+    const handleCategoryClick = id => {
         setAnchorEl(null)
         navigate(`books/categories/${id}`)
     }
@@ -30,7 +34,7 @@ export default function CatalogButton() {
                 aria-haspopup='true'
                 aria-expanded={open ? 'true' : undefined}
                 sx={{ color: 'white' }}
-                onClick={handleClick}
+                onClick={handleListOpen}
             >
                 Каталог
                 {<MenuIcon sx={{ marginLeft: 1 }} />}
@@ -49,7 +53,7 @@ export default function CatalogButton() {
                         <MenuItem
                             key={category._id}
                             label={category.name}
-                            onClick={() => handleClose(category._id)}
+                            onClick={() => handleCategoryClick(category._id)}
                         >
                             {category.name}
                         </MenuItem>
