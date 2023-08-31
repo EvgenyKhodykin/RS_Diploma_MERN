@@ -17,7 +17,7 @@ function CategoryPage() {
         return (
             <>
                 <Typography variant='h3' sx={{ mt: 8 }}>
-                    {currentCategory.name}
+                    {currentCategory.name.toUpperCase()}
                 </Typography>
                 <BooksList books={currentBookList} />
             </>
