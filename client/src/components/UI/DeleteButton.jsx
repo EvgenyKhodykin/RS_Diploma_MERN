@@ -8,7 +8,7 @@ function DeleteButton({ bookId }) {
     const dispatch = useDispatch()
 
     const handleDeleteClick = id => {
-        dispatch(removeCartBookId(id))
+        dispatch(removeCartBookId('cart-books-ids', id))
     }
 
     return (

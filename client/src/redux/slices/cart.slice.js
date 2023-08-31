@@ -26,23 +26,23 @@ const { actions, reducer: cartReducer } = cartSlice
 const { cartBooksIdsRecieved, cartBookIdAdded, cartBookIdRemoved, cartStoreCleared } =
     actions
 
-export const loadCartBooksIds = dispatch => {
-    const data = localStorageService.getCartBooksIds()
+export const loadCartBooksIds = key => dispatch => {
+    const data = localStorageService.getBooksIds(key)
     dispatch(cartBooksIdsRecieved(data))
 }
 
-export const addCartBookId = payload => dispatch => {
-    localStorageService.addCartBookId(payload)
+export const addCartBookId = (key, payload) => dispatch => {
+    localStorageService.addBookId(key, payload)
     dispatch(cartBookIdAdded(payload))
 }
 
-export const removeCartBookId = payload => dispatch => {
-    localStorageService.removeCartBookId(payload)
+export const removeCartBookId = (key, payload) => dispatch => {
+    localStorageService.removeBookId(key, payload)
     dispatch(cartBookIdRemoved(payload))
 }
 
-export const clearCartStore = dispatch => {
-    localStorageService.removeAllCartBooksIds()
+export const clearCartStore = key => dispatch => {
+    localStorageService.removeAllBooksIds(key)
     dispatch(cartStoreCleared([]))
 }
 

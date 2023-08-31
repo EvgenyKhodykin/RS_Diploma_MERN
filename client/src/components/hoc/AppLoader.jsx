@@ -16,7 +16,7 @@ function AppLoader({ children }) {
         dispatch(loadBooksList)
         dispatch(loadCategoriesList)
         dispatch(loadUsersList)
-        dispatch(loadCartBooksIds)
+        dispatch(loadCartBooksIds('cart-books-ids'))
     }, [])
 
     if (usersStatusLoading) return <Loading />

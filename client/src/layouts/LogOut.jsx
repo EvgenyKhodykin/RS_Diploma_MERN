@@ -9,7 +9,7 @@ function LogOut() {
 
     useEffect(() => {
         dispatch(userLogOut)
-        dispatch(clearCartStore)
+        dispatch(clearCartStore('cart-books-ids'))
     }, [])
 
     return <Navigate to='/' />
