@@ -32,6 +32,7 @@ function BookSearchCard({ _id, cover, name, author, onClick }) {
                 <Typography
                     variant='body1'
                     sx={{
+                        color: 'black',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
                         display: '-webkit-box',
