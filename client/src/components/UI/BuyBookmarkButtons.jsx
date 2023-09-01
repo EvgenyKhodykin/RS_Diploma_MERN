@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
-import CloseIcon from '@mui/icons-material/Close'
-import { Box, Button, IconButton, Modal, Paper, Tooltip, Typography } from '@mui/material'
+import { Box, Button, IconButton, Tooltip } from '@mui/material'
 import { addCartBookId } from '../../redux/slices/cart.slice.js'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
@@ -13,14 +12,16 @@ import {
     removeFavoritesBookId
 } from '../../redux/slices/favorites.slice.js'
 import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
+import ModalWindow from './ModalWindow.jsx'
 
 function BuyBookmarkButtons({ bookId }) {
     const dispatch = useDispatch()
     const cartStore = useSelector(getCartStore)
     const favoritesStore = useSelector(getFavoritesStore)
     const isLoggedIn = useSelector(getIsLoggedIn)
-    const [open, setOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalText, setModalText] = useState('')
+
     let buyButtonText = 'Купить'
     let buyButtonColor = 'primary'
     let toolTipBuyButtonText = 'Добавить в корзину'
@@ -33,7 +34,7 @@ function BuyBookmarkButtons({ bookId }) {
 
     const handleBookmarkClick = id => {
         if (!isLoggedIn) {
-            setOpen(true)
+            setIsModalOpen(true)
             setModalText('Чтобы добавить в избранное нужна авторизация!')
         }
         if (!favoritesStore.includes(id) && isLoggedIn) {
@@ -45,7 +46,7 @@ function BuyBookmarkButtons({ bookId }) {
 
     const handleBuyClick = id => {
         if (!isLoggedIn) {
-            setOpen(true)
+            setIsModalOpen(true)
             setModalText('Чтобы добавить в корзину нужна авторизация!')
         }
         if (!cartStore.includes(id) && isLoggedIn) {
@@ -53,44 +54,15 @@ function BuyBookmarkButtons({ bookId }) {
         }
     }
 
-    const handleModalClose = event => {
-        if (event.target.id === 'closeIcon') setOpen(false)
-    }
+    const handleModalClose = event => setIsModalOpen(false)
 
     return (
         <>
-            <Modal
-                open={open}
+            <ModalWindow
+                isOpen={isModalOpen}
+                text={modalText}
                 onClose={handleModalClose}
-                aria-labelledby='modal-modal-title'
-                aria-describedby='modal-modal-description'
-            >
-                <Paper
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        position: 'absolute',
-                        top: '40%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 500,
-                        height: 100,
-                        bgcolor: 'background.paper',
-                        boxShadow: 24
-                    }}
-                >
-                    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                        <IconButton onClick={handleModalClose}>
-                            <CloseIcon id='closeIcon' />
-                        </IconButton>
-                    </Box>
-                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <Typography variant='body1' component='h2'>
-                            {modalText}
-                        </Typography>
-                    </Box>
-                </Paper>
-            </Modal>
+            />
             <Box
                 sx={{
                     display: 'flex',
