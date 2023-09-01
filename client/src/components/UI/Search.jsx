@@ -11,7 +11,9 @@ function Search() {
     const navigate = useNavigate()
 
     const handleSearch = event => {
-        setSearchValue(event.target.value)
+        if (event.target.value !== ' ' && event.target.value !== '.') {
+            setSearchValue(event.target.value)
+        }
     }
 
     const handleListClick = id => {
@@ -21,7 +23,7 @@ function Search() {
 
     const filteredBooks = searchValue
         ? books.filter(book =>
-              book.name.toLowerCase().includes(searchValue.toLowerCase())
+              book.name.toLowerCase().includes(searchValue.toLowerCase().trim())
           )
         : null
 
