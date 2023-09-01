@@ -13,10 +13,7 @@ import {
     removeComment
 } from '../../redux/slices/comments.slice.js'
 import CommentsList from '../comments/CommentsList.jsx'
-import {
-    getComments,
-    getCommentsLoadingStatus
-} from '../../redux/selectors/comments.selectors.js'
+import { getComments } from '../../redux/selectors/comments.selectors.js'
 import BookCard from './BookCard.jsx'
 import ModalWindow from '../UI/ModalWindow.jsx'
 
@@ -25,7 +22,6 @@ function BookPage() {
     const { bookId } = useParams()
     const isLoggedIn = useSelector(getIsLoggedIn)
     const currentBook = useSelector(getBookById(bookId))
-    const isLoading = useSelector(getCommentsLoadingStatus)
     const currentUserId = null
     const comments = useSelector(getComments)
     const sortedComments = orderBy(comments, ['created_at'], ['desc'])
@@ -145,12 +141,10 @@ function BookPage() {
                         </Box>
                     </Box>
                     {formIsVisible && <NewCommentForm onSubmit={handleSubmit} />}
-                    {!isLoading && (
-                        <CommentsList
-                            comments={sortedComments}
-                            onRemove={handleRemoveComment}
-                        />
-                    )}
+                    <CommentsList
+                        comments={sortedComments}
+                        onRemove={handleRemoveComment}
+                    />
                 </Container>
             </>
         )

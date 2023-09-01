@@ -15,8 +15,8 @@ function Comment({ _id, created_at, content, userId, onRemove }) {
     const usersList = useSelector(getUsersList)
     const isLoggedIn = useSelector(getIsLoggedIn)
     const currentUserId = isLoggedIn ? useSelector(getCurrentUserId) : null
-    const currentUser = usersList?.filter(user => user._id === currentUserId)[0]
-    const commentAuthor = usersList?.filter(user => user._id === userId)[0]
+    const currentUser = usersList?.find(user => user._id === currentUserId)
+    const commentAuthor = usersList?.find(user => user._id === userId)
 
     if (commentAuthor) {
         return (

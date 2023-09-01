@@ -51,7 +51,6 @@ const usersSlice = createSlice({
             state.entities[index] = action.payload
         },
         userLoggedOut(state) {
-            state.entities = null
             state.isLoggedIn = false
             state.auth = null
             state.dataLoaded = false
