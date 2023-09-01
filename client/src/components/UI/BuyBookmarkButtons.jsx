@@ -4,7 +4,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart'
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import { Box, Button, IconButton, Tooltip } from '@mui/material'
-import { addCartBookId } from '../../redux/slices/cart.slice.js'
+import { addCartBookId, removeCartBookId } from '../../redux/slices/cart.slice.js'
 import { getCartStore } from '../../redux/selectors/cart.selectors.js'
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import {
@@ -51,6 +51,8 @@ function BuyBookmarkButtons({ bookId }) {
         }
         if (!cartStore.includes(id) && isLoggedIn) {
             dispatch(addCartBookId('cart-books-ids', id))
+        } else if (cartStore.includes(id) && isLoggedIn) {
+            dispatch(removeCartBookId('cart-books-ids', id))
         }
     }
 
