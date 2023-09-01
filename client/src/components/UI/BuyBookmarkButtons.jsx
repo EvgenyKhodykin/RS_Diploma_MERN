@@ -54,7 +54,7 @@ function BuyBookmarkButtons({ bookId }) {
         }
     }
 
-    const handleModalClose = event => setIsModalOpen(false)
+    const handleModalClose = () => setIsModalOpen(false)
 
     return (
         <>
