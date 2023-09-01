@@ -47,14 +47,14 @@ function Search() {
                 <Box
                     sx={{
                         width: 600,
-                        mt: 9,
+                        top: 100,
+                        left: '33%',
                         p: 1,
                         display: 'flex',
                         flexDirection: 'column',
                         position: 'absolute',
                         zIndex: 1,
                         backgroundColor: 'white',
-                        left: '33%',
                         borderRadius: 1,
                         boxShadow: '0 0 8px grey'
                     }}
