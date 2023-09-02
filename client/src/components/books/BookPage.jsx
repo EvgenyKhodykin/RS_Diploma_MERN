@@ -114,7 +114,9 @@ function BookPage() {
                             justifyContent: 'space-between'
                         }}
                     >
-                        <Typography variant='body1'>{currentBook.description}</Typography>
+                        <Typography variant='body1' sx={{ textAlign: 'justify' }}>
+                            {currentBook.description}
+                        </Typography>
                     </Box>
                     <Box
                         sx={{
