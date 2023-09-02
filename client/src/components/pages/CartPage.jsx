@@ -4,13 +4,23 @@ import { Typography, Container, Box, Paper, Button } from '@mui/material'
 import emptyCartImage from '../../assets/empty-cart.png'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
 import BookCard from '../books/BookCard.jsx'
-import { getCartStore } from '../../redux/selectors/cart.selectors.js'
+import {
+    getCartBooksIds,
+    getCartFullBooksIds
+} from '../../redux/selectors/cart.selectors.js'
 
 function CartPage() {
     const allBooks = useSelector(getBooks)
-    const cartBooksIds = useSelector(getCartStore)
+    const cartBooksIds = useSelector(getCartBooksIds)
+    const storageAllBooksIds = useSelector(getCartFullBooksIds)
     const currentBooks = allBooks?.filter(book => cartBooksIds.includes(book._id))
-    const totalPrice = currentBooks?.reduce((acc, book) => acc + book.price, 0)
+    const totalPriceBooks = storageAllBooksIds?.reduce((acc, bookId) => {
+        allBooks?.forEach(book => {
+            if (book._id === bookId) acc.push(book)
+        })
+        return acc
+    }, [])
+    const totalPrice = totalPriceBooks.reduce((acc, book) => acc + book.price, 0)
     const location = 'cart'
 
     if (currentBooks && currentBooks?.length > 0) {

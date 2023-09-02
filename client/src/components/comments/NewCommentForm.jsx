@@ -37,6 +37,7 @@ function NewCommentForm({ onSubmit }) {
             }}
         >
             <TextField
+                autoFocus
                 multiline
                 required
                 name='content'

@@ -45,7 +45,7 @@ function Search() {
                 onChange={handleSearch}
                 value={searchValue}
             />
-            {filteredBooks && (
+            {filteredBooks && filteredBooks.length > 0 && (
                 <Box
                     sx={{
                         width: 600,

@@ -5,7 +5,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import { Box, Button, IconButton, Tooltip } from '@mui/material'
 import { addCartBookId, removeCartBookId } from '../../redux/slices/cart.slice.js'
-import { getCartStore } from '../../redux/selectors/cart.selectors.js'
+import { getCartBooksIds } from '../../redux/selectors/cart.selectors.js'
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import {
     addFavoritesBookId,
@@ -13,10 +13,12 @@ import {
 } from '../../redux/slices/favorites.slice.js'
 import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
 import ModalWindow from './ModalWindow.jsx'
+// import { getBookById } from '../../redux/selectors/books.selectors.js'
 
 function BuyBookmarkButtons({ bookId }) {
     const dispatch = useDispatch()
-    const cartStore = useSelector(getCartStore)
+    // const currentBook = useSelector(getBookById(bookId))
+    const cartBooksIds = useSelector(getCartBooksIds)
     const favoritesStore = useSelector(getFavoritesStore)
     const isLoggedIn = useSelector(getIsLoggedIn)
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -26,7 +28,7 @@ function BuyBookmarkButtons({ bookId }) {
     let buyButtonColor = 'primary'
     let toolTipBuyButtonText = 'Добавить в корзину'
 
-    if (cartStore?.includes(bookId)) {
+    if (cartBooksIds?.includes(bookId)) {
         buyButtonText = <AddShoppingCartIcon />
         buyButtonColor = '#37ceb4'
         toolTipBuyButtonText = null
@@ -39,8 +41,10 @@ function BuyBookmarkButtons({ bookId }) {
         }
         if (!favoritesStore.includes(id) && isLoggedIn) {
             dispatch(addFavoritesBookId('favorites-books-ids', id))
+            // dispatch(incrementTotalPrice(currentBook.price))
         } else {
             dispatch(removeFavoritesBookId('favorites-books-ids', id))
+            // dispatch(decrementTotalPrice(currentBook.price))
         }
     }
 
@@ -49,9 +53,9 @@ function BuyBookmarkButtons({ bookId }) {
             setIsModalOpen(true)
             setModalText('Чтобы добавить в корзину нужна авторизация!')
         }
-        if (!cartStore.includes(id) && isLoggedIn) {
+        if (!cartBooksIds.includes(id) && isLoggedIn) {
             dispatch(addCartBookId('cart-books-ids', id))
-        } else if (cartStore.includes(id) && isLoggedIn) {
+        } else if (cartBooksIds.includes(id) && isLoggedIn) {
             dispatch(removeCartBookId('cart-books-ids', id))
         }
     }

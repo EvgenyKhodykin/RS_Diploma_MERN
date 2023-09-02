@@ -1,8 +1,9 @@
 import React from 'react'
-import { CardMedia, Typography, Paper } from '@mui/material'
+import { CardMedia, Typography, Paper, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 import DeleteButton from '../UI/DeleteButton.jsx'
+import Counter from '../UI/Counter.jsx'
 
 function BookCard(props) {
     const { _id, name, cover, price, author, location } = props
@@ -57,7 +58,10 @@ function BookCard(props) {
             {location === 'booksList' ? (
                 <BuyBookmarkButtons bookId={_id} />
             ) : (
-                <DeleteButton bookId={_id} />
+                <Box>
+                    <Counter price={price} bookId={_id} />
+                    <DeleteButton bookId={_id} />
+                </Box>
             )}
         </Paper>
     )

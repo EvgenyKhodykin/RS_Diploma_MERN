@@ -2,8 +2,6 @@ const TOKEN_KEY = 'jwt-token'
 const REFRESH_KEY = 'jwt-refresh-token'
 const EXPIRES_KEY = 'jwt-expires'
 const USERID_KEY = 'user-local-id'
-// const CART_BOOKS_IDS = 'cart-books-ids'
-// const FAVORITES_BOOKS_IDS = 'favorites-books-ids'
 
 const setTokens = ({ refreshToken, accessToken, userId, expiresIn = 3600 }) => {
     const expiresDate = new Date().getTime() + expiresIn * 1000
@@ -57,6 +55,17 @@ function removeBookId(key, id) {
     const newBooksIdsArray = booksIdsArray.filter(bookId => bookId !== id)
     localStorage.setItem(key, JSON.stringify(newBooksIdsArray))
 }
+
+function removeOneBookId(key, id) {
+    const booksIdsArray = getBooksIds(key)
+    removeAllBooksIds(key)
+    const idIndex = booksIdsArray.indexOf(id)
+    if (idIndex >= 0) {
+        booksIdsArray.splice(idIndex, 1)
+    }
+    localStorage.setItem(key, JSON.stringify(booksIdsArray))
+}
+
 function removeAllBooksIds(key) {
     localStorage.removeItem(key)
 }
@@ -71,7 +80,8 @@ const localStorageService = {
     addBookId,
     getBooksIds,
     removeBookId,
-    removeAllBooksIds
+    removeAllBooksIds,
+    removeOneBookId
 }
 
 export default localStorageService

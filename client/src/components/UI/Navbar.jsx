@@ -8,17 +8,17 @@ import CatalogButton from './CatalogButton'
 import { useSelector } from 'react-redux'
 import { getIsLoggedIn } from '../../redux/selectors/users.selectors.js'
 import NavProfile from './NavProfile.jsx'
-import { getCartStore } from '../../redux/selectors/cart.selectors.js'
+import { getCartBooksIds } from '../../redux/selectors/cart.selectors.js'
 import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
 import Search from './Search.jsx'
 
 function Navbar() {
     const isLoggedIn = useSelector(getIsLoggedIn)
-    const cartStore = useSelector(getCartStore)
+    const cartBooksIds = useSelector(getCartBooksIds)
     const favoritesStore = useSelector(getFavoritesStore)
     const favoritesBadgeNumber =
         favoritesStore?.length > 0 ? favoritesStore?.length : null
-    const cartBadgeNumber = cartStore?.length > 0 ? cartStore?.length : null
+    const cartBadgeNumber = [...new Set(cartBooksIds)].length
 
     return (
         <AppBar
