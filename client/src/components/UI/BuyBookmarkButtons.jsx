@@ -13,11 +13,9 @@ import {
 } from '../../redux/slices/favorites.slice.js'
 import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
 import ModalWindow from './ModalWindow.jsx'
-// import { getBookById } from '../../redux/selectors/books.selectors.js'
 
 function BuyBookmarkButtons({ bookId }) {
     const dispatch = useDispatch()
-    // const currentBook = useSelector(getBookById(bookId))
     const cartBooksIds = useSelector(getCartBooksIds)
     const favoritesStore = useSelector(getFavoritesStore)
     const isLoggedIn = useSelector(getIsLoggedIn)
@@ -41,10 +39,8 @@ function BuyBookmarkButtons({ bookId }) {
         }
         if (!favoritesStore.includes(id) && isLoggedIn) {
             dispatch(addFavoritesBookId('favorites-books-ids', id))
-            // dispatch(incrementTotalPrice(currentBook.price))
         } else {
             dispatch(removeFavoritesBookId('favorites-books-ids', id))
-            // dispatch(decrementTotalPrice(currentBook.price))
         }
     }
 

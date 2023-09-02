@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Typography, Container, Box, Paper, Button } from '@mui/material'
 import emptyCartImage from '../../assets/empty-cart.png'
@@ -8,6 +8,7 @@ import {
     getCartBooksIds,
     getCartFullBooksIds
 } from '../../redux/selectors/cart.selectors.js'
+import ModalWindow from '../UI/ModalWindow.jsx'
 
 function CartPage() {
     const allBooks = useSelector(getBooks)
@@ -23,59 +24,74 @@ function CartPage() {
     const totalPrice = totalPriceBooks.reduce((acc, book) => acc + book.price, 0)
     const location = 'cart'
 
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const handleModalOpen = () => setIsModalOpen(true)
+    const handleModalClose = () => setIsModalOpen(false)
+
     if (currentBooks && currentBooks?.length > 0) {
         return (
-            <Container
-                maxWidth='xl'
-                sx={{
-                    display: 'flex',
-                    mt: 8
-                }}
-            >
-                <Box
+            <>
+                <ModalWindow
+                    isOpen={isModalOpen}
+                    text='Извините, сервис в стадии разработки...'
+                    onClose={handleModalClose}
+                />
+                <Container
+                    maxWidth='xl'
                     sx={{
                         display: 'flex',
-                        width: '60%',
-                        flexWrap: 'wrap'
+                        mt: 8
                     }}
                 >
-                    {currentBooks.map(book => (
-                        <BookCard key={book._id} {...book} location={location} />
-                    ))}
-                </Box>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        ml: 2,
-                        width: '40%'
-                    }}
-                >
-                    <Paper
-                        elevation={5}
+                    <Box
                         sx={{
-                            p: 1,
-                            mt: 1,
-                            width: '80%',
-                            height: 380,
                             display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'space-between'
+                            width: '60%',
+                            flexWrap: 'wrap'
                         }}
                     >
-                        <Typography variant='h4' color='primary'>
-                            Итоговая сумма заказа:
-                        </Typography>
-                        <Typography variant='h4' sx={{ color: 'red' }}>
-                            {totalPrice} &#8381;
-                        </Typography>
-                        <Button variant='contained' sx={{ width: '100%' }}>
-                            Оформить заказ
-                        </Button>
-                    </Paper>
-                </Box>
-            </Container>
+                        {currentBooks.map(book => (
+                            <BookCard key={book._id} {...book} location={location} />
+                        ))}
+                    </Box>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            ml: 2,
+                            width: '40%'
+                        }}
+                    >
+                        <Paper
+                            elevation={5}
+                            sx={{
+                                p: 1,
+                                mt: 1,
+                                width: '80%',
+                                height: 380,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'space-between'
+                            }}
+                        >
+                            <Typography variant='h4' color='primary'>
+                                Итоговая сумма заказа:
+                            </Typography>
+                            <Typography variant='h4' sx={{ color: 'red' }}>
+                                {totalPrice} &#8381;
+                            </Typography>
+                            <Button
+                                variant='contained'
+                                sx={{ width: '100%' }}
+                                onClick={handleModalOpen}
+                            >
+                                Оформить заказ
+                            </Button>
+                        </Paper>
+                    </Box>
+                </Container>
+            </>
         )
     } else if (cartBooksIds.length === 0 || !cartBooksIds) {
         return (
