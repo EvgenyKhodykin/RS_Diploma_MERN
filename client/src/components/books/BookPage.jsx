@@ -25,6 +25,7 @@ import { getComments } from '../../redux/selectors/comments.selectors.js'
 import ModalWindow from '../UI/ModalWindow.jsx'
 import BuyBookmarkButtons from '../UI/BuyBookmarkButtons.jsx'
 import EmptyCommentsList from '../comments/EmptyCommentsList.jsx'
+import saleIcon from '../../assets/sale.png'
 
 function BookPage() {
     const dispatch = useDispatch()
@@ -37,7 +38,6 @@ function BookPage() {
     const [formIsVisible, setFormIsVisible] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalText, setModalText] = useState('')
-    // const inputRef = useRef()
 
     useEffect(() => {
         dispatch(loadCommentsList(bookId))
@@ -125,8 +125,16 @@ function BookPage() {
                                 </Typography>
                             </Box>
                             <Box>
-                                <Typography variant='body2'>Стоимость:</Typography>
-                                <Typography variant='h6' sx={{ color: 'red' }}>
+                                <CardMedia
+                                    component='img'
+                                    image={saleIcon}
+                                    sx={{
+                                        objectFit: 'contain',
+                                        width: 50,
+                                        ml: '60%'
+                                    }}
+                                />
+                                <Typography variant='h3' sx={{ color: 'red' }}>
                                     {currentBook.price} &#8381;
                                 </Typography>
                             </Box>
