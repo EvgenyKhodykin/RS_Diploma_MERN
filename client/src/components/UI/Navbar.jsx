@@ -11,6 +11,7 @@ import NavProfile from './NavProfile.jsx'
 import { getCartBooksIds } from '../../redux/selectors/cart.selectors.js'
 import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
 import Search from './Search.jsx'
+import bookShopLogo from '../../assets/favicon.png'
 
 function Navbar() {
     const isLoggedIn = useSelector(getIsLoggedIn)
@@ -39,7 +40,7 @@ function Navbar() {
                     alignItems: 'center'
                 }}
             >
-                <Avatar variant='square' alt='logo' src='../../../public/favicon.png' />
+                <Avatar variant='square' alt='logo' src={bookShopLogo} />
                 <Link to='/'>
                     <Button size='large' sx={{ color: 'white' }}>
                         Book Shop
