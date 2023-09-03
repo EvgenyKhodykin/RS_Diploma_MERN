@@ -1,9 +1,9 @@
 /* eslint-disable no-unneeded-ternary */
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Box, Button, Typography } from '@mui/material'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
-import { useDispatch, useSelector } from 'react-redux'
 import { addCartBookId, removeCartOneBookId } from '../../redux/slices/cart.slice.js'
 import { getCartFullBooksIds } from '../../redux/selectors/cart.selectors.js'
 

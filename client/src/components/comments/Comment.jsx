@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Box, Button, CardMedia, Paper, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useSelector } from 'react-redux'
 import getCommentDate from '../../utils/getCommentDate.js'
 import {
     getCurrentUserId,

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Avatar, Button, Menu, MenuItem } from '@mui/material'
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Avatar, Button, Menu, MenuItem } from '@mui/material'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { getCurrentUserId, getUsersList } from '../../redux/selectors/users.selectors.js'
 
 function NavProfile() {

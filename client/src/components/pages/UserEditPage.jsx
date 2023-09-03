@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {
     Box,
     Button,
@@ -11,7 +12,6 @@ import {
     TextField,
     Typography
 } from '@mui/material'
-import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 import { updateCurrentUser } from '../../redux/slices/users.slice.js'

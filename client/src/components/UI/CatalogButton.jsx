@@ -1,9 +1,9 @@
 import { React, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { Menu, MenuItem, Button, Box } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { getCategories } from '../../redux/selectors/categories.selectors.js'
-import { useNavigate } from 'react-router-dom'
 
 export default function CatalogButton() {
     const categories = useSelector(getCategories)

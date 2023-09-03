@@ -1,6 +1,6 @@
 import React from 'react'
-import { Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
+import { Typography } from '@mui/material'
 import { getBooks } from '../../redux/selectors/books.selectors.js'
 import BooksList from '../books/BooksList.jsx'
 import Loading from '../UI/Loading.jsx'
