@@ -9,7 +9,7 @@
 ![axios](https://img.shields.io/badge/NodeJS-19.8.1-s)
 ![axios](https://img.shields.io/badge/Express-4.18.2-yellow)
 
-![result](./client/public/favicon.png)
+![result](./client/src/assets/favicon.png)
 
 The MERN diploma project app in [Result School](https://result.school/).
 
