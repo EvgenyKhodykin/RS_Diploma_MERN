@@ -10,6 +10,7 @@ function FavoritesPage() {
     const favoriteStore = useSelector(getFavoritesStore)
     const books = useSelector(getBooks)
     const favoriteBooks = books?.filter(book => favoriteStore.includes(book._id))
+    document.title = 'Избранное'
 
     if (favoriteBooks && favoriteBooks.length > 0) {
         return (

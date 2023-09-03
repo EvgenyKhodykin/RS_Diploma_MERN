@@ -39,6 +39,7 @@ function RegisterForm() {
         handleSubmit,
         formState: { errors }
     } = useForm({ mode: 'onChange' })
+    document.title = 'Регистрация'
 
     useEffect(() => {
         if (isLoggedIn) {

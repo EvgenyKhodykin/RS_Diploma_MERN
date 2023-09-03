@@ -38,6 +38,7 @@ function BookPage() {
     const [formIsVisible, setFormIsVisible] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [modalText, setModalText] = useState('')
+    document.title = currentBook.name
 
     useEffect(() => {
         dispatch(loadCommentsList(bookId))

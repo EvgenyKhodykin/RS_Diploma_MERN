@@ -22,6 +22,7 @@ function LoginForm() {
     const isLoggedIn = useSelector(getIsLoggedIn)
     const loginError = useSelector(getAuthError)
     const navigate = useNavigate()
+    document.title = 'Вход'
 
     useEffect(() => {
         if (isLoggedIn) {

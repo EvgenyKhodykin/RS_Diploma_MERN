@@ -7,6 +7,7 @@ import Loading from '../UI/Loading.jsx'
 
 function MainPage() {
     const books = useSelector(getBooks)
+    document.title = 'Book Shop'
 
     if (books) {
         return (

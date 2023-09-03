@@ -21,6 +21,7 @@ function UserEditPage() {
     const navigate = useNavigate()
     const currentUser = useSelector(getCurrentUser)
     const [user, setUser] = useState(currentUser)
+    document.title = 'Редактирование профиля'
 
     const handleChange = ({ target }) => {
         setUser(prevState => ({

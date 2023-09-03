@@ -12,6 +12,7 @@ function CategoryPage() {
     const books = useSelector(getBooks)
     const currentCategory = categories?.filter(category => category._id === categoryId)[0]
     const currentBookList = books?.filter(book => book.category === currentCategory.name)
+    document.title = currentCategory.name
 
     if (books && currentBookList) {
         return (

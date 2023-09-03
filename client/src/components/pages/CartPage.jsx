@@ -27,6 +27,7 @@ function CartPage() {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const handleModalOpen = () => setIsModalOpen(true)
     const handleModalClose = () => setIsModalOpen(false)
+    document.title = 'Корзина'
 
     if (currentBooks && currentBooks?.length > 0) {
         return (

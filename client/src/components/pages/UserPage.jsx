@@ -9,6 +9,7 @@ function UserPage() {
     const usersList = useSelector(getUsersList)
     const currentUserId = useSelector(getCurrentUserId)
     const currentUser = usersList?.filter(user => user._id === currentUserId)[0]
+    document.title = 'Профиль'
 
     return (
         <Paper
