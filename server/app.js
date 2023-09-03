@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import chalk from 'chalk'
 import cors from 'cors'
+import path from 'path'
 import 'dotenv/config'
 import router from './routes/index.js'
 import initDatabase from './startUp/initDatabase.js'
@@ -14,6 +15,15 @@ app.use(cors())
 app.use('/api', router)
 
 const PORT = process.env.PORT ?? 4000
+
+if (process.env.NODE_ENV === 'production') {
+    app.use('/', express.static('client'))
+
+    const indexPath = path.resolve('client', 'index.html')
+    console.log(indexPath)
+
+    app.get('*', (request, response) => response.sendFile(indexPath))
+}
 
 async function start() {
     try {
