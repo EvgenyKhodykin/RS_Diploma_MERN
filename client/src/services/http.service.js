@@ -1,11 +1,10 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import configFile from '../config.js'
 import localStorageService from './localStorage.service'
 import authService from './auth.service'
 
 const http = axios.create({
-    baseURL: configFile.apiEndPoint
+    baseURL: import.meta.env.VITE_API_ENDPOINT
 })
 
 http.interceptors.request.use(
@@ -14,35 +13,15 @@ http.interceptors.request.use(
         const refreshToken = localStorageService.getRefreshToken()
         const isExpired = refreshToken && expiresDate < Date.now()
 
-        if (configFile.isFireBase) {
-            const containSlash = /\/$/gi.test(config.url)
-            config.url = (containSlash ? config.url.slice(0, -1) : config.url) + '.json'
-
-            if (isExpired) {
-                const data = await authService.refreshToken()
-
-                localStorageService.setTokens({
-                    refreshToken: data.refresh_token,
-                    idToken: data.id_token,
-                    expiresIn: data.expires_in,
-                    localId: data.user_id
-                })
-            }
-            const accessToken = localStorageService.getAccessToken()
-            if (accessToken) {
-                config.params = { ...config.params, auth: accessToken }
-            }
-        } else {
-            if (isExpired) {
-                const data = await authService.refreshToken()
-                localStorageService.setTokens(data)
-            }
-            const accessToken = localStorageService.getAccessToken()
-            if (accessToken) {
-                config.headers = {
-                    ...config.headers,
-                    authorization: `Bearer ${accessToken}`
-                }
+        if (isExpired) {
+            const data = await authService.refreshToken()
+            localStorageService.setTokens(data)
+        }
+        const accessToken = localStorageService.getAccessToken()
+        if (accessToken) {
+            config.headers = {
+                ...config.headers,
+                authorization: `Bearer ${accessToken}`
             }
         }
 
@@ -53,20 +32,8 @@ http.interceptors.request.use(
     }
 )
 
-function transformData(data) {
-    if (data && !data._id) {
-        return Object.keys(data).map(key => ({
-            ...data[key]
-        }))
-    }
-    return data
-}
-
 http.interceptors.response.use(
     response => {
-        if (configFile.isFireBase) {
-            response.data = { content: transformData(response.data) }
-        }
         response.data = { content: response.data }
         return response
     },

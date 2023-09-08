@@ -11,7 +11,7 @@ import NavProfile from './NavProfile.jsx'
 import { getCartBooksIds } from '../../redux/selectors/cart.selectors.js'
 import { getFavoritesStore } from '../../redux/selectors/favorites.selectors.js'
 import Search from './Search.jsx'
-import bookShopLogo from '../../assets/favicon.png'
+import bookShopLogo from '../../assets/favicon.ico'
 
 function Navbar() {
     const isLoggedIn = useSelector(getIsLoggedIn)
