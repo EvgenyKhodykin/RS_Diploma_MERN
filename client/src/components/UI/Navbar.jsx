@@ -26,7 +26,7 @@ function Navbar() {
             <AppBar position='static'>
                 <Toolbar
                     sx={{
-                        height: 90,
+                        minHeight: 90,
                         p: 2,
                         display: 'flex',
                         backgroundColor: '#26a9e0',
@@ -117,6 +117,7 @@ function Navbar() {
                         <Box
                             sx={{
                                 display: 'flex',
+                                flexDirection: 'column',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 width: '33%'
@@ -128,7 +129,7 @@ function Navbar() {
                                 <Link to='auth/signIn'>
                                     <AccountCircleIcon
                                         fontSize='large'
-                                        sx={{ color: 'white' }}
+                                        sx={{ color: 'white', ml: 0.4 }}
                                     />
 
                                     <Typography

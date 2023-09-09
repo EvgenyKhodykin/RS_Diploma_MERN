@@ -67,7 +67,7 @@ function RegisterForm() {
     }
 
     return (
-        <Paper elevation={5} sx={{ p: 1 }}>
+        <Paper elevation={5} sx={{ p: 2 }}>
             <Typography variant='h4' sx={{ m: 1 }}>
                 Регистрация:
             </Typography>

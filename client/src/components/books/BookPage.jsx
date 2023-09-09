@@ -99,7 +99,7 @@ function BookPage() {
                             }}
                         />
                         <Paper
-                            elevation={3}
+                            elevation={5}
                             sx={{
                                 ml: 5,
                                 p: 1,

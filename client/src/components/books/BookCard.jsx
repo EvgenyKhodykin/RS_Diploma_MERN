@@ -10,11 +10,11 @@ function BookCard(props) {
 
     return (
         <Paper
-            elevation={3}
+            elevation={5}
             sx={{
-                height: 480,
+                height: 500,
                 width: 300,
-                p: 1,
+                p: 2,
                 m: 1,
                 display: 'flex',
                 flexDirection: 'column'
