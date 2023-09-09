@@ -46,7 +46,7 @@ function NewCommentForm({ onSubmit }) {
                 onKeyDown={enterPressHandler}
                 maxRows={4}
                 placeholder='Напишитe здесь Ваш отзыв...'
-                sx={{ width: '50%' }}
+                sx={{ width: '70%' }}
             />
             <Button
                 variant='contained'

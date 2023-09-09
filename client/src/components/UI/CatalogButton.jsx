@@ -2,6 +2,7 @@ import { React, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Menu, MenuItem, Button, Box } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import MenuIcon from '@mui/icons-material/Menu'
 import { getCategories } from '../../redux/selectors/categories.selectors.js'
 
@@ -10,6 +11,7 @@ export default function CatalogButton() {
     const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl)
+    const mobileSize = useMediaQuery('(min-width:500px)')
 
     const handleListOpen = event => {
         setAnchorEl(event.currentTarget)
@@ -36,7 +38,7 @@ export default function CatalogButton() {
                 sx={{ color: 'white', height: 40 }}
                 onClick={handleListOpen}
             >
-                Каталог
+                {mobileSize && 'Каталог'}
                 {<MenuIcon sx={{ marginLeft: 1 }} />}
             </Button>
             <Menu
