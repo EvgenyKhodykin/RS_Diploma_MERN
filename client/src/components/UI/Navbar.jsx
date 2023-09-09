@@ -30,28 +30,28 @@ function Navbar() {
                 flexShrink: 1,
                 backgroundColor: '#26a9e0',
                 minHeight: 80,
-                px: 3,
+                p: 2,
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between'
             }}
         >
-            <Box
-                sx={{
-                    display: 'flex',
-                    alignItems: 'center'
-                }}
-            >
+            {mobileSize && (
                 <Link to='/'>
-                    <Avatar variant='square' alt='logo' src={bookShopLogo} />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <Avatar variant='square' alt='logo' src={bookShopLogo} />
+                        <Button size='large' sx={{ color: 'white' }}>
+                            Book Shop
+                        </Button>
+                    </Box>
                 </Link>
-                {mobileSize && (
-                    <Button size='large' sx={{ color: 'white' }}>
-                        Book Shop
-                    </Button>
-                )}
-            </Box>
+            )}
 
             <Box
                 sx={{

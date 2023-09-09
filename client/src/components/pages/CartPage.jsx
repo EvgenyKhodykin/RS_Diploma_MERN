@@ -37,17 +37,19 @@ function CartPage() {
                     text='Извините, сервис в стадии разработки...'
                     onClose={handleModalClose}
                 />
-                <Container
-                    maxWidth='xl'
+                <Box
                     sx={{
                         display: 'flex',
-                        mt: 8
+                        mt: 8,
+                        px: 3,
+                        width: '100%',
+                        justifyContent: 'center'
                     }}
                 >
                     <Box
                         sx={{
                             display: 'flex',
-                            width: '60%',
+                            width: '50%',
                             flexWrap: 'wrap'
                         }}
                     >
@@ -58,18 +60,16 @@ function CartPage() {
                     <Box
                         sx={{
                             display: 'flex',
-                            justifyContent: 'flex-end',
-                            ml: 2,
-                            width: '40%'
+                            justifyContent: 'center',
+                            ml: 5
                         }}
                     >
                         <Paper
                             elevation={5}
                             sx={{
-                                p: 1,
+                                p: 3,
                                 mt: 1,
-                                width: '80%',
-                                height: 380,
+                                height: 500,
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
@@ -91,7 +91,7 @@ function CartPage() {
                             </Button>
                         </Paper>
                     </Box>
-                </Container>
+                </Box>
             </>
         )
     } else if (cartBooksIds.length === 0 || !cartBooksIds) {
