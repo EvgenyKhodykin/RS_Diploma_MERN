@@ -11,7 +11,9 @@
 
 ![result](./client/src/assets/favicon.ico)
 
-The MERN diploma project app in [Result School](https://result.school/).
+The MERN diploma project app in [Result School](https://result.school/)
+
+Deployed on http://31.129.32.139
 
 ## Installation
 
