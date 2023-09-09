@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Box, Button, CardMedia, Paper, Tooltip, Typography } from '@mui/material'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import SettingsIcon from '@mui/icons-material/Settings'
 import { getCurrentUserId, getUsersList } from '../../redux/selectors/users.selectors.js'
 
@@ -10,12 +11,14 @@ function UserPage() {
     const currentUserId = useSelector(getCurrentUserId)
     const currentUser = usersList?.filter(user => user._id === currentUserId)[0]
     document.title = 'Профиль'
+    const mobileSize = useMediaQuery('(min-width:500px)')
+    const paperWidth = mobileSize ? '30%' : '90%'
 
     return (
         <Paper
             elevation={3}
             sx={{
-                width: '30%',
+                width: paperWidth,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import {
     Box,
     Button,
@@ -12,7 +13,7 @@ import {
     TextField,
     Typography
 } from '@mui/material'
-import { useDispatch, useSelector } from 'react-redux'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { getCurrentUser } from '../../redux/selectors/users.selectors.js'
 import { updateCurrentUser } from '../../redux/slices/users.slice.js'
 
@@ -22,6 +23,8 @@ function UserEditPage() {
     const currentUser = useSelector(getCurrentUser)
     const [user, setUser] = useState(currentUser)
     document.title = 'Редактирование профиля'
+    const mobileSize = useMediaQuery('(min-width:500px)')
+    const paperWidth = mobileSize ? '30%' : '90%'
 
     const handleChange = ({ target }) => {
         setUser(prevState => ({
@@ -38,11 +41,14 @@ function UserEditPage() {
 
     if (currentUser) {
         return (
-            <Paper elevation={5} sx={{ py: 1, px: 2, mt: 8, width: '30%' }}>
+            <Paper elevation={5} sx={{ py: 1, px: 2, mt: 8, width: paperWidth }}>
                 <Typography variant='h5' sx={{ m: 1 }}>
                     Редактирование персональных данных:
                 </Typography>
                 <Box component='form' onSubmit={handleSubmit}>
+                    <FormLabel id='demo-radio-buttons-group-label' sx={{ ml: 1 }}>
+                        Имя
+                    </FormLabel>
                     <TextField
                         required
                         type='text'

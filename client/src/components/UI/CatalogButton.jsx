@@ -29,7 +29,7 @@ export default function CatalogButton() {
     return (
         <Box>
             <Button
-                variant='contained'
+                variant={mobileSize ? 'contained' : null}
                 size='large'
                 id='basic-button'
                 aria-controls={open ? 'basic-menu' : undefined}
@@ -50,6 +50,16 @@ export default function CatalogButton() {
                     'aria-labelledby': 'basic-button'
                 }}
             >
+                {!mobileSize && (
+                    <MenuItem
+                        onClick={() => {
+                            setAnchorEl(null)
+                            navigate('/')
+                        }}
+                    >
+                        Все категории
+                    </MenuItem>
+                )}
                 {categories &&
                     categories.map(category => (
                         <MenuItem
